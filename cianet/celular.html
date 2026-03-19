@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chip 5G Cianet Celular</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .chip-hero {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, #005c2e 100%);
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            color: var(--white);
+        }
+        .chip-hero h1 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; margin-bottom: 1rem; }
+        .chip-hero h1 em { color: var(--orange-light); font-style: normal; }
+        .chip-hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; line-height: 1.6; }
+        .chip-hero-imgs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .chip-hero-imgs img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 200px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .chip-hero-imgs img:first-child { grid-column: span 2; height: 260px; }
+
+        /* ── PLANOS CELULAR ── */
+        .mobile-plans { background: var(--gray-bg); }
+        .mobile-plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .mobile-plan-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .mobile-plan-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--green), var(--green-light));
+        }
+        .mobile-plan-card.featured::before {
+            background: linear-gradient(90deg, var(--orange-dark), var(--orange));
+        }
+        .mobile-plan-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .mobile-plan-card .plan-badge { position: static; display: inline-block; margin-bottom: 1rem; }
+        .mobile-gb {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--green);
+            line-height: 1;
+        }
+        .mobile-plan-card.featured .mobile-gb { color: var(--orange); }
+        .mobile-gb small { font-size: 1.2rem; color: #999; font-weight: 400; }
+        .mobile-plan-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin: 0.5rem 0 1rem; }
+        .mobile-features { list-style: none; text-align: left; margin-bottom: 1.5rem; }
+        .mobile-features li {
+            padding: 0.4rem 0;
+            font-size: 0.88rem; color: #555;
+            display: flex; align-items: center; gap: 0.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .mobile-features li::before {
+            content: '✓';
+            color: var(--green); font-weight: 700; font-size: 0.85rem;
+        }
+        .mobile-plan-card.featured .mobile-features li::before { color: var(--orange); }
+        .mobile-price { font-size: 1.6rem; font-weight: 900; color: var(--orange); margin-bottom: 1.2rem; }
+        .mobile-price small { font-size: 0.85rem; color: #999; font-weight: 400; }
+
+        /* ── CHIP INFO ── */
+        .chip-info { background: var(--white); }
+        .chip-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .chip-info-imgs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .chip-info-imgs img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 180px;
+        }
+        .chip-info-imgs img:last-child { grid-column: span 2; height: 220px; }
+        .info-list { list-style: none; margin: 1.5rem 0 2rem; }
+        .info-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex; align-items: flex-start; gap: 1rem;
+            font-size: 0.95rem; color: #555;
+        }
+        .info-list li .icon {
+            font-size: 1.5rem; flex-shrink: 0;
+        }
+        .info-list li strong { display: block; color: var(--dark); font-weight: 700; margin-bottom: 0.2rem; }
+
+        @media (max-width: 900px) {
+            .chip-hero, .chip-info-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .chip-hero-imgs img:first-child { height: 200px; }
+        }
+        @media (max-width: 600px) {
+            .chip-hero { padding: 3rem 5%; }
+            .mobile-plans-grid { grid-template-columns: 1fr; }
+            .chip-info-imgs img:last-child { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html" class="active">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+        <a href="https://wa.me/558432634154" class="nav-wpp-mobile">📲 Fale no WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/558432634154" class="btn-whatsapp">📲 Fale no WhatsApp</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<!-- CHIP HERO -->
+<div class="chip-hero">
+    <div>
+        <span class="section-label">Cianet Celular</span>
+        <h1>Chip <em>5G</em> por apenas R$ 9,99</h1>
+        <p>Cobertura nacional, velocidade 5G e planos que cabem no seu bolso. Ative hoje mesmo pelo WhatsApp.</p>
+        <a href="https://wa.me/558432634154" class="btn-primary">Pedir meu Chip Agora</a>
+    </div>
+    <div class="chip-hero-imgs">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.33 (2).jpeg" alt="Chip 5G Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.33 (3).jpeg" alt="Chip Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.34.jpeg" alt="Planos Celular">
+    </div>
+</div>
+
+<!-- PLANOS CELULAR -->
+<section class="mobile-plans">
+    <div class="text-center">
+        <span class="section-label">Planos Móveis</span>
+        <h2 class="section-title">Escolha seu <span>Plano</span></h2>
+        <p class="section-sub">Do básico ao completo, temos o plano certo para você.</p>
+    </div>
+    <div class="mobile-plans-grid">
+        <div class="mobile-plan-card">
+            <div class="mobile-gb">6<small>GB</small></div>
+            <h3>Plano Básico</h3>
+            <ul class="mobile-features">
+                <li>6GB de dados</li>
+                <li>WhatsApp incluso</li>
+                <li>Ligações locais</li>
+                <li>Cobertura nacional</li>
+            </ul>
+            <div class="mobile-price">R$ 19,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="plan-btn">Contratar</a>
+        </div>
+        <div class="mobile-plan-card">
+            <div class="mobile-gb">15<small>GB</small></div>
+            <h3>Plano Intermediário</h3>
+            <ul class="mobile-features">
+                <li>15GB de dados</li>
+                <li>WhatsApp + Redes Sociais</li>
+                <li>Ligações ilimitadas</li>
+                <li>Cobertura nacional 5G</li>
+            </ul>
+            <div class="mobile-price">R$ 29,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="plan-btn">Contratar</a>
+        </div>
+        <div class="mobile-plan-card featured">
+            <span class="plan-badge">🔥 Mais Vendido</span>
+            <div class="mobile-gb">25<small>GB</small></div>
+            <h3>Plano Avançado</h3>
+            <ul class="mobile-features">
+                <li>25GB de dados</li>
+                <li>WhatsApp + Redes Sociais</li>
+                <li>Ligações ilimitadas</li>
+                <li>Roaming nacional</li>
+                <li>Cobertura 5G premium</li>
+            </ul>
+            <div class="mobile-price">R$ 39,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="plan-btn">Contratar</a>
+        </div>
+        <div class="mobile-plan-card">
+            <div class="mobile-gb">35<small>GB</small></div>
+            <h3>Plano Completo</h3>
+            <ul class="mobile-features">
+                <li>35GB de dados</li>
+                <li>Todos os apps inclusos</li>
+                <li>Ligações ilimitadas</li>
+                <li>Roaming nacional</li>
+                <li>Prioridade de rede 5G</li>
+            </ul>
+            <div class="mobile-price">R$ 49,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="plan-btn">Contratar</a>
+        </div>
+    </div>
+</section>
+
+<!-- CHIP INFO -->
+<section class="chip-info">
+    <div class="chip-info-grid">
+        <div>
+            <span class="section-label">Como funciona</span>
+            <h2 class="section-title">Simples de <span>Ativar</span></h2>
+            <p class="section-sub">Em poucos passos você já está conectado.</p>
+            <ul class="info-list">
+                <li>
+                    <span class="icon">📲</span>
+                    <div><strong>1. Fale no WhatsApp</strong>Solicite seu chip pelo nosso número de atendimento.</div>
+                </li>
+                <li>
+                    <span class="icon">📦</span>
+                    <div><strong>2. Receba o Chip</strong>Entregamos no seu endereço ou retire em nosso ponto.</div>
+                </li>
+                <li>
+                    <span class="icon">📱</span>
+                    <div><strong>3. Insira e Ative</strong>Coloque o chip no celular e ative em minutos.</div>
+                </li>
+                <li>
+                    <span class="icon">🚀</span>
+                    <div><strong>4. Navegue em 5G</strong>Aproveite a velocidade e cobertura nacional.</div>
+                </li>
+            </ul>
+            <a href="https://wa.me/558432634154" class="btn-wpp-big">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Pedir meu Chip
+            </a>
+        </div>
+        <div class="chip-info-imgs">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.36.jpeg" alt="Chip Cianet">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.36 (1).jpeg" alt="Chip Cianet">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.36 (2).jpeg" alt="Chip Cianet">
+        </div>
+    </div>
+</section>
+
+<!-- MAIS IMAGENS -->
+<section style="background: var(--gray-bg);">
+    <div class="img-strip">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.37.jpeg" alt="Cianet Celular">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.38.jpeg" alt="Cianet Celular">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.38 (1).jpeg" alt="Cianet Celular">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.38 (2).jpeg" alt="Cianet Celular">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.39.jpeg" alt="Cianet Celular">
+    </div>
+</section>
+
+<footer>
+    <div class="footer-brand">
+        <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+        <p>Conectando você ao mundo com ultravelocidade e atendimento humanizado.</p>
+    </div>
+    <div>
+        <h4>Páginas</h4>
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Contato</h4>
+        <ul>
+            <li>(84) 3263-4154</li>
+            <li>Natal — RN</li>
+            <li>Seg a Dom: 8h às 22h</li>
+            <li><a href="https://wa.me/558432634154">WhatsApp</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bottom">
+    &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
+</div>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+    function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+</script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cianet - Conectando Você ao Mundo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── HERO HOME ── */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 40%, var(--orange) 100%);
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(0,80,30,0.85) 0%, rgba(0,0,0,0.3) 60%, rgba(180,60,0,0.6) 100%);
+        }
+        .hero-bg-img {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.25;
+        }
+        .hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 700px; }
+        .hero-badge {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--white);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900; color: var(--white);
+            line-height: 1.1; margin-bottom: 1.2rem;
+        }
+        .hero h1 em { color: var(--orange-light); font-style: normal; }
+        .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 2.5rem; line-height: 1.6; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-stats {
+            position: absolute; bottom: 3rem; right: 5%;
+            z-index: 2; display: flex; gap: 2rem;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px; padding: 1.2rem 1.8rem;
+            text-align: center; color: var(--white);
+        }
+        .stat-box strong { display: block; font-size: 2rem; font-weight: 900; color: var(--orange-light); }
+        .stat-box span { font-size: 0.8rem; opacity: 0.85; }
+
+        /* ── FEATURES ── */
+        .features { background: var(--white); }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: 20px;
+            background: var(--gray-bg);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--green-dark); margin-bottom: 0.5rem; }
+        .feature-card p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+
+        /* ── PREVIEW SECTIONS ── */
+        #planos-preview { background: var(--gray-bg); }
+        #celular-preview {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, #005c2e 100%);
+            color: var(--white);
+        }
+        #celular-preview .section-title { color: var(--white); }
+        #celular-preview .section-title span { color: var(--orange-light); }
+        #celular-preview .section-sub { color: rgba(255,255,255,0.8); }
+        .celular-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .celular-imgs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .celular-imgs img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 200px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .celular-imgs img:first-child { grid-column: span 2; height: 250px; }
+        .chip-features { list-style: none; margin: 1.5rem 0 2rem; }
+        .chip-features li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            display: flex; align-items: center; gap: 0.8rem; font-size: 1rem;
+        }
+        .chip-features li::before {
+            content: '✓';
+            background: var(--orange); color: var(--white);
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+        }
+        .chip-price-tag {
+            display: inline-block;
+            background: var(--orange); color: var(--white);
+            padding: 0.8rem 2rem; border-radius: 16px;
+            font-size: 1.5rem; font-weight: 900; margin-bottom: 1.5rem;
+        }
+
+        /* ── GALERIA PREVIEW ── */
+        #galeria-preview { background: var(--white); }
+
+        /* ── CTA BAND ── */
+        .cta-band {
+            background: linear-gradient(135deg, var(--orange-dark), var(--orange), var(--orange-light));
+            padding: 4rem 5%;
+            text-align: center;
+            color: var(--white);
+        }
+        .cta-band h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; margin-bottom: 1rem; }
+        .cta-band p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
+
+        @media (max-width: 900px) {
+            .celular-wrap { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-stats { display: none; }
+            .celular-imgs img:first-child { height: 200px; }
+        }
+        @media (max-width: 600px) {
+            .hero { min-height: 70vh; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            .hero-btns { flex-direction: column; }
+            .hero-btns a { text-align: center; }
+            .chip-price-tag { font-size: 1.1rem; padding: 0.6rem 1.2rem; }
+            .features-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .feature-card { padding: 1.5rem 1rem; }
+            .promos-rapidas { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+        <a href="https://wa.me/558432634154" class="nav-wpp-mobile">📲 Fale no WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/558432634154" class="btn-whatsapp">📲 Fale no WhatsApp</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<!-- HERO -->
+<section class="hero">
+    <img class="hero-bg-img" src="WhatsApp Image 2026-03-19 at 19.38.22.jpeg" alt="">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span class="hero-badge">🚀 Fibra Óptica de Verdade</span>
+        <h1>Internet <em>Ultra Rápida</em> para sua casa e empresa</h1>
+        <p>A melhor fibra óptica da região com atendimento 100% humanizado, 7 dias por semana.</p>
+        <div class="hero-btns">
+            <a href="https://wa.me/558432634154" class="btn-primary">Assinar Agora</a>
+            <a href="planos.html" class="btn-secondary">Ver Planos</a>
+        </div>
+    </div>
+    <div class="hero-stats">
+        <div class="stat-box"><strong>1GB</strong><span>Velocidade Máxima</span></div>
+        <div class="stat-box"><strong>7/7</strong><span>Dias de Suporte</span></div>
+        <div class="stat-box"><strong>5G</strong><span>Chip Disponível</span></div>
+    </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="features">
+    <div class="text-center">
+        <span class="section-label">Por que Cianet?</span>
+        <h2 class="section-title">Nossos <span>Diferenciais</span></h2>
+        <p class="section-sub">Mais do que internet, entregamos experiência.</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fibra Óptica Real</h3>
+            <p>Velocidade simétrica de upload e download, sem compartilhamento.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Estabilidade 99,9%</h3>
+            <p>Infraestrutura robusta para garantir sua conexão sempre ativa.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🤝</div>
+            <h3>Atendimento Humano</h3>
+            <p>Suporte real, sem robôs. Nossa equipe resolve de verdade.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Chip 5G Incluso</h3>
+            <p>Combine fibra em casa com o melhor chip 5G do mercado.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PLANOS PREVIEW -->
+<section id="planos-preview">
+    <div class="text-center">
+        <span class="section-label">Fibra Óptica</span>
+        <h2 class="section-title">Nossos <span>Planos</span></h2>
+        <p class="section-sub">Velocidade real, sem travamentos. Escolha o plano ideal para você.</p>
+    </div>
+    <div class="plans-grid">
+        <div class="plan-card">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.23.jpeg" alt="Plano 450MB">
+            <div class="plan-body">
+                <h3>Fibra 450MB</h3>
+                <p>Ideal para famílias que usam streaming e home office.</p>
+                <div class="plan-price">R$ 79,90 <small>/mês</small></div>
+                <a href="planos.html" class="plan-btn">Ver Detalhes</a>
+            </div>
+        </div>
+        <div class="plan-card featured">
+            <span class="plan-badge">⭐ Mais Popular</span>
+            <img src="WhatsApp Image 2026-03-19 at 19.38.24.jpeg" alt="Plano 750MB">
+            <div class="plan-body">
+                <h3>Fibra 750MB</h3>
+                <p>Perfeito para velocidade e estabilidade no dia a dia.</p>
+                <div class="plan-price">R$ 99,90 <small>/mês</small></div>
+                <a href="planos.html" class="plan-btn">Ver Detalhes</a>
+            </div>
+        </div>
+        <div class="plan-card">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.26.jpeg" alt="Plano 1GB">
+            <div class="plan-body">
+                <h3>Fibra 1GB</h3>
+                <p>Máxima velocidade para empresas, gamers e streamers.</p>
+                <div class="plan-price">R$ 129,90 <small>/mês</small></div>
+                <a href="planos.html" class="plan-btn">Ver Detalhes</a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" style="margin-top: 2.5rem;">
+        <a href="planos.html" class="btn-green">Ver Todos os Planos →</a>
+    </div>
+</section>
+
+<!-- PROMOS RÁPIDAS -->
+<div class="promos-rapidas" style="display:grid; grid-template-columns:1fr 1fr; background: var(--white);">
+    <div style="background: linear-gradient(135deg, var(--orange-dark), var(--orange)); color: var(--white); padding: 2.5rem 5%; display:flex; flex-direction:column; gap:0.8rem;">
+        <span style="font-size:2rem;">🎉</span>
+        <strong style="font-size:clamp(1.1rem,2vw,1.5rem); font-weight:900; line-height:1.2;">1º Mês por R$ 50,00</strong>
+        <p style="opacity:0.9; font-size:0.95rem; line-height:1.5;">Qualquer plano de fibra na primeira mensalidade. Oferta exclusiva para novos clientes.</p>
+        <a href="planos.html" style="color:var(--white); font-weight:700; font-size:0.9rem; text-decoration:underline;">Saiba mais →</a>
+    </div>
+    <div style="background: linear-gradient(135deg, var(--green-dark), var(--green)); color: var(--white); padding: 2.5rem 5%; display:flex; flex-direction:column; gap:0.8rem;">
+        <span style="font-size:2rem;">🤝</span>
+        <strong style="font-size:clamp(1.1rem,2vw,1.5rem); font-weight:900; line-height:1.2;">Indique e Ganhe Mensalidade Grátis</strong>
+        <p style="opacity:0.9; font-size:0.95rem; line-height:1.5;">Indicou um amigo que assinou? Sua próxima mensalidade é grátis. Sem limite!</p>
+        <a href="planos.html" style="color:var(--white); font-weight:700; font-size:0.9rem; text-decoration:underline;">Saiba mais →</a>
+    </div>
+</div>
+
+<!-- CELULAR PREVIEW -->
+<section id="celular-preview">
+    <div class="celular-wrap">
+        <div>
+            <span class="section-label">Cianet Celular</span>
+            <h2 class="section-title">Chip <span>5G</span> por apenas R$ 9,99</h2>
+            <p class="section-sub">Cobertura nacional com a melhor tecnologia móvel disponível.</p>
+            <div class="chip-price-tag">🔥 Chip 5G — R$ 9,99</div>
+            <ul class="chip-features">
+                <li>Planos de 6GB até 35GB de dados</li>
+                <li>WhatsApp e Redes Sociais inclusos</li>
+                <li>Ligações ilimitadas (consulte planos)</li>
+                <li>Cobertura em todo o Brasil</li>
+            </ul>
+            <a href="celular.html" class="btn-primary">Conhecer Planos de Celular →</a>
+        </div>
+        <div class="celular-imgs">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.33 (2).jpeg" alt="Chip 5G Cianet">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.33 (3).jpeg" alt="Chip Cianet">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.34.jpeg" alt="Planos Celular">
+        </div>
+    </div>
+</section>
+
+<!-- GALERIA PREVIEW -->
+<section id="galeria-preview">
+    <div class="text-center">
+        <span class="section-label">Nossa Estrutura</span>
+        <h2 class="section-title">Veja a <span>Cianet</span> em Ação</h2>
+        <p class="section-sub">Infraestrutura de ponta para levar a melhor conexão até você.</p>
+    </div>
+    <div class="gallery-grid">
+        <div class="gallery-item tall">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gallery-item">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gallery-item">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27 (3).jpeg" alt="Cianet">
+        </div>
+        <div class="gallery-item wide">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.28.jpeg" alt="Cianet">
+        </div>
+        <div class="gallery-item">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.30.jpeg" alt="Cianet">
+        </div>
+        <div class="gallery-item">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.30 (1).jpeg" alt="Cianet">
+        </div>
+    </div>
+    <div class="text-center" style="margin-top: 2.5rem;">
+        <a href="galeria.html" class="btn-green">Ver Galeria Completa →</a>
+    </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+    <h2>Pronto para ter a melhor internet da região?</h2>
+    <p>Fale agora com nossa equipe e assine em minutos pelo WhatsApp.</p>
+    <a href="https://wa.me/558432634154" class="btn-secondary">📲 Assinar pelo WhatsApp</a>
+</div>
+
+<!-- LOCALIZAÇÃO -->
+<section style="background: var(--gray-bg);">
+    <div class="text-center">
+        <span class="section-label">Onde Estamos</span>
+        <h2 class="section-title">Nossa <span>Central</span></h2>
+        <p class="section-sub">Venha nos visitar em Natal — Rio Grande do Norte.</p>
+    </div>
+    <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 4px solid var(--green);">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.853362106516!2d-35.26326912414972!3d-5.734248894247888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7b3ab6577a1113d%3A0x8cb02c4974678595!2sCIANET%20NATAL!5e0!3m2!1sen!2sbr!4v1773961213724!5m2!1sen!2sbr"
+            width="100%"
+            height="420"
+            style="border:0; display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização Cianet Natal">
+        </iframe>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://maps.google.com/?q=CIANET+NATAL" target="_blank" class="btn-green">📍 Abrir no Google Maps</a>
+        <a href="contato.html" class="btn-primary">Falar com a Equipe</a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-brand">
+        <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+        <p>Conectando você ao mundo com ultravelocidade e atendimento humanizado.</p>
+    </div>
+    <div>
+        <h4>Páginas</h4>
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Contato</h4>
+        <ul>
+            <li>(84) 3263-4154</li>
+            <li>Natal — RN</li>
+            <li>Seg a Dom: 8h às 22h</li>
+            <li><a href="https://wa.me/558432634154">WhatsApp</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bottom">
+    &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
+</div>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+    function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+</script>
+</body>
+</html>

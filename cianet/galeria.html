@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria - Cianet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .full-gallery { background: var(--white); }
+        .gallery-masonry {
+            columns: 4;
+            column-gap: 0.8rem;
+        }
+        .gallery-masonry .gitem {
+            break-inside: avoid;
+            margin-bottom: 0.8rem;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-masonry .gitem img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s;
+        }
+        .gallery-masonry .gitem:hover img { transform: scale(1.04); }
+
+        /* lightbox */
+        .lightbox {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute; top: 1.5rem; right: 2rem;
+            color: var(--white); font-size: 2.5rem;
+            cursor: pointer; font-weight: 300; line-height: 1;
+            transition: color 0.3s;
+        }
+        .lightbox-close:hover { color: var(--orange); }
+
+        @media (max-width: 900px) { .gallery-masonry { columns: 3; } }
+        @media (max-width: 600px) { .gallery-masonry { columns: 2; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html" class="active">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+        <a href="https://wa.me/558432634154" class="nav-wpp-mobile">📲 Fale no WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/558432634154" class="btn-whatsapp">📲 Fale no WhatsApp</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<div class="page-hero">
+    <span class="section-label">Fotos e Estrutura</span>
+    <h1>Nossa <span style="color: var(--orange-light);">Galeria</span></h1>
+    <p>Conheça nossa infraestrutura, equipe e promoções em imagens.</p>
+</div>
+
+<section class="full-gallery">
+    <div class="text-center" style="margin-bottom: 3rem;">
+        <span class="section-label">Todas as Fotos</span>
+        <h2 class="section-title">Cianet em <span>Imagens</span></h2>
+        <p class="section-sub">Clique em qualquer foto para ampliar.</p>
+    </div>
+    <div class="gallery-masonry">
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.22.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.23.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.24.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.26.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.27 (3).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.28.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.30.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.30 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.31.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.33.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.33 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.33 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.33 (3).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.34.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.34 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.34 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.35.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.35 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.36.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.36 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.36 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.37.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.38.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.38 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.38 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.39.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.39 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.39 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.39 (3).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.40.jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.40 (1).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.40 (2).jpeg" alt="Cianet">
+        </div>
+        <div class="gitem" onclick="openLightbox(this)">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.40 (3).jpeg" alt="Cianet">
+        </div>
+    </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+    <div class="footer-brand">
+        <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+        <p>Conectando você ao mundo com ultravelocidade e atendimento humanizado.</p>
+    </div>
+    <div>
+        <h4>Páginas</h4>
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Contato</h4>
+        <ul>
+            <li>(84) 3263-4154</li>
+            <li>Natal — RN</li>
+            <li>Seg a Dom: 8h às 22h</li>
+            <li><a href="https://wa.me/558432634154">WhatsApp</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bottom">
+    &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
+</div>
+
+<script>
+    function openLightbox(el) {
+        const src = el.querySelector('img').src;
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+    function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+</script>
+
+</body>
+</html>

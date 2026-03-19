@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atendimento - Cianet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-section { background: var(--white); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* ── CONTACT CARDS ── */
+        .contact-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+        .contact-card {
+            background: var(--gray-bg);
+            border-radius: 20px;
+            padding: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contact-card:hover { transform: translateX(6px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        .contact-card .cc-icon {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        .cc-green { background: linear-gradient(135deg, var(--green), var(--green-dark)); }
+        .cc-orange { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); }
+        .cc-wpp { background: linear-gradient(135deg, #25d366, #128c7e); }
+        .contact-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.3rem; }
+        .contact-card p { font-size: 0.9rem; color: #666; }
+        .contact-card a { color: var(--green); font-weight: 700; text-decoration: none; font-size: 1.1rem; }
+        .contact-card a:hover { color: var(--orange); }
+
+        /* ── FORM ── */
+        .contact-form-wrap {
+            background: var(--gray-bg);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+        .contact-form-wrap h3 { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem; }
+        .contact-form-wrap p { color: #666; font-size: 0.9rem; margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--dark);
+            background: var(--white);
+            transition: border-color 0.3s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: var(--green); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 20px rgba(0,166,81,0.4);
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,166,81,0.5); }
+
+        /* ── TEAM ── */
+        .team-section { background: var(--gray-bg); }
+        .team-imgs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .team-imgs img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 220px;
+            transition: transform 0.3s;
+        }
+        .team-imgs img:hover { transform: scale(1.03); }
+
+        /* ── HOURS ── */
+        .hours-section { background: linear-gradient(135deg, var(--green-dark), var(--green)); color: var(--white); }
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .hour-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .hour-card .day { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.3rem; }
+        .hour-card .time { font-size: 1.3rem; font-weight: 800; color: var(--orange-light); }
+        .hours-section .section-title { color: var(--white); }
+        .hours-section .section-title span { color: var(--orange-light); }
+        .hours-section .section-sub { color: rgba(255,255,255,0.8); }
+
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .team-imgs { grid-template-columns: 1fr 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .team-imgs { grid-template-columns: 1fr 1fr; }
+            .team-imgs img { height: 160px; }
+            .contact-card { padding: 1.2rem; gap: 1rem; }
+            .contact-card .cc-icon { width: 48px; height: 48px; font-size: 1.4rem; }
+            .hours-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html" class="active">Atendimento</a></li>
+        </ul>
+        <a href="https://wa.me/558432634154" class="nav-wpp-mobile">📲 Fale no WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/558432634154" class="btn-whatsapp">📲 Fale no WhatsApp</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<div class="page-hero">
+    <span class="section-label">Fale Conosco</span>
+    <h1>Atendimento <span style="color: var(--orange-light);">Humanizado</span></h1>
+    <p>Nossa equipe está pronta para te ajudar. Sem robôs, sem filas intermináveis.</p>
+</div>
+
+<!-- CONTATO PRINCIPAL -->
+<section class="contact-section">
+    <div class="contact-grid">
+        <div class="contact-cards">
+            <span class="section-label">Canais de Atendimento</span>
+            <h2 class="section-title">Como nos <span>Contatar</span></h2>
+            <p class="section-sub" style="margin-bottom: 1.5rem;">Escolha o canal mais conveniente para você.</p>
+
+            <div class="contact-card">
+                <div class="cc-icon cc-wpp">💬</div>
+                <div>
+                    <h3>WhatsApp</h3>
+                    <p>Atendimento rápido e direto</p>
+                    <a href="https://wa.me/558432634154">(84) 3263-4154</a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="cc-icon cc-green">📞</div>
+                <div>
+                    <h3>Telefone</h3>
+                    <p>Central de atendimento</p>
+                    <a href="tel:558432634154">(84) 3263-4154</a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="cc-icon cc-orange">📍</div>
+                <div>
+                    <h3>Localização</h3>
+                    <p>Natal — Rio Grande do Norte</p>
+                    <a href="https://maps.google.com/?q=CIANET+NATAL" target="_blank" style="color: var(--green); font-weight: 700;">Ver no Google Maps</a>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="cc-icon cc-green">🕐</div>
+                <div>
+                    <h3>Horário de Atendimento</h3>
+                    <p>Segunda a Domingo</p>
+                    <span style="color: var(--green); font-weight: 700;">8h às 22h</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/558432634154" class="btn-wpp-big">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Iniciar Conversa no WhatsApp
+            </a>
+        </div>
+
+        <div class="contact-form-wrap">
+            <h3>Envie uma Mensagem</h3>
+            <p>Preencha o formulário e entraremos em contato em breve.</p>
+            <form onsubmit="handleForm(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone / WhatsApp</label>
+                        <input type="tel" id="telefone" placeholder="(84) 9 0000-0000" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="assunto">Assunto</label>
+                    <select id="assunto">
+                        <option value="">Selecione o assunto</option>
+                        <option>Contratar Plano Fibra</option>
+                        <option>Chip 5G</option>
+                        <option>Suporte Técnico</option>
+                        <option>Financeiro / Boleto</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" placeholder="Como podemos te ajudar?"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- MAPA -->
+<section style="background: var(--gray-bg); padding: 5rem 5%;">
+    <div class="text-center">
+        <span class="section-label">Onde Estamos</span>
+        <h2 class="section-title">Nossa <span>Central</span></h2>
+        <p class="section-sub">Venha nos visitar em Natal — Rio Grande do Norte.</p>
+    </div>
+    <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 4px solid var(--green);">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.853362106516!2d-35.26326912414972!3d-5.734248894247888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7b3ab6577a1113d%3A0x8cb02c4974678595!2sCIANET%20NATAL!5e0!3m2!1sen!2sbr!4v1773961213724!5m2!1sen!2sbr"
+            width="100%"
+            height="450"
+            style="border:0; display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização Cianet Natal">
+        </iframe>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="https://maps.google.com/?q=CIANET+NATAL" target="_blank" class="btn-green">📍 Abrir no Google Maps</a>
+    </div>
+</section>
+
+<!-- HORÁRIOS -->
+<section class="hours-section">
+    <div class="text-center">
+        <span class="section-label">Disponibilidade</span>
+        <h2 class="section-title">Horários de <span>Atendimento</span></h2>
+        <p class="section-sub">Estamos disponíveis todos os dias para te atender.</p>
+    </div>
+    <div class="hours-grid">
+        <div class="hour-card">
+            <div class="day">Segunda a Sexta</div>
+            <div class="time">8h às 22h</div>
+        </div>
+        <div class="hour-card">
+            <div class="day">Sábado</div>
+            <div class="time">8h às 20h</div>
+        </div>
+        <div class="hour-card">
+            <div class="day">Domingo</div>
+            <div class="time">9h às 18h</div>
+        </div>
+        <div class="hour-card">
+            <div class="day">Feriados</div>
+            <div class="time">9h às 17h</div>
+        </div>
+    </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="team-section">
+    <div class="text-center">
+        <span class="section-label">Nossa Equipe</span>
+        <h2 class="section-title">Quem está <span>por trás</span></h2>
+        <p class="section-sub">Profissionais dedicados a manter sua conexão sempre no ar.</p>
+    </div>
+    <div class="team-imgs">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.39 (1).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40.jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40 (1).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40 (2).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40 (3).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.39 (2).jpeg" alt="Equipe Cianet">
+    </div>
+</section>
+
+<footer>
+    <div class="footer-brand">
+        <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+        <p>Conectando você ao mundo com ultravelocidade e atendimento humanizado.</p>
+    </div>
+    <div>
+        <h4>Páginas</h4>
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Contato</h4>
+        <ul>
+            <li>(84) 3263-4154</li>
+            <li>Natal — RN</li>
+            <li>Seg a Dom: 8h às 22h</li>
+            <li><a href="https://wa.me/558432634154">WhatsApp</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bottom">
+    &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
+</div>
+
+<script>
+    function handleForm(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value;
+        const tel = document.getElementById('telefone').value;
+        const assunto = document.getElementById('assunto').value || 'Contato';
+        const msg = document.getElementById('mensagem').value;
+        const text = encodeURIComponent(`Olá! Meu nome é ${nome}.\nTelefone: ${tel}\nAssunto: ${assunto}\n\n${msg}`);
+        window.open(`https://wa.me/558432634154?text=${text}`, '_blank');
+    }
+
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+    function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+</script>
+
+</body>
+</html>

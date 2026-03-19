@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos Fibra Óptica - Cianet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── COMPARATIVO ── */
+        .compare-section { background: var(--white); }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+        }
+        .compare-table thead { background: linear-gradient(135deg, var(--green-dark), var(--green)); color: var(--white); }
+        .compare-table th { padding: 1.2rem 1rem; font-size: 1rem; font-weight: 700; }
+        .compare-table td { padding: 1rem; text-align: center; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table tr:nth-child(even) td { background: var(--gray-bg); }
+        .compare-table .highlight { color: var(--green); font-weight: 700; }
+        .compare-table .check { color: var(--green); font-size: 1.2rem; }
+        .compare-table .cross { color: #ccc; font-size: 1.2rem; }
+        .col-popular { background: rgba(255,107,0,0.06) !important; }
+        .col-popular-head { background: var(--orange) !important; }
+
+        /* ── PROMOS DUPLAS ── */
+        .promos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .promo-card {
+            padding: 3.5rem 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .promo-card.promo-orange {
+            background: linear-gradient(135deg, var(--orange-dark), var(--orange));
+            color: var(--white);
+        }
+        .promo-card.promo-green {
+            background: linear-gradient(135deg, var(--green-dark), var(--green));
+            color: var(--white);
+        }
+        .promo-card .promo-icon { font-size: 3rem; }
+        .promo-card h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 900; line-height: 1.2; }
+        .promo-card p { font-size: 1rem; opacity: 0.9; line-height: 1.6; }
+        .promo-card .promo-destaque {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1;
+        }
+        .promo-card .promo-destaque small {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-top: 0.3rem;
+        }
+        @media (max-width: 700px) {
+            .promos-grid { grid-template-columns: 1fr; }
+            .promo-card { padding: 2.5rem 5%; }
+        }
+
+        /* ── PLANOS DETALHADOS ── */
+        .plans-detail { background: var(--gray-bg); }
+        .plan-detail-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 2rem;
+            transition: box-shadow 0.3s;
+        }
+        .plan-detail-card:hover { box-shadow: 0 15px 50px rgba(0,0,0,0.12); }
+        .plan-detail-card.reverse { direction: rtl; }
+        .plan-detail-card.reverse > * { direction: ltr; }
+        .plan-detail-card img { width: 100%; height: 100%; object-fit: cover; min-height: 280px; }
+        .plan-detail-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+        .plan-speed {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--green);
+            line-height: 1;
+        }
+        .plan-speed small { font-size: 1.2rem; color: #999; font-weight: 400; }
+        .plan-detail-body h3 { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin: 0.5rem 0; }
+        .plan-detail-body p { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .plan-includes { list-style: none; margin-bottom: 1.5rem; }
+        .plan-includes li {
+            padding: 0.4rem 0;
+            display: flex; align-items: center; gap: 0.6rem;
+            font-size: 0.9rem; color: #555;
+        }
+        .plan-includes li::before {
+            content: '✓';
+            background: var(--green); color: var(--white);
+            width: 20px; height: 20px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+        }
+        .plan-detail-price { font-size: 2rem; font-weight: 900; color: var(--orange); margin-bottom: 1.2rem; }
+        .plan-detail-price small { font-size: 0.9rem; color: #999; font-weight: 400; }
+
+        @media (max-width: 768px) {
+            .plan-detail-card { grid-template-columns: 1fr; }
+            .plan-detail-card.reverse { direction: ltr; }
+            .plan-detail-card img { min-height: 200px; }
+            .compare-table { font-size: 0.78rem; }
+            .compare-table th, .compare-table td { padding: 0.6rem 0.4rem; }
+            .promo-banner { flex-direction: column; text-align: center; }
+            .promo-price { font-size: 3rem; }
+        }
+        @media (max-width: 480px) {
+            .compare-table { font-size: 0.7rem; }
+            .compare-table th, .compare-table td { padding: 0.5rem 0.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="planos.html" class="active">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+        <a href="https://wa.me/558432634154" class="nav-wpp-mobile">📲 Fale no WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/558432634154" class="btn-whatsapp">📲 Fale no WhatsApp</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<div class="page-hero">
+    <span class="section-label">Fibra Óptica</span>
+    <h1>Planos para cada necessidade</h1>
+    <p>Velocidade real, sem compartilhamento. Escolha o plano ideal para sua casa ou empresa.</p>
+</div>
+
+<!-- PROMOÇÕES -->
+<div class="promos-grid">
+    <div class="promo-card promo-orange">
+        <div class="promo-icon">🎉</div>
+        <h2>1º Mês em qualquer plano</h2>
+        <p>Assine agora e pague apenas <strong>R$ 50,00</strong> na primeira mensalidade, independente do plano escolhido. Oferta exclusiva para novos clientes.</p>
+        <div class="promo-destaque">
+            R$ 50,00
+            <small>1ª mensalidade — qualquer plano</small>
+        </div>
+        <a href="https://wa.me/558432634154" class="btn-secondary">Aproveitar Agora</a>
+    </div>
+    <div class="promo-card promo-green">
+        <div class="promo-icon">🤝</div>
+        <h2>Indique um amigo e ganhe!</h2>
+        <p>Indicou um amigo que assinou um plano? Sua <strong>próxima mensalidade é grátis</strong>. Sem limite de indicações — quanto mais você indica, mais você economiza!</p>
+        <div class="promo-destaque">
+            Mensalidade Grátis
+            <small>a cada cliente indicado que assinar</small>
+        </div>
+        <a href="https://wa.me/558432634154" class="btn-secondary">Quero Indicar</a>
+    </div>
+</div>
+
+<!-- PLANOS DETALHADOS -->
+<section class="plans-detail">
+    <div class="text-center">
+        <span class="section-label">Escolha o seu</span>
+        <h2 class="section-title">Planos de <span>Fibra Óptica</span></h2>
+        <p class="section-sub">Todos os planos com instalação inclusa e suporte 7 dias por semana.</p>
+    </div>
+
+    <div class="plan-detail-card">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.23.jpeg" alt="Plano 450MB">
+        <div class="plan-detail-body">
+            <div class="plan-speed">450<small>MB</small></div>
+            <h3>Plano Fibra 450MB</h3>
+            <p>Ideal para famílias que usam streaming, redes sociais e home office com tranquilidade.</p>
+            <ul class="plan-includes">
+                <li>Upload e download simétricos</li>
+                <li>Roteador Wi-Fi incluso</li>
+                <li>Instalação gratuita</li>
+                <li>Suporte 7 dias por semana</li>
+            </ul>
+            <div class="plan-detail-price">R$ 79,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="btn-green">Contratar pelo WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="plan-detail-card reverse">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.24.jpeg" alt="Plano 750MB">
+        <div class="plan-detail-body">
+            <div class="plan-speed" style="color: var(--orange);">750<small>MB</small></div>
+            <h3>Plano Fibra 750MB ⭐ Mais Popular</h3>
+            <p>Perfeito para quem precisa de velocidade e estabilidade para múltiplos dispositivos.</p>
+            <ul class="plan-includes">
+                <li>Upload e download simétricos</li>
+                <li>Roteador Wi-Fi dual band incluso</li>
+                <li>Instalação gratuita</li>
+                <li>Suporte prioritário</li>
+                <li>Ideal para 4+ dispositivos</li>
+            </ul>
+            <div class="plan-detail-price">R$ 99,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="btn-primary">Contratar pelo WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="plan-detail-card">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.26.jpeg" alt="Plano 1GB">
+        <div class="plan-detail-body">
+            <div class="plan-speed">1<small>GB</small></div>
+            <h3>Plano Fibra 1GB</h3>
+            <p>Máxima velocidade para empresas, gamers, streamers e quem não aceita limitações.</p>
+            <ul class="plan-includes">
+                <li>1 Gigabit simétrico real</li>
+                <li>Roteador Wi-Fi 6 incluso</li>
+                <li>Instalação gratuita</li>
+                <li>Suporte VIP 24h</li>
+                <li>IP fixo disponível</li>
+            </ul>
+            <div class="plan-detail-price">R$ 129,90 <small>/mês</small></div>
+            <a href="https://wa.me/558432634154" class="btn-green">Contratar pelo WhatsApp</a>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARATIVO -->
+<section class="compare-section">
+    <div class="text-center">
+        <span class="section-label">Comparativo</span>
+        <h2 class="section-title">Compare os <span>Planos</span></h2>
+        <p class="section-sub">Veja lado a lado o que cada plano oferece.</p>
+    </div>
+    <table class="compare-table">
+        <thead>
+            <tr>
+                <th>Recurso</th>
+                <th>450MB</th>
+                <th class="col-popular-head">750MB ⭐</th>
+                <th>1GB</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Velocidade</td>
+                <td class="highlight">450 Mbps</td>
+                <td class="highlight col-popular">750 Mbps</td>
+                <td class="highlight">1000 Mbps</td>
+            </tr>
+            <tr>
+                <td>Upload Simétrico</td>
+                <td class="check">✓</td>
+                <td class="check col-popular">✓</td>
+                <td class="check">✓</td>
+            </tr>
+            <tr>
+                <td>Roteador Wi-Fi</td>
+                <td>Padrão</td>
+                <td class="col-popular">Dual Band</td>
+                <td>Wi-Fi 6</td>
+            </tr>
+            <tr>
+                <td>Instalação</td>
+                <td class="check">Grátis</td>
+                <td class="check col-popular">Grátis</td>
+                <td class="check">Grátis</td>
+            </tr>
+            <tr>
+                <td>Suporte</td>
+                <td>7 dias</td>
+                <td class="col-popular">Prioritário</td>
+                <td>VIP 24h</td>
+            </tr>
+            <tr>
+                <td>IP Fixo</td>
+                <td class="cross col-popular">—</td>
+                <td class="cross col-popular">—</td>
+                <td class="check">Disponível</td>
+            </tr>
+            <tr>
+                <td>Mensalidade</td>
+                <td class="highlight">R$ 79,90</td>
+                <td class="highlight col-popular">R$ 99,90</td>
+                <td class="highlight">R$ 129,90</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
+                <td class="col-popular"><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
+                <td><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- GALERIA DE PLANOS -->
+<section style="background: var(--gray-bg);">
+    <div class="text-center">
+        <span class="section-label">Promoções</span>
+        <h2 class="section-title">Ofertas <span>Exclusivas</span></h2>
+    </div>
+    <div class="img-strip">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.27.jpeg" alt="Promoção">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.34 (1).jpeg" alt="Promoção">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.34 (2).jpeg" alt="Promoção">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.35.jpeg" alt="Promoção">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.35 (1).jpeg" alt="Promoção">
+    </div>
+</section>
+
+<footer>
+    <div class="footer-brand">
+        <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+        <p>Conectando você ao mundo com ultravelocidade e atendimento humanizado.</p>
+    </div>
+    <div>
+        <h4>Páginas</h4>
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        <ul>
+            <li>(84) 3263-4154</li>
+            <li>Natal — RN</li>
+            <li>Seg a Dom: 8h às 22h</li>
+            <li><a href="https://wa.me/558432634154">WhatsApp</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bottom">
+    &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
+</div>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+    function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+</script>
+</body>
+</html>

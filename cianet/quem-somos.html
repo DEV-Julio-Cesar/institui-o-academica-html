@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem Somos - Cianet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── SOBRE ── */
+        .sobre-section { background: var(--white); }
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .sobre-text h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--dark); margin-bottom: 1.2rem; line-height: 1.2; }
+        .sobre-text h2 span { color: var(--green); }
+        .sobre-text p { color: #555; font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.2rem; }
+        .sobre-imgs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .sobre-imgs img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 200px;
+            transition: transform 0.3s;
+        }
+        .sobre-imgs img:hover { transform: scale(1.03); }
+        .sobre-imgs img:first-child { grid-column: span 2; height: 260px; }
+
+        /* ── MVV ── */
+        .mvv-section { background: var(--gray-bg); }
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .mvv-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .mvv-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
+        .mvv-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 5px;
+        }
+        .mvv-card.missao::before { background: linear-gradient(90deg, var(--orange-dark), var(--orange)); }
+        .mvv-card.visao::before  { background: linear-gradient(90deg, var(--green-dark), var(--green)); }
+        .mvv-card.valores::before { background: linear-gradient(90deg, #6a0dad, #a855f7); }
+        .mvv-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+        .mvv-card h3 { font-size: 1.4rem; font-weight: 900; color: var(--dark); margin-bottom: 1rem; }
+        .mvv-card p { color: #666; font-size: 0.95rem; line-height: 1.7; }
+
+        /* ── VALORES ── */
+        .valores-section { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, #005c2e 100%); color: var(--white); }
+        .valores-section .section-title { color: var(--white); }
+        .valores-section .section-title span { color: var(--orange-light); }
+        .valores-section .section-sub { color: rgba(255,255,255,0.8); }
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .valor-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .valor-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); }
+        .valor-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .valor-card h4 { font-size: 1.05rem; font-weight: 800; color: var(--orange-light); margin-bottom: 0.6rem; }
+        .valor-card p { font-size: 0.88rem; opacity: 0.85; line-height: 1.6; }
+
+        /* ── NÚMEROS ── */
+        .numeros-section { background: var(--white); }
+        .numeros-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .numero-item { padding: 2rem 1rem; }
+        .numero-item strong {
+            display: block;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--green), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .numero-item span { font-size: 0.95rem; color: #666; font-weight: 600; }
+
+        /* ── GALERIA EQUIPE ── */
+        .equipe-section { background: var(--gray-bg); }
+        .equipe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .equipe-grid img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 230px;
+            transition: transform 0.3s;
+        }
+        .equipe-grid img:hover { transform: scale(1.03); }
+
+        /* ── CTA ── */
+        .cta-band {
+            background: linear-gradient(135deg, var(--orange-dark), var(--orange), var(--orange-light));
+            padding: 4rem 5%;
+            text-align: center;
+            color: var(--white);
+        }
+        .cta-band h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; margin-bottom: 1rem; }
+        .cta-band p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
+
+        @media (max-width: 900px) {
+            .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .mvv-grid { grid-template-columns: 1fr; }
+            .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+            .equipe-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 600px) {
+            .numeros-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .equipe-grid { grid-template-columns: 1fr 1fr; }
+            .equipe-grid img { height: 160px; }
+            .sobre-imgs img { height: 160px; }
+            .sobre-imgs img:first-child { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <nav id="main-nav">
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html" class="active">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+        <a href="https://wa.me/558432634154" class="nav-wpp-mobile">📲 Fale no WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/558432634154" class="btn-whatsapp">📲 Fale no WhatsApp</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+    <span class="section-label">🏢 Nossa História</span>
+    <h1>Quem é a <span style="color: var(--orange-light);">Cianet</span></h1>
+    <p>Conectando pessoas e empresas ao melhor do mundo digital, com tecnologia de ponta e atendimento humanizado.</p>
+</div>
+
+<!-- QUEM SOMOS -->
+<section class="sobre-section">
+    <div class="sobre-grid">
+        <div class="sobre-text">
+            <span class="section-label">Sobre Nós</span>
+            <h2>Mais do que internet, <span>conexão de verdade</span></h2>
+            <p>A Cianet é um provedor de internet focado em oferecer soluções de conectividade de alta performance em Natal e região. Com uma infraestrutura moderna de fibra óptica e tecnologia 5G, nascemos com o propósito de aproximar pessoas e empresas ao que há de melhor no mundo digital.</p>
+            <p>Nosso diferencial não está apenas nos "megas", mas no atendimento 100% humanizado, disponível todos os dias para garantir que você nunca fique desconectado.</p>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+                <a href="planos.html" class="btn-green">Ver Planos</a>
+                <a href="contato.html" class="btn-primary">Falar Conosco</a>
+            </div>
+        </div>
+        <div class="sobre-imgs">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.22.jpeg" alt="Cianet Natal">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.28.jpeg" alt="Infraestrutura Cianet">
+            <img src="WhatsApp Image 2026-03-19 at 19.38.31.jpeg" alt="Equipe Cianet">
+        </div>
+    </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="numeros-section">
+    <div class="text-center">
+        <span class="section-label">Cianet em Números</span>
+        <h2 class="section-title">Nossa <span>Trajetória</span></h2>
+        <p class="section-sub">Resultados que refletem nosso compromisso com qualidade.</p>
+    </div>
+    <div class="numeros-grid">
+        <div class="numero-item">
+            <strong>1GB</strong>
+            <span>Velocidade Máxima</span>
+        </div>
+        <div class="numero-item">
+            <strong>7/7</strong>
+            <span>Dias de Suporte</span>
+        </div>
+        <div class="numero-item">
+            <strong>5G</strong>
+            <span>Tecnologia Móvel</span>
+        </div>
+        <div class="numero-item">
+            <strong>99,9%</strong>
+            <span>Uptime Garantido</span>
+        </div>
+    </div>
+</section>
+
+<!-- MISSÃO, VISÃO -->
+<section class="mvv-section">
+    <div class="text-center">
+        <span class="section-label">Propósito</span>
+        <h2 class="section-title">Missão, Visão e <span>Valores</span></h2>
+        <p class="section-sub">Os pilares que guiam cada decisão da Cianet.</p>
+    </div>
+    <div class="mvv-grid">
+        <div class="mvv-card missao">
+            <div class="mvv-icon">🎯</div>
+            <h3>Missão</h3>
+            <p>Prover serviços de telecomunicações com excelência, agilidade e tecnologia de ponta, garantindo uma conexão estável que agregue valor ao dia a dia dos nossos clientes, seja para lazer, estudos ou negócios.</p>
+        </div>
+        <div class="mvv-card visao">
+            <div class="mvv-icon">👁️</div>
+            <h3>Visão</h3>
+            <p>Ser reconhecida como o melhor e mais confiável provedor de internet do Rio Grande do Norte, destacando-se pela inovação constante em infraestrutura e pela proximidade real com o cliente.</p>
+        </div>
+        <div class="mvv-card valores">
+            <div class="mvv-icon">💎</div>
+            <h3>Valores</h3>
+            <p>Foco no cliente, inovação tecnológica, ética e transparência, humanização no atendimento e qualidade na entrega. Esses são os compromissos que assumimos com cada cliente todos os dias.</p>
+        </div>
+    </div>
+</section>
+
+<!-- VALORES DETALHADOS -->
+<section class="valores-section">
+    <div class="text-center">
+        <span class="section-label">O que nos move</span>
+        <h2 class="section-title">Nossos <span>Valores</span></h2>
+        <p class="section-sub">Cada valor reflete quem somos e como trabalhamos.</p>
+    </div>
+    <div class="valores-grid">
+        <div class="valor-card">
+            <div class="valor-icon">❤️</div>
+            <h4>Foco no Cliente</h4>
+            <p>Entender para atender com empatia e eficiência. O cliente é o centro de tudo.</p>
+        </div>
+        <div class="valor-card">
+            <div class="valor-icon">🚀</div>
+            <h4>Inovação</h4>
+            <p>Busca constante pelas tecnologias mais recentes — Fibra Óptica e 5G.</p>
+        </div>
+        <div class="valor-card">
+            <div class="valor-icon">🤝</div>
+            <h4>Ética e Transparência</h4>
+            <p>Relações claras e compromissos honrados. Sem letras miúdas.</p>
+        </div>
+        <div class="valor-card">
+            <div class="valor-icon">👥</div>
+            <h4>Humanização</h4>
+            <p>Acreditamos que, por trás de toda conexão, existem pessoas reais.</p>
+        </div>
+        <div class="valor-card">
+            <div class="valor-icon">⭐</div>
+            <h4>Qualidade</h4>
+            <p>Entrega do que foi prometido com a máxima estabilidade e confiabilidade.</p>
+        </div>
+    </div>
+</section>
+
+<!-- EQUIPE -->
+<section class="equipe-section">
+    <div class="text-center">
+        <span class="section-label">Nossa Equipe</span>
+        <h2 class="section-title">As pessoas por <span>trás da Cianet</span></h2>
+        <p class="section-sub">Profissionais dedicados a manter sua conexão sempre no ar, todos os dias.</p>
+    </div>
+    <div class="equipe-grid">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.39 (1).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40.jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40 (1).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40 (2).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.40 (3).jpeg" alt="Equipe Cianet">
+        <img src="WhatsApp Image 2026-03-19 at 19.38.39 (2).jpeg" alt="Equipe Cianet">
+    </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+    <h2>Faça parte da família Cianet</h2>
+    <p>Assine agora e experimente a diferença de uma internet com atendimento humanizado.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="planos.html" class="btn-secondary">Ver Planos</a>
+        <a href="https://wa.me/558432634154" style="background:var(--white); color:var(--orange); padding:1rem 2.2rem; border-radius:50px; text-decoration:none; font-weight:700; font-size:1.05rem; display:inline-block;">📲 Falar no WhatsApp</a>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-brand">
+        <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+        <p>Conectando você ao mundo com ultravelocidade e atendimento humanizado.</p>
+    </div>
+    <div>
+        <h4>Páginas</h4>
+        <ul>
+            <li><a href="planos.html">Planos Fibra</a></li>
+            <li><a href="celular.html">Chip 5G</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="quem-somos.html">Quem Somos</a></li>
+            <li><a href="contato.html">Atendimento</a></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Contato</h4>
+        <ul>
+            <li>(84) 3263-4154</li>
+            <li>Natal — RN</li>
+            <li>Seg a Dom: 8h às 22h</li>
+            <li><a href="https://wa.me/558432634154">WhatsApp</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bottom">
+    &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
+</div>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    const overlay = document.getElementById('nav-overlay');
+    function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+</script>
+
+</body>
+</html>

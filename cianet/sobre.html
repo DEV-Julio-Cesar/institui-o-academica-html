@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem Somos - Cianet</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ── HERO SOBRE ── */
+        .sobre-hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 45%, var(--orange) 100%);
+            padding: 7rem 5% 5rem;
+            color: var(--white);
+            overflow: hidden;
+        }
+        .sobre-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.3);
+        }
+        .sobre-hero-inner {
+            position: relative; z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .sobre-hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+        .sobre-hero h1 em { color: var(--orange-light); font-style: normal; }
+        .sobre-hero p {
+            font-size: 1.1rem;
+            opacity: 0.92;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .anos-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 1.2rem 2rem;
+            backdrop-filter: blur(8px);
+        }
+        .anos-badge .num {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--orange-light);
+            line-height: 1;
+        }
+        .anos-badge .txt { font-size: 0.95rem; opacity: 0.9; line-height: 1.4; }
+        .hero-img-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .hero-img-wrap img {
+            width: 100%; border-radius: 16px;
+            object-fit: cover; height: 190px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .hero-img-wrap img:first-child { grid-column: span 2; height: 240px; }
+
+        /* ── MISSÃO / VISÃO / VALORES ── */
+        .mvv { background: var(--white); }
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .mvv-card {
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .mvv-card.missao { background: linear-gradient(135deg, var(--green-dark), var(--green)); color: var(--white); }
+        .mvv-card.visao  { background: linear-gradient(135deg, var(--orange-dark), var(--orange)); color: var(--white); }
+        .mvv-card.valores { background: var(--gray-bg); color: var(--dark); }
+        .mvv-card .mvv-icon { font-size: 2.8rem; margin-b
