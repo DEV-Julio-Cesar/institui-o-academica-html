@@ -234,6 +234,27 @@
       transform: translateY(-2px);
     }
 
+    .project-card.card-cianet::before {
+      background: linear-gradient(90deg, #00a651, #ff6b00);
+    }
+
+    .card-cianet .card-tag {
+      background: rgba(0,166,81,0.2);
+      color: #4ade80;
+      border: 1px solid rgba(0,166,81,0.4);
+    }
+
+    .card-cianet .btn-card {
+      background: linear-gradient(135deg, #00a651, #ff6b00);
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(0,166,81,0.4);
+    }
+
+    .card-cianet .btn-card:hover {
+      box-shadow: 0 8px 28px rgba(0,166,81,0.6);
+      transform: translateY(-2px);
+    }
+
     /* === FOOTER === */
     footer {
       text-align: center;
@@ -249,6 +270,10 @@
     @media (min-width: 640px) {
       header h1 { font-size: 2.5rem; }
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -293,6 +318,23 @@
         </div>
 
         <a href="cidade/index.html" class="btn-card">🌴 Acessar Portal</a>
+      </article>
+
+      <!-- PROJETO 3: CIANET -->
+      <article class="project-card card-cianet">
+        <span class="card-icon">📡</span>
+        <span class="card-tag">Provedor de Internet</span>
+        <h2>Cianet</h2>
+        <p>Portal do provedor de internet Cianet com planos, serviços para celular, galeria e canais de contato.</p>
+
+        <div class="sub-links">
+          <a href="cianet/planos.html"   class="sub-link">📶 Planos</a>
+          <a href="cianet/celular.html"  class="sub-link">📱 Celular</a>
+          <a href="cianet/galeria.html"  class="sub-link">🖼 Galeria</a>
+          <a href="cianet/contato.html"  class="sub-link">📞 Contato</a>
+        </div>
+
+        <a href="cianet/index.html" class="btn-card">🌐 Acessar Portal</a>
       </article>
 
     </div>
