@@ -174,10 +174,17 @@
         <h2 class="section-title">Escolha seu <span>Plano</span></h2>
         <p class="section-sub">Do básico ao completo, temos o plano certo para você.</p>
     </div>
+    <!-- div.mobile-plans-grid: CSS Grid com auto-fit para distribuir
+         os cards automaticamente conforme o espaço disponível -->
     <div class="mobile-plans-grid">
         <div class="mobile-plan-card">
+            <!-- div.mobile-gb: exibe o número de GB em tamanho grande.
+                 small: texto menor semântico para a unidade "GB" -->
             <div class="mobile-gb">6<small>GB</small></div>
             <h3>Plano Básico</h3>
+            <!-- ul.mobile-features: lista de benefícios do plano.
+                 Os marcadores ✓ são inseridos via CSS ::before,
+                 mantendo o HTML limpo -->
             <ul class="mobile-features">
                 <li>6GB de dados</li>
                 <li>WhatsApp incluso</li>

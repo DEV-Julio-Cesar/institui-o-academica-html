@@ -5,42 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeria - Cianet</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- <style>: CSS interno — usado aqui porque esses estilos são exclusivos desta página.
+         Colocar no <head> garante que o visual carregue junto com o HTML, sem piscar.
+         Para estilos compartilhados entre páginas, usamos o arquivo externo css/style.css -->
     <style>
         .full-gallery { background: var(--white); }
+
+        /* gallery-masonry: layout de colunas tipo "Pinterest".
+           A propriedade "columns: 4" divide o espaço em 4 colunas verticais.
+           As fotos se encaixam automaticamente preenchendo os espaços, sem deixar buracos.
+           Isso é diferente de grid/flexbox, que trabalham em linhas. */
         .gallery-masonry {
-            columns: 4;
-            column-gap: 0.8rem;
+            columns: 4;          /* número de colunas lado a lado */
+            column-gap: 0.8rem;  /* espaço entre as colunas */
         }
+
+        /* gitem: cada item (foto) da galeria.
+           break-inside: avoid → impede que uma foto seja "cortada" entre duas colunas.
+           cursor: pointer → muda o cursor para "mãozinha", indicando que é clicável. */
         .gallery-masonry .gitem {
             break-inside: avoid;
             margin-bottom: 0.8rem;
             border-radius: 14px;
-            overflow: hidden;
+            overflow: hidden;    /* esconde o que ultrapassar o border-radius */
             cursor: pointer;
         }
+
+        /* width: 100% → a imagem ocupa toda a largura da coluna.
+           display: block → remove o espaço extra que imagens inline criam embaixo.
+           transition: transform → anima suavemente o efeito de zoom no hover. */
         .gallery-masonry .gitem img {
             width: 100%;
             display: block;
             transition: transform 0.4s;
         }
+        /* Ao passar o mouse, a foto cresce 4% — efeito visual de destaque */
         .gallery-masonry .gitem:hover img { transform: scale(1.04); }
 
-        /* lightbox */
+        /* ── LIGHTBOX ──
+           Lightbox é uma sobreposição (overlay) que exibe a foto em tamanho grande
+           sem sair da página. Funciona assim:
+           1. Começa com display:none → invisível
+           2. Quando o usuário clica numa foto, o JS adiciona a classe "open"
+           3. Com a classe "open", vira display:flex → aparece na tela
+           position: fixed → fica fixo na tela, mesmo com scroll
+           inset: 0 → ocupa toda a tela (top/right/bottom/left = 0)
+           z-index: 9999 → fica na frente de tudo */
         .lightbox {
             display: none;
             position: fixed; inset: 0;
-            background: rgba(0,0,0,0.92);
+            background: rgba(0,0,0,0.92); /* fundo preto semitransparente */
             z-index: 9999;
             align-items: center;
             justify-content: center;
         }
+        /* Quando o JS adiciona a classe "open", o lightbox aparece como flexbox */
         .lightbox.open { display: flex; }
+
+        /* A foto dentro do lightbox nunca ultrapassa 90% da tela */
         .lightbox img {
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 90vw;   /* vw = % da largura da janela */
+            max-height: 90vh;  /* vh = % da altura da janela */
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
+
+        /* Botão "×" para fechar o lightbox — posicionado no canto superior direito */
         .lightbox-close {
             position: absolute; top: 1.5rem; right: 2rem;
             color: var(--white); font-size: 2.5rem;
@@ -49,6 +79,8 @@
         }
         .lightbox-close:hover { color: var(--orange); }
 
+        /* Responsividade: em telas menores, reduz o número de colunas
+           para que as fotos não fiquem pequenas demais */
         @media (max-width: 900px) { .gallery-masonry { columns: 3; } }
         @media (max-width: 600px) { .gallery-masonry { columns: 2; } }
     </style>
@@ -94,7 +126,15 @@
         <h2 class="section-title">Cianet em <span>Imagens</span></h2>
         <p class="section-sub">Clique em qualquer foto para ampliar.</p>
     </div>
+    <!-- gallery-masonry: container da galeria estilo "Pinterest" com CSS columns.
+         Cada filho (gitem) é posicionado automaticamente na coluna mais curta. -->
     <div class="gallery-masonry">
+
+        <!-- gitem: cada card de foto da galeria.
+             onclick="openLightbox(this)" → ao clicar, chama a função JS passando
+             este elemento (this) como referência para pegar o src da imagem.
+             alt="Cianet": texto alternativo — lido por leitores de tela para acessibilidade.
+             Idealmente descreveria o conteúdo da foto (ex: "Técnico instalando fibra óptica"). -->
         <div class="gitem" onclick="openLightbox(this)">
             <img src="WhatsApp Image 2026-03-19 at 19.38.22.jpeg" alt="Cianet">
         </div>
@@ -206,9 +246,13 @@
     </div>
 </section>
 
-<!-- LIGHTBOX -->
+<!-- LIGHTBOX: sobreposição que exibe a foto ampliada.
+     Começa invisível (display:none no CSS). O JS adiciona/remove a classe "open"
+     para mostrar ou esconder. O onclick no próprio div fecha ao clicar fora da foto. -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <!-- Botão "×" para fechar — o onclick aqui também chama closeLightbox() -->
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <!-- A imagem começa com src="" vazio. O JS preenche com o src da foto clicada -->
     <img id="lightbox-img" src="" alt="">
 </div>
 
@@ -242,16 +286,24 @@
 </div>
 
 <script>
+    /* openLightbox(el): recebe o elemento .gitem clicado,
+       pega o src da imagem dentro dele e coloca no lightbox.
+       Depois adiciona a classe "open" → o CSS muda display:none para display:flex */
     function openLightbox(el) {
-        const src = el.querySelector('img').src;
-        document.getElementById('lightbox-img').src = src;
-        document.getElementById('lightbox').classList.add('open');
+        const src = el.querySelector('img').src; /* pega o caminho da imagem */
+        document.getElementById('lightbox-img').src = src; /* coloca no lightbox */
+        document.getElementById('lightbox').classList.add('open'); /* exibe */
     }
+
+    /* closeLightbox(): remove a classe "open" → o CSS volta para display:none */
     function closeLightbox() {
         document.getElementById('lightbox').classList.remove('open');
     }
+
+    /* Fecha o lightbox ao pressionar a tecla Escape — melhora a usabilidade */
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+    /* Controle do menu hambúrguer para mobile */
     const toggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('main-nav');
     const overlay = document.getElementById('nav-overlay');

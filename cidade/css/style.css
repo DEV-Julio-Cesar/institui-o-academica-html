@@ -6,28 +6,34 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
 
+/* box-sizing: border-box faz com que padding e borda sejam incluídos
+   no tamanho total do elemento — evita que ele "estoure" o layout */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* :root é o elemento raiz do HTML — aqui guardamos variáveis CSS reutilizáveis
+   em todo o arquivo com var(--nome). Funciona como uma paleta de cores centralizada */
 :root {
-  --ocean:      #0077B6;
-  --ocean-dk:   #023E8A;
-  --ocean-lt:   #00B4D8;
-  --sand:       #F4A261;
-  --sand-dk:    #E76F51;
-  --green:      #2D6A4F;
-  --green-lt:   #52B788;
-  --light:      #F0F8FF;
-  --dark:       #03045E;
-  --text:       #1B2A3B;
-  --muted:      #6B7C93;
-  --white:      #FFFFFF;
-  --radius:     12px;
-  --radius-lg:  20px;
-  --shadow:     0 4px 24px rgba(0,119,182,0.15);
-  --shadow-lg:  0 12px 40px rgba(0,119,182,0.25);
-  --transition: 0.3s ease;
+  --ocean:      #0077B6;  /* azul oceano principal */
+  --ocean-dk:   #023E8A;  /* azul escuro — títulos e fundos */
+  --ocean-lt:   #00B4D8;  /* azul claro — detalhes e destaques */
+  --sand:       #F4A261;  /* areia — cor de ação/botões */
+  --sand-dk:    #E76F51;  /* areia escura — hover dos botões */
+  --green:      #2D6A4F;  /* verde tropical */
+  --green-lt:   #52B788;  /* verde claro */
+  --light:      #F0F8FF;  /* azul bem claro — fundo de seções alternadas */
+  --dark:       #03045E;  /* azul quase preto — fundo do header/footer */
+  --text:       #1B2A3B;  /* cor padrão do texto */
+  --muted:      #6B7C93;  /* cinza azulado — textos secundários */
+  --white:      #FFFFFF;  /* branco puro */
+  --radius:     12px;     /* arredondamento padrão dos cards */
+  --radius-lg:  20px;     /* arredondamento maior */
+  --shadow:     0 4px 24px rgba(0,119,182,0.15);   /* sombra suave */
+  --shadow-lg:  0 12px 40px rgba(0,119,182,0.25);  /* sombra mais intensa */
+  --transition: 0.3s ease; /* duração padrão das animações de hover */
 }
 
+/* scroll-behavior: smooth faz a página rolar suavemente ao clicar
+   em links âncora (#secao), em vez de pular direto para o destino */
 html { scroll-behavior: smooth; }
 
 body {
@@ -42,27 +48,33 @@ img  { max-width: 100%; display: block; }
 a    { text-decoration: none; color: inherit; }
 ul, ol { list-style: none; }
 
+/* .container centraliza o conteúdo na página e limita a largura máxima,
+   evitando que o texto fique muito largo em telas grandes */
 .container {
   width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  max-width: 1100px; /* no máximo 1100px — acima disso o conteúdo para de crescer */
+  margin: 0 auto;    /* auto nas laterais centraliza o bloco horizontalmente */
+  padding: 0 1.5rem; /* espaçamento interno nas laterais para não colar nas bordas */
 }
 
 /* === BOTÕES === */
+/* display: inline-flex permite que o botão fique na mesma linha que outros elementos
+   e ao mesmo tempo usa flexbox internamente para alinhar ícone + texto lado a lado */
 .btn {
   display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  align-items: center; /* alinha ícone e texto verticalmente ao centro */
+  gap: 0.4rem;         /* espaço entre o ícone e o texto */
   padding: 0.8rem 2rem;
   border-radius: 50px;
   font-weight: 700;
   font-size: 0.92rem;
   cursor: pointer;
   border: none;
-  transition: var(--transition);
+  transition: var(--transition); /* usa a variável de transição definida no :root */
 }
 
+/* linear-gradient cria uma cor de fundo degradê — vai de uma cor para outra
+   em linha reta. 135deg é o ângulo da direção do gradiente */
 .btn-primary {
   background: linear-gradient(135deg, var(--sand), var(--sand-dk));
   color: var(--white);
@@ -78,17 +90,19 @@ ul, ol { list-style: none; }
 .btn-ghost:hover { background: var(--white); color: var(--ocean-dk); transform: translateY(-3px); }
 
 /* === TAGS === */
+/* .tag é o pequeno rótulo colorido que aparece acima dos títulos de seção */
 .tag {
   display: inline-block;
-  background: linear-gradient(135deg, var(--ocean-lt), var(--ocean));
+  background: linear-gradient(135deg, var(--ocean-lt), var(--ocean)); /* degradê azul */
   color: var(--white);
   font-size: 0.72rem;
   font-weight: 700;
   padding: 0.25rem 0.9rem;
   border-radius: 50px;
   margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: uppercase; /* transforma todas as letras em maiúsculas via CSS,
+                                 sem precisar digitar em caps no HTML */
+  letter-spacing: 0.08em;    /* aumenta o espaço entre as letras — dá ar de "etiqueta" */
 }
 
 .section-title {
@@ -364,6 +378,10 @@ footer::before {
 }
 
 /* === RESPONSIVE TABLET === */
+/* @media (min-width: 768px) significa: "aplique estes estilos SOMENTE quando
+   a tela tiver 768px ou mais" — ou seja, em tablets e desktops.
+   Este projeto usa Mobile First: os estilos base são para celular,
+   e os @media ampliam o layout para telas maiores */
 @media (min-width: 768px) {
   .nav-toggle { display: none; }
   .nav-menu {
@@ -393,6 +411,7 @@ footer::before {
 }
 
 /* === RESPONSIVE DESKTOP === */
+/* @media (min-width: 1024px): estilos aplicados apenas em telas de desktop (≥ 1024px) */
 @media (min-width: 1024px) {
   .hero h1 { font-size: 3.5rem; }
   .page-hero h1 { font-size: 2.5rem; }
@@ -400,4 +419,189 @@ footer::before {
   .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
   .main-with-aside { grid-template-columns: 1fr 280px; }
   .section-title { font-size: 2rem; }
+}
+
+/* =============================================
+   UC7 — ATIVIDADE 2: SELETORES, PSEUDO-CLASSES
+   E PSEUDO-ELEMENTOS — TURISMO
+   ============================================= */
+
+/* ─────────────────────────────────────────────
+   1. LINKS — ESTADOS COMPLETOS
+   ─────────────────────────────────────────────
+*/
+
+/*
+  :is() — agrupa seletores com estilos comuns
+  ─────────────────────────────────────────────
+  Aplica o estado normal dos links em múltiplas
+  seções sem repetir o seletor para cada uma.
+*/
+:is(.cards-grid, .info-box, footer) a {
+  color: var(--ocean);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+
+/* :hover — ao passar o mouse */
+:is(.cards-grid, .info-box, footer) a:hover {
+  color: var(--sand-dk);
+  text-decoration-color: var(--sand-dk);
+}
+
+/* :active — durante o clique */
+:is(.cards-grid, .info-box, footer) a:active {
+  background: rgba(0,119,182,0.12);
+  border-radius: 3px;
+  color: var(--ocean-dk);
+}
+
+/* ─────────────────────────────────────────────
+   2. ::selection — SELEÇÃO DE TEXTO DA CIDADE
+   ─────────────────────────────────────────────
+   Quando o usuário seleciona texto dentro de
+   .turismo-text, o fundo fica azul oceano e
+   o texto branco, reforçando a identidade visual.
+*/
+.turismo-text::selection,
+.turismo-text *::selection {
+  background-color: var(--ocean);
+  color: var(--white);
+  text-shadow: none;
+}
+
+/* ::selection estiliza o texto que o usuário seleciona com o mouse.
+   Aqui trocamos o azul padrão do navegador pela cor do projeto */
+::selection {
+  background-color: var(--ocean-lt); /* fundo azul claro ao selecionar */
+  color: var(--white);               /* texto branco sobre o fundo azul */
+  text-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   3. CARDS DE ATRAÇÃO — :hover
+   ─────────────────────────────────────────────
+*/
+.card:hover .card-body p {
+  color: var(--ocean);
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-body h3 {
+  color: var(--ocean-dk);
+}
+
+/* ─────────────────────────────────────────────
+   4. FORMULÁRIO FALE CONOSCO — INPUTS
+   (complementa o style inline de fale-conosco.html)
+   ─────────────────────────────────────────────
+*/
+
+/* Seletor de atributo: cada tipo de campo tem borda própria */
+input[type="text"]  { border-left: 3px solid var(--ocean-lt); }
+input[type="email"] { border-left: 3px solid var(--ocean); }
+input[type="tel"]   { border-left: 3px solid var(--sand); }
+
+/*
+  ::placeholder — texto de dica dos campos
+  ─────────────────────────────────────────────
+  Estiliza o texto cinza exibido antes de digitar.
+*/
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  font-style: italic;
+  opacity: 1;
+}
+
+input[type="email"]::placeholder { color: var(--ocean-lt); font-style: normal; }
+input[type="tel"]::placeholder   { color: var(--sand-dk);  letter-spacing: 0.04em; }
+
+/*
+  :focus — foco nos campos
+  ─────────────────────────────────────────────
+  Feedback visual claro ao navegar pelo formulário.
+*/
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--ocean);
+  box-shadow: 0 0 0 3px rgba(0,119,182,0.18);
+  background: #fff;
+  transform: translateY(-1px);
+  transition: all 0.25s ease;
+}
+
+/*
+  :valid e :invalid — validação visual
+  ─────────────────────────────────────────────
+  :valid aplica estilo quando o campo está preenchido corretamente (ex: email válido).
+  :invalid aplica estilo quando o valor não atende ao formato esperado.
+  :not(:placeholder-shown) evita mostrar erro
+  em campos ainda não tocados pelo usuário.
+*/
+input:not(:placeholder-shown):valid,
+textarea:not(:placeholder-shown):valid {
+  border-color: #2D6A4F;  /* borda verde = campo correto */
+  background: #f0fdf4;    /* fundo levemente verde */
+}
+
+input:not(:placeholder-shown):invalid,
+textarea:not(:placeholder-shown):invalid {
+  border-color: #dc2626;                       /* borda vermelha = campo com erro */
+  background: #fef2f2;                         /* fundo levemente vermelho */
+  box-shadow: 0 0 0 2px rgba(220,38,38,0.1);  /* brilho vermelho ao redor */
+}
+
+/* ─────────────────────────────────────────────
+   5. BOTÃO DE ENVIO — :hover E :active
+   ─────────────────────────────────────────────
+*/
+.btn-submit:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(0,119,182,0.5);
+  filter: brightness(1.1);
+}
+
+.btn-submit:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 3px 10px rgba(0,119,182,0.3);
+  filter: brightness(0.95);
+}
+
+/* ─────────────────────────────────────────────
+   6. RODAPÉ — :hover COM ESCALA
+   ─────────────────────────────────────────────
+*/
+
+/*
+  :hover nos itens do rodapé
+  ─────────────────────────────────────────────
+  transform: scale não afeta o fluxo do documento,
+  então os outros itens não se movem.
+*/
+.footer-col ul li:hover {
+  transform: scale(1.05) translateX(4px);
+  transition: transform 0.25s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--ocean-lt);
+  padding-left: 6px;
+  transition: all 0.25s ease;
+}
+
+.footer-col:hover h4 {
+  color: var(--ocean-lt);
+  transition: color 0.3s ease;
+}
+
+.footer-bottom p:hover {
+  color: rgba(255,255,255,0.8);
+  transform: scale(1.02);
+  display: inline-block;
+  transition: all 0.3s ease;
 }

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
+<!-- lang="pt-br": informa ao navegador e leitores de tela o idioma da página,
+     essencial para acessibilidade e SEO correto -->
 <html lang="pt-br">
 <head>
+    <!-- charset="UTF-8": define a codificação de caracteres, permitindo
+         acentos e caracteres especiais do português sem distorção -->
     <meta charset="UTF-8">
+    <!-- viewport: controla o zoom e largura em dispositivos móveis.
+         width=device-width → usa a largura real do dispositivo.
+         initial-scale=1.0 → sem zoom inicial, essencial para responsividade -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title: texto exibido na aba do navegador e nos resultados de busca (SEO) -->
     <title>Cianet - Conectando Você ao Mundo</title>
+    <!-- link rel="stylesheet": carrega o arquivo CSS externo.
+         href aponta para o caminho relativo do arquivo de estilos -->
     <link rel="stylesheet" href="css/style.css">
     <style>
         /* ── HERO HOME ── */
@@ -155,9 +165,16 @@
 </head>
 <body>
 
+<!-- header: elemento semântico que representa o cabeçalho da página.
+     O CSS o torna sticky (fixo no topo ao rolar) -->
 <header>
+    <!-- a.logo-text: link que leva à página inicial ao clicar no logo -->
     <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+    <!-- nav: elemento semântico de navegação. id="main-nav" permite
+         que o JavaScript o controle para abrir/fechar no mobile -->
     <nav id="main-nav">
+        <!-- ul/li/a: lista não ordenada de links de navegação.
+             Cada <li> é um item do menu, o <a> é o link clicável -->
         <ul>
             <li><a href="planos.html">Planos Fibra</a></li>
             <li><a href="celular.html">Chip 5G</a></li>
@@ -167,8 +184,16 @@
             <li><a href="velocidade.html">⚡ Velocidade</a></li>
         </ul>
     </nav>
+    <!-- div.header-actions: agrupa os botões do lado direito do header.
+         Oculto em mobile via CSS (display:none em telas ≤768px) -->
     <div class="header-actions">
+        <!-- target="_blank": abre o link em nova aba.
+             rel="noopener": segurança — impede que a nova aba acesse
+             a janela original via window.opener -->
         <a href="https://wa.me/558432634154" class="header-wpp" target="_blank" rel="noopener">
+            <!-- svg: gráfico vetorial inline do ícone do WhatsApp.
+                 fill="currentColor" herda a cor do texto do elemento pai,
+                 permitindo mudar a cor só com CSS -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="18" height="18">
                 <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.476-2.004A15.94 15.94 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.853l-.485-.288-5.03 1.188 1.21-4.898-.317-.503A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.87c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.63-.2-.896.2-.265.398-1.03 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.982-2.356-2.214-2.754-.232-.398-.025-.613.174-.811.179-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.066-.497-.033-.697-.1-.2-.896-2.16-1.228-2.957-.323-.776-.65-.67-.896-.683l-.763-.013c-.265 0-.697.1-1.062.497-.365.398-1.394 1.362-1.394 3.32s1.427 3.85 1.626 4.116c.2.265 2.808 4.287 6.803 6.013.951.41 1.693.655 2.272.838.954.303 1.823.26 2.51.158.765-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/>
             </svg>
@@ -176,47 +201,77 @@
         </a>
         <a href="https://play.google.com/store/apps/details?id=br.com.appdoprovedor.cianet" target="_blank" rel="noopener" class="header-app-btn">📱 Área do Cliente</a>
     </div>
+    <!-- button.menu-toggle: botão hamburguer visível apenas em mobile.
+         aria-label="Menu" descreve o botão para leitores de tela,
+         já que ele não tem texto visível, apenas os <span> decorativos -->
     <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
 </header>
+<!-- div.nav-overlay: fundo escuro que aparece atrás do menu mobile aberto.
+     Clicar nele fecha o menu (controlado pelo JavaScript) -->
 <div class="nav-overlay" id="nav-overlay"></div>
 
-<!-- HERO -->
+<!-- section: elemento semântico que agrupa conteúdo relacionado.
+     class="hero" aplica os estilos da seção principal de destaque -->
 <section class="hero">
+    <!-- img.hero-bg-img: imagem de fundo decorativa do hero.
+         alt="": alt vazio porque é puramente decorativa, não transmite
+         informação — leitores de tela a ignoram corretamente -->
     <img class="hero-bg-img" src="WhatsApp Image 2026-03-19 at 19.38.22.jpeg" alt="">
+    <!-- div.hero-overlay: camada escura semitransparente sobre a imagem
+         para garantir contraste e legibilidade do texto branco -->
     <div class="hero-overlay"></div>
     <div class="hero-content">
+        <!-- span.hero-badge: badge/etiqueta de destaque.
+             span é inline por padrão, o CSS o transforma em inline-block -->
         <span class="hero-badge">🚀 Fibra Óptica de Verdade</span>
+        <!-- h1: título principal da página. Deve existir apenas um por página.
+             em: ênfase semântica — aqui usada para destacar visualmente
+             "Ultra Rápida" com cor diferente via CSS -->
         <h1>Internet <em>Ultra Rápida</em> para sua casa e empresa</h1>
         <p>A melhor fibra óptica da região com atendimento 100% humanizado, 7 dias por semana.</p>
         <div class="hero-btns">
+            <!-- a.btn-primary: link estilizado como botão de ação principal.
+                 href com URL completa do WhatsApp Web API (wa.me) -->
             <a href="https://wa.me/558432634154" class="btn-primary">Assinar Agora</a>
             <a href="planos.html" class="btn-secondary">Ver Planos</a>
         </div>
     </div>
+    <!-- div.hero-stats: caixas de estatísticas posicionadas absolutamente
+         no canto inferior direito do hero (ocultas em mobile) -->
     <div class="hero-stats">
+        <!-- strong: indica importância semântica do número -->
         <div class="stat-box"><strong>1GB</strong><span>Velocidade Máxima</span></div>
         <div class="stat-box"><strong>7/7</strong><span>Dias de Suporte</span></div>
         <div class="stat-box"><strong>5G</strong><span>Chip Disponível</span></div>
     </div>
 </section>
 
-<!-- DIFERENCIAIS -->
+<!-- section.features: seção semântica dos diferenciais da empresa -->
 <section class="features">
     <div class="text-center">
+        <!-- span.section-label: rótulo pequeno acima do título da seção -->
         <span class="section-label">Por que Cianet?</span>
+        <!-- h2: título de seção (hierarquia abaixo do h1 do hero) -->
         <h2 class="section-title">Nossos <span>Diferenciais</span></h2>
         <p class="section-sub">Mais do que internet, entregamos experiência.</p>
     </div>
+    <!-- div.features-grid: container CSS Grid que distribui os cards
+         automaticamente com repeat(auto-fit, minmax(220px, 1fr)) -->
     <div class="features-grid">
+        <!-- div.feature-card: card individual de cada diferencial.
+             Poderia ser article, mas div é aceitável para conteúdo
+             puramente visual sem semântica de artigo independente -->
         <div class="feature-card">
+            <!-- div.feature-icon: container do emoji/ícone decorativo -->
             <div class="feature-icon">⚡</div>
+            <!-- h3: subtítulo dentro do card (hierarquia: h1 > h2 > h3) -->
             <h3>Fibra Óptica Real</h3>
             <p>Velocidade simétrica de upload e download, sem compartilhamento.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">🛡️</div>
+            <div class="feature-icon">�️</div>
             <h3>Estabilidade 99,9%</h3>
             <p>Infraestrutura robusta para garantir sua conexão sempre ativa.</p>
         </div>
@@ -233,23 +288,31 @@
     </div>
 </section>
 
-<!-- PLANOS PREVIEW -->
+<!-- section#planos-preview: id permite âncora direta via URL (#planos-preview)
+     e também é usado como seletor CSS para o fundo cinza -->
 <section id="planos-preview">
     <div class="text-center">
         <span class="section-label">Fibra Óptica</span>
         <h2 class="section-title">Nossos <span>Planos</span></h2>
         <p class="section-sub">Velocidade real, sem travamentos. Escolha o plano ideal para você.</p>
     </div>
+    <!-- div.plans-grid: CSS Grid que distribui os cards de plano -->
     <div class="plans-grid">
         <div class="plan-card">
+            <!-- img: imagem do plano. alt descreve o conteúdo para
+                 acessibilidade e SEO de imagens -->
             <img src="WhatsApp Image 2026-03-19 at 19.38.23.jpeg" alt="Plano 450MB">
             <div class="plan-body">
                 <h3>Fibra 450MB</h3>
                 <p>Ideal para famílias que usam streaming e home office.</p>
+                <!-- div.plan-price: container do preço.
+                     small: texto menor semântico para "/mês" -->
                 <div class="plan-price">R$ 79,90 <small>/mês</small></div>
                 <a href="planos.html" class="plan-btn">Ver Detalhes</a>
             </div>
         </div>
+        <!-- class="featured": classe extra que aplica destaque visual
+             ao plano mais popular (borda laranja, badge) -->
         <div class="plan-card featured">
             <span class="plan-badge">⭐ Mais Popular</span>
             <img src="WhatsApp Image 2026-03-19 at 19.38.24.jpeg" alt="Plano 750MB">
@@ -291,7 +354,7 @@
     </div>
 </div>
 
-<!-- CELULAR PREVIEW -->
+<!-- section#celular-preview: id para âncora e estilo CSS específico -->
 <section id="celular-preview">
     <div class="celular-wrap">
         <div>
@@ -299,6 +362,9 @@
             <h2 class="section-title">Chip <span>5G</span> por apenas R$ 9,99</h2>
             <p class="section-sub">Cobertura nacional com a melhor tecnologia móvel disponível.</p>
             <div class="chip-price-tag">🔥 Chip 5G — R$ 9,99</div>
+            <!-- ul.chip-features: lista não ordenada de benefícios do chip.
+                 list-style:none no CSS remove os marcadores padrão,
+                 substituídos pelo ::before com ✓ via CSS -->
             <ul class="chip-features">
                 <li>Planos de 6GB até 35GB de dados</li>
                 <li>WhatsApp e Redes Sociais inclusos</li>
@@ -307,6 +373,8 @@
             </ul>
             <a href="celular.html" class="btn-primary">Conhecer Planos de Celular →</a>
         </div>
+        <!-- div.celular-imgs: CSS Grid 2 colunas para as imagens do chip.
+             A primeira imagem ocupa as 2 colunas (grid-column: span 2) -->
         <div class="celular-imgs">
             <img src="WhatsApp Image 2026-03-19 at 19.38.33 (2).jpeg" alt="Chip 5G Cianet">
             <img src="WhatsApp Image 2026-03-19 at 19.38.33 (3).jpeg" alt="Chip Cianet">
@@ -315,14 +383,17 @@
     </div>
 </section>
 
-<!-- GALERIA PREVIEW -->
+<!-- section#galeria-preview: seção de prévia da galeria de imagens -->
 <section id="galeria-preview">
     <div class="text-center">
         <span class="section-label">Nossa Estrutura</span>
         <h2 class="section-title">Veja a <span>Cianet</span> em Ação</h2>
         <p class="section-sub">Infraestrutura de ponta para levar a melhor conexão até você.</p>
     </div>
+    <!-- div.gallery-grid: CSS Grid com grid-auto-rows para altura uniforme.
+         Cada item pode ter classes "tall" (span 2 linhas) ou "wide" (span 2 colunas) -->
     <div class="gallery-grid">
+        <!-- class="tall": faz o item ocupar 2 linhas do grid (grid-row: span 2) -->
         <div class="gallery-item tall">
             <img src="WhatsApp Image 2026-03-19 at 19.38.27 (1).jpeg" alt="Cianet">
         </div>
@@ -332,6 +403,7 @@
         <div class="gallery-item">
             <img src="WhatsApp Image 2026-03-19 at 19.38.27 (3).jpeg" alt="Cianet">
         </div>
+        <!-- class="wide": faz o item ocupar 2 colunas (grid-column: span 2) -->
         <div class="gallery-item wide">
             <img src="WhatsApp Image 2026-03-19 at 19.38.28.jpeg" alt="Cianet">
         </div>
@@ -397,6 +469,12 @@
         <p class="section-sub">Venha nos visitar em Natal — Rio Grande do Norte.</p>
     </div>
     <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); border: 4px solid var(--green);">
+<!-- iframe: incorpora o Google Maps diretamente na página.
+     allowfullscreen: permite abrir em tela cheia.
+     loading="lazy": carrega o mapa só quando o usuário rolar até ele,
+     melhorando a performance da página.
+     referrerpolicy: controla quais informações são enviadas ao Google Maps.
+     title: obrigatório para acessibilidade — descreve o iframe para leitores de tela -->
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.853362106516!2d-35.26326912414972!3d-5.734248894247888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7b3ab6577a1113d%3A0x8cb02c4974678595!2sCIANET%20NATAL!5e0!3m2!1sen!2sbr!4v1773961213724!5m2!1sen!2sbr"
             width="100%"
@@ -414,6 +492,8 @@
     </div>
 </section>
 
+<!-- footer: elemento semântico do rodapé da página.
+     Contém informações institucionais, links e contato -->
 <footer>
     <div class="footer-brand">
         <a href="index.html" class="logo-text">CIA<span>NET</span></a>
@@ -421,6 +501,7 @@
     </div>
     <div>
         <h4>Páginas</h4>
+        <!-- ul: lista de links de navegação do rodapé -->
         <ul>
             <li><a href="planos.html">Planos Fibra</a></li>
             <li><a href="celular.html">Chip 5G</a></li>
@@ -439,24 +520,36 @@
         </ul>
     </div>
 </footer>
+<!-- div.footer-bottom: barra inferior com copyright.
+     &copy; é a entidade HTML para o símbolo © -->
 <div class="footer-bottom">
     &copy; 2026 <span>Cianet</span> Provedor de Internet. Todos os direitos reservados. — Natal, RN
 </div>
 
 <script>
+    // Seleciona os elementos pelo id para controlar o menu mobile
     const toggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('main-nav');
     const overlay = document.getElementById('nav-overlay');
+
+    // Função reutilizável para fechar o menu
     function closeMenu() { toggle.classList.remove('open'); nav.classList.remove('open'); overlay.classList.remove('open'); }
+
+    // addEventListener: escuta o evento 'click' no botão hamburguer.
+    // classList.toggle: adiciona a classe 'open' se não existir, remove se existir
     toggle.addEventListener('click', () => {
         const isOpen = nav.classList.toggle('open');
         toggle.classList.toggle('open', isOpen);
         overlay.classList.toggle('open', isOpen);
     });
+
+    // Fecha o menu ao clicar no overlay escuro
     overlay.addEventListener('click', closeMenu);
 </script>
 
-<!-- BOTÃO FIXO WHATSAPP -->
+<!-- a.wpp-float: botão flutuante fixo do WhatsApp.
+     position:fixed no CSS o mantém sempre visível no canto da tela.
+     aria-label: descreve o botão para leitores de tela (acessibilidade) -->
 <a href="https://wa.me/558432634154" class="wpp-float" target="_blank" rel="noopener" aria-label="Fale no WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white" width="30" height="30">
         <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.476-2.004A15.94 15.94 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.853l-.485-.288-5.03 1.188 1.21-4.898-.317-.503A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.87c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.63-.2-.896.2-.265.398-1.03 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.982-2.356-2.214-2.754-.232-.398-.025-.613.174-.811.179-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.066-.497-.033-.697-.1-.2-.896-2.16-1.228-2.957-.323-.776-.65-.67-.896-.683l-.763-.013c-.265 0-.697.1-1.062.497-.365.398-1.394 1.362-1.394 3.32s1.427 3.85 1.626 4.116c.2.265 2.808 4.287 6.803 6.013.951.41 1.693.655 2.272.838.954.303 1.823.26 2.51.158.765-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/>

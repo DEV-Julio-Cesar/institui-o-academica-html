@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
+/* :root é o elemento raiz do HTML — aqui definimos variáveis CSS (apelidos para valores)
+   que podem ser reutilizadas em todo o arquivo com var(--nome-da-variavel) */
 :root {
-    --green: #00a651;
-    --green-dark: #007a3d;
-    --green-light: #00c96a;
-    --orange: #ff6b00;
-    --orange-light: #ff8c2f;
-    --orange-dark: #cc5500;
-    --white: #ffffff;
-    --gray-bg: #f5f5f5;
-    --dark: #1a1a1a;
+    --green: #00a651;       /* verde principal da marca */
+    --green-dark: #007a3d;  /* verde mais escuro, usado em gradientes e hovers */
+    --green-light: #00c96a; /* verde mais claro, para detalhes e bordas */
+    --orange: #ff6b00;      /* laranja principal — cor de destaque/ação */
+    --orange-light: #ff8c2f;/* laranja claro */
+    --orange-dark: #cc5500; /* laranja escuro */
+    --white: #ffffff;       /* branco puro */
+    --gray-bg: #f5f5f5;     /* cinza bem claro para fundos de seção */
+    --dark: #1a1a1a;        /* quase preto — cor padrão do texto */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,13 +21,16 @@ body { font-family: 'Montserrat', sans-serif; color: var(--dark); background: va
 header {
     background: var(--white);
     padding: 0.8rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* display: flex coloca os filhos lado a lado (logo, nav, botão)
+                      em vez de empilhados um abaixo do outro */
+    justify-content: space-between; /* empurra os itens para as extremidades */
+    align-items: center; /* alinha verticalmente ao centro */
     box-shadow: 0 3px 15px rgba(0,0,0,0.12);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position: sticky; /* position: sticky faz o header "grudar" no topo da tela
+                         enquanto o usuário rola a página — fica sempre visível */
+    top: 0; /* define a partir de onde ele fica fixo (0 = topo da janela) */
+    z-index: 1000; /* z-index controla qual elemento fica "na frente" dos outros.
+                      Valor alto (1000) garante que o header fique acima de tudo */
 }
 .logo-text { font-size: 2rem; font-weight: 900; color: var(--green); letter-spacing: -1px; text-decoration: none; }
 .logo-text span { color: var(--orange); }
@@ -35,16 +40,19 @@ nav a {
     color: var(--dark);
     font-weight: 600;
     font-size: 0.95rem;
-    transition: color 0.3s;
-    position: relative;
+    transition: color 0.3s; /* transition anima a mudança de cor suavemente em 0.3s
+                                sem isso, a cor mudaria de forma brusca no hover */
+    position: relative; /* necessário para posicionar o ::after (linha laranja) */
 }
+/* nav a::after cria um pseudo-elemento invisível logo abaixo de cada link.
+   É a linha laranja que aparece ao passar o mouse — sem precisar de HTML extra */
 nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 3px;
+    content: ''; /* obrigatório: sem isso o pseudo-elemento não aparece */
+    position: absolute; /* posiciona em relação ao <a> pai (que tem position: relative) */
+    bottom: -4px; left: 0; /* fica 4px abaixo do texto, alinhado à esquerda */
+    width: 0; height: 3px; /* começa com largura 0 (invisível) */
     background: var(--orange);
-    transition: width 0.3s;
+    transition: width 0.3s; /* anima a largura de 0 até 100% no hover */
     border-radius: 2px;
 }
 nav a:hover, nav a.active { color: var(--orange); }
@@ -78,24 +86,29 @@ nav a:hover::after, nav a.active::after { width: 100%; }
     width: 26px; height: 3px;
     background: var(--green);
     border-radius: 3px;
-    transition: all 0.3s;
+    transition: all 0.3s; /* anima qualquer propriedade que mudar (transform, opacity) */
 }
+/* Quando o botão tem a classe "open", as 3 barras se transformam em X:
+   - 1ª barra: desce 8px e gira 45° (diagonal para baixo)
+   - 2ª barra: some (opacity 0)
+   - 3ª barra: sobe 8px e gira -45° (diagonal para cima) */
 .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .menu-toggle.open span:nth-child(2) { opacity: 0; }
 .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* mobile nav drawer */
+/* @media (max-width: 768px) significa: "aplique estes estilos SOMENTE quando
+   a tela tiver até 768px de largura" — ou seja, em celulares e tablets pequenos */
 @media (max-width: 768px) {
     .menu-toggle { display: flex; }
     .btn-whatsapp { display: none; }
     nav {
-        position: fixed;
-        top: 0; right: -100%;
+        position: fixed; /* fixed: fica fixo na tela mesmo ao rolar a página */
+        top: 0; right: -100%; /* começa fora da tela (à direita) */
         width: 75%; max-width: 300px;
-        height: 100vh;
+        height: 100vh; /* 100vh = 100% da altura da janela do navegador */
         background: var(--white);
         box-shadow: -5px 0 30px rgba(0,0,0,0.15);
-        transition: right 0.35s ease;
+        transition: right 0.35s ease; /* anima o menu deslizando da direita */
         z-index: 999;
         padding: 5rem 2rem 2rem;
     }
@@ -253,18 +266,21 @@ footer ul a:hover { color: var(--orange); }
 /* ── PLAN CARDS ── */
 .plans-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* cria colunas automáticas:
+        cada coluna tem no mínimo 260px e no máximo 1fr (divide o espaço igualmente) */
     gap: 1.8rem;
 }
+/* .plan-card é o card de cada plano de internet */
 .plan-card {
     background: var(--white);
     border-radius: 20px;
-    overflow: hidden;
+    overflow: hidden; /* esconde qualquer conteúdo que ultrapasse as bordas arredondadas */
     box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s; /* anima o efeito de "levantar" no hover */
     position: relative;
 }
 .plan-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+/* .plan-card.featured é o card em destaque — recebe uma borda laranja para se destacar */
 .plan-card.featured { border: 3px solid var(--orange); }
 .plan-badge {
     position: absolute;
@@ -300,10 +316,12 @@ footer ul a:hover { color: var(--orange); }
 .plan-btn:hover { opacity: 0.85; }
 
 /* ── GALLERY ── */
+/* .gallery-grid usa CSS Grid para criar um mosaico de fotos */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 140px;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas de tamanho igual */
+    grid-auto-rows: 140px; /* cada linha tem 140px de altura por padrão.
+                               Itens com classe "tall" ocupam 2 linhas (280px) */
     gap: 0.6rem;
     max-width: 1000px;
     margin: 0 auto;
@@ -352,14 +370,16 @@ footer ul a:hover { color: var(--orange); }
 }
 
 /* ── BOTÃO FIXO WHATSAPP ── */
+/* position: fixed mantém o botão sempre visível no canto da tela,
+   independente de quanto o usuário rolar a página */
 .wpp-float {
     position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 9999;
+    bottom: 1.5rem; /* 1.5rem acima da borda inferior da janela */
+    right: 1.5rem;  /* 1.5rem da borda direita da janela */
+    z-index: 9999;  /* valor altíssimo para ficar acima de absolutamente tudo */
     background: #25D366;
     width: 58px; height: 58px;
-    border-radius: 50%;
+    border-radius: 50%; /* 50% transforma o elemento em círculo perfeito */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -407,4 +427,217 @@ footer ul a:hover { color: var(--orange); }
 
 @media (max-width: 768px) {
     .header-actions { display: none; }
+}
+
+/* =============================================
+   CIANET — SELETORES, PSEUDO-CLASSES
+   E PSEUDO-ELEMENTOS
+   ============================================= */
+
+/* ─────────────────────────────────────────────
+   1. LINKS — ESTADOS COMPLETOS
+   ─────────────────────────────────────────────
+*/
+
+/*
+  :is() — agrupa seletores com estilos comuns
+  Aplica o estado normal dos links em múltiplas
+  seções sem repetir o seletor para cada uma.
+*/
+:is(.features, .plans-grid, footer, .cta-band) a {
+    color: var(--green);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+
+/* :hover — ao passar o mouse */
+:is(.features, .plans-grid, footer, .cta-band) a:hover {
+    color: var(--orange);
+    text-decoration-color: var(--orange);
+}
+
+/* :active — durante o clique */
+:is(.features, .plans-grid, footer, .cta-band) a:active {
+    background: rgba(0,166,81,0.12);
+    border-radius: 3px;
+    color: var(--green-dark);
+}
+
+/* Links do nav — estados completos */
+nav a:link    { color: var(--dark); }
+nav a:visited { color: #555; }
+nav a.active  { color: var(--orange); }
+
+/* ─────────────────────────────────────────────
+   2. CARDS DE PLANO — :hover
+   ─────────────────────────────────────────────
+*/
+
+/*
+  :hover no card de plano
+  Eleva o card e destaca a borda ao passar o mouse.
+*/
+.plan-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,166,81,0.2);
+    border-color: var(--green);
+}
+
+/* :hover na descrição do plano */
+.plan-card:hover .plan-body p {
+    color: var(--green-dark);
+    transition: color 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────
+   3. CARDS DE FEATURE — :hover
+   ─────────────────────────────────────────────
+*/
+.feature-card:hover .feature-card p {
+    color: var(--green-dark);
+}
+
+/*
+  ::after no título da feature
+  Insere uma linha decorativa abaixo do h3
+  ao passar o mouse, sem alterar o HTML.
+*/
+.feature-card:hover h3::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-top: 0.4rem;
+    animation: growLine 0.3s ease forwards;
+}
+
+@keyframes growLine {
+    from { width: 0; }
+    to   { width: 40px; }
+}
+
+/* ─────────────────────────────────────────────
+   4. ::selection — SELEÇÃO DE TEXTO
+   ─────────────────────────────────────────────
+   Quando o usuário seleciona texto na página,
+   o fundo fica verde Cianet e o texto branco.
+*/
+::selection {
+    background-color: var(--green);
+    color: var(--white);
+    text-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   5. FORMULÁRIO CONTATO — INPUTS POR ATRIBUTO
+   ─────────────────────────────────────────────
+   input[type="..."] estiliza cada tipo de campo
+   de forma independente sem classes extras no HTML.
+*/
+input[type="text"]  { border-left: 3px solid var(--green-light); }
+input[type="email"] { border-left: 3px solid var(--green); }
+input[type="tel"]   { border-left: 3px solid var(--orange); }
+
+/*
+  ::placeholder — texto de dica dos campos
+  Estiliza o texto cinza exibido antes de digitar.
+*/
+input::placeholder,
+textarea::placeholder {
+    color: #a0aec0;
+    font-style: italic;
+    opacity: 1;
+}
+
+input[type="email"]::placeholder { color: var(--green);  font-style: normal; }
+input[type="tel"]::placeholder   { color: var(--orange); letter-spacing: 0.04em; }
+
+/*
+  :focus — foco nos campos
+  Feedback visual claro ao navegar pelo formulário.
+*/
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(0,166,81,0.18);
+    background: #fff;
+    transform: translateY(-1px);
+    transition: all 0.25s ease;
+}
+
+/*
+  :valid e :invalid — validação visual
+  :not(:placeholder-shown) evita mostrar erro
+  em campos ainda não tocados pelo usuário.
+*/
+input:not(:placeholder-shown):valid,
+textarea:not(:placeholder-shown):valid {
+    border-color: var(--green-dark);
+    background: #f0fdf4;
+}
+
+input:not(:placeholder-shown):invalid,
+textarea:not(:placeholder-shown):invalid {
+    border-color: #dc2626;
+    background: #fef2f2;
+    box-shadow: 0 0 0 2px rgba(220,38,38,0.1);
+}
+
+/* ─────────────────────────────────────────────
+   6. BOTÕES — :hover E :active
+   ─────────────────────────────────────────────
+*/
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    filter: brightness(1.08);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.97);
+    filter: brightness(0.95);
+}
+
+.btn-green:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 28px rgba(0,166,81,0.45);
+    filter: brightness(1.08);
+}
+
+.btn-green:active {
+    transform: translateY(0) scale(0.97);
+    filter: brightness(0.95);
+}
+
+/* ─────────────────────────────────────────────
+   7. RODAPÉ — :hover COM ESCALA
+   ─────────────────────────────────────────────
+   transform: scale não afeta o fluxo do documento,
+   então os outros itens não se movem.
+*/
+footer ul li:hover {
+    transform: scale(1.05) translateX(4px);
+    transition: transform 0.25s ease;
+}
+
+footer ul li a:hover {
+    color: var(--orange);
+    padding-left: 6px;
+    transition: all 0.25s ease;
+}
+
+footer h4:hover {
+    color: var(--orange-light);
+    transition: color 0.3s ease;
+}
+
+.footer-bottom:hover {
+    color: rgba(255,255,255,0.8);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
 }

@@ -164,18 +164,27 @@
     <p>Velocidade real, sem compartilhamento. Escolha o plano ideal para sua casa ou empresa.</p>
 </div>
 
-<!-- PROMOÇÕES -->
+<!-- PROMOÇÕES: dois cards lado a lado em grid de 2 colunas.
+     Cada card tem cor de fundo diferente (laranja e verde) para criar contraste visual
+     e destacar as duas ofertas sem precisar de bordas ou sombras. -->
 <div class="promos-grid">
+    <!-- promo-card promo-orange: card da promoção de primeiro mês.
+         display:flex + flex-direction:column organiza ícone, título, texto e botão
+         em pilha vertical, com gap entre cada elemento. -->
     <div class="promo-card promo-orange">
+        <!-- Emoji como ícone decorativo — leve, sem precisar de arquivo de imagem -->
         <div class="promo-icon">🎉</div>
         <h2>1º Mês em qualquer plano</h2>
         <p>Assine agora e pague apenas <strong>R$ 50,00</strong> na primeira mensalidade, independente do plano escolhido. Oferta exclusiva para novos clientes.</p>
+        <!-- promo-destaque: caixa com o valor em destaque — fundo semitransparente
+             sobre o gradiente laranja cria profundidade visual -->
         <div class="promo-destaque">
             R$ 50,00
             <small>1ª mensalidade — qualquer plano</small>
         </div>
         <a href="https://wa.me/558432634154" class="btn-secondary">Aproveitar Agora</a>
     </div>
+    <!-- promo-card promo-green: card da promoção de indicação -->
     <div class="promo-card promo-green">
         <div class="promo-icon">🤝</div>
         <h2>Indique um amigo e ganhe!</h2>
@@ -188,7 +197,10 @@
     </div>
 </div>
 
-<!-- PLANOS DETALHADOS -->
+<!-- PLANOS DETALHADOS: cada plano tem um card com foto + informações lado a lado.
+     plan-detail-card usa grid de 2 colunas: imagem à esquerda, detalhes à direita.
+     A classe "reverse" inverte a ordem (detalhes à esquerda, imagem à direita)
+     para criar alternância visual e tornar a página mais dinâmica. -->
 <section class="plans-detail">
     <div class="text-center">
         <span class="section-label">Escolha o seu</span>
@@ -196,26 +208,38 @@
         <p class="section-sub">Todos os planos com instalação inclusa e suporte 7 dias por semana.</p>
     </div>
 
+    <!-- Card do Plano 450MB: imagem à esquerda, detalhes à direita -->
     <div class="plan-detail-card">
+        <!-- A imagem ocupa metade do card (1fr do grid de 2 colunas).
+             object-fit: cover no CSS garante que a foto preencha o espaço sem distorcer. -->
         <img src="WhatsApp Image 2026-03-19 at 19.38.23.jpeg" alt="Plano 450MB">
         <div class="plan-detail-body">
+            <!-- plan-speed: velocidade em destaque — número grande para impacto visual.
+                 <small> dentro do span reduz o tamanho da unidade "MB" -->
             <div class="plan-speed">450<small>MB</small></div>
             <h3>Plano Fibra 450MB</h3>
             <p>Ideal para famílias que usam streaming, redes sociais e home office com tranquilidade.</p>
+            <!-- <ul> com <li>: lista semântica de benefícios incluídos no plano.
+                 O CSS adiciona um ✓ verde antes de cada item via ::before -->
             <ul class="plan-includes">
                 <li>Upload e download simétricos</li>
                 <li>Roteador Wi-Fi incluso</li>
                 <li>Instalação gratuita</li>
                 <li>Suporte 7 dias por semana</li>
             </ul>
+            <!-- plan-detail-price: preço em destaque com cor laranja para chamar atenção.
+                 <small> reduz o tamanho do "/mês" para não competir com o valor principal. -->
             <div class="plan-detail-price">R$ 79,90 <small>/mês</small></div>
             <a href="https://wa.me/558432634154" class="btn-green">Contratar pelo WhatsApp</a>
         </div>
     </div>
 
+    <!-- Card do Plano 750MB: classe "reverse" inverte a ordem (foto à direita).
+         direction: rtl no CSS inverte a ordem dos filhos do grid. -->
     <div class="plan-detail-card reverse">
         <img src="WhatsApp Image 2026-03-19 at 19.38.24.jpeg" alt="Plano 750MB">
         <div class="plan-detail-body">
+            <!-- Cor laranja no plan-speed para diferenciar visualmente o plano popular -->
             <div class="plan-speed" style="color: var(--orange);">750<small>MB</small></div>
             <h3>Plano Fibra 750MB ⭐ Mais Popular</h3>
             <p>Perfeito para quem precisa de velocidade e estabilidade para múltiplos dispositivos.</p>
@@ -231,6 +255,7 @@
         </div>
     </div>
 
+    <!-- Card do Plano 1GB: volta para o layout normal (foto à esquerda) -->
     <div class="plan-detail-card">
         <img src="WhatsApp Image 2026-03-19 at 19.38.26.jpeg" alt="Plano 1GB">
         <div class="plan-detail-body">
@@ -257,69 +282,90 @@
         <h2 class="section-title">Compare os <span>Planos</span></h2>
         <p class="section-sub">Veja lado a lado o que cada plano oferece.</p>
     </div>
-    <table class="compare-table">
-        <thead>
-            <tr>
-                <th>Recurso</th>
-                <th>450MB</th>
-                <th class="col-popular-head">750MB ⭐</th>
-                <th>1GB</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Velocidade</td>
-                <td class="highlight">450 Mbps</td>
-                <td class="highlight col-popular">750 Mbps</td>
-                <td class="highlight">1000 Mbps</td>
-            </tr>
-            <tr>
-                <td>Upload Simétrico</td>
-                <td class="check">✓</td>
-                <td class="check col-popular">✓</td>
-                <td class="check">✓</td>
-            </tr>
-            <tr>
-                <td>Roteador Wi-Fi</td>
-                <td>Padrão</td>
-                <td class="col-popular">Dual Band</td>
-                <td>Wi-Fi 6</td>
-            </tr>
-            <tr>
-                <td>Instalação</td>
-                <td class="check">Grátis</td>
-                <td class="check col-popular">Grátis</td>
-                <td class="check">Grátis</td>
-            </tr>
-            <tr>
-                <td>Suporte</td>
-                <td>7 dias</td>
-                <td class="col-popular">Prioritário</td>
-                <td>VIP 24h</td>
-            </tr>
-            <tr>
-                <td>IP Fixo</td>
-                <td class="cross col-popular">—</td>
-                <td class="cross col-popular">—</td>
-                <td class="check">Disponível</td>
-            </tr>
-            <tr>
-                <td>Mensalidade</td>
-                <td class="highlight">R$ 79,90</td>
-                <td class="highlight col-popular">R$ 99,90</td>
-                <td class="highlight">R$ 129,90</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
-                <td class="col-popular"><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
-                <td><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
-            </tr>
-        </tbody>
-    </table>
+<!-- TABELA COMPARATIVA: <table> é a tag correta para dados tabulares (linhas e colunas).
+     Não use tabelas para layout de página — use apenas para comparar dados estruturados.
+     border-collapse: collapse no CSS remove o espaço duplo entre bordas das células. -->
+<table class="compare-table">
+    <!-- <thead>: cabeçalho semântico da tabela — agrupa a linha de títulos das colunas.
+         Separar thead/tbody ajuda leitores de tela a entender a estrutura dos dados. -->
+    <thead>
+        <tr>
+            <!-- <th>: célula de cabeçalho — diferente de <td>, ela tem peso semântico.
+                 O navegador a renderiza em negrito por padrão e leitores de tela
+                 a anunciam como "título de coluna" ao navegar pela tabela. -->
+            <th>Recurso</th>
+            <th>450MB</th>
+            <!-- col-popular-head: cor laranja nesta coluna para destacar o plano mais vendido -->
+            <th class="col-popular-head">750MB ⭐</th>
+            <th>1GB</th>
+        </tr>
+    </thead>
+    <!-- <tbody>: corpo da tabela — agrupa todas as linhas de dados.
+         Separar do thead permite que o navegador role o corpo mantendo o cabeçalho fixo
+         (com CSS overflow), e melhora a semântica para tecnologias assistivas. -->
+    <tbody>
+        <tr>
+            <td>Velocidade</td>
+            <!-- class="highlight": aplica cor verde para valores de destaque -->
+            <td class="highlight">450 Mbps</td>
+            <!-- col-popular: fundo levemente laranja na coluna do plano popular
+                 para guiar o olhar do usuário até a opção recomendada -->
+            <td class="highlight col-popular">750 Mbps</td>
+            <td class="highlight">1000 Mbps</td>
+        </tr>
+        <tr>
+            <td>Upload Simétrico</td>
+            <!-- class="check": cor verde para o símbolo ✓ — indica recurso disponível -->
+            <td class="check">✓</td>
+            <td class="check col-popular">✓</td>
+            <td class="check">✓</td>
+        </tr>
+        <tr>
+            <td>Roteador Wi-Fi</td>
+            <td>Padrão</td>
+            <td class="col-popular">Dual Band</td>
+            <td>Wi-Fi 6</td>
+        </tr>
+        <tr>
+            <td>Instalação</td>
+            <td class="check">Grátis</td>
+            <td class="check col-popular">Grátis</td>
+            <td class="check">Grátis</td>
+        </tr>
+        <tr>
+            <td>Suporte</td>
+            <td>7 dias</td>
+            <td class="col-popular">Prioritário</td>
+            <td>VIP 24h</td>
+        </tr>
+        <tr>
+            <td>IP Fixo</td>
+            <!-- class="cross": cor cinza para "—" — indica recurso não disponível neste plano -->
+            <td class="cross col-popular">—</td>
+            <td class="cross col-popular">—</td>
+            <td class="check">Disponível</td>
+        </tr>
+        <tr>
+            <td>Mensalidade</td>
+            <td class="highlight">R$ 79,90</td>
+            <td class="highlight col-popular">R$ 99,90</td>
+            <td class="highlight">R$ 129,90</td>
+        </tr>
+        <!-- Última linha com botões de ação — <td> vazio na primeira coluna serve de espaçador -->
+        <tr>
+            <td></td>
+            <td><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
+            <td class="col-popular"><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
+            <td><a href="https://wa.me/558432634154" class="plan-btn">Contratar</a></td>
+        </tr>
+    </tbody>
+</table>
 </section>
 
-<!-- GALERIA DE PLANOS -->
+<!-- GALERIA DE PROMOÇÕES: imagens das promoções em faixa horizontal (img-strip).
+     img-strip no CSS usa flexbox ou grid para exibir as fotos lado a lado.
+     Cada imagem tem alt="Promoção" — idealmente descreveria o conteúdo específico
+     (ex: "Banner promoção 1º mês por R$50") para melhor acessibilidade. -->
 <section style="background: var(--gray-bg);">
     <div class="text-center">
         <span class="section-label">Promoções</span>

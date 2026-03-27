@@ -222,6 +222,9 @@
             <h3>Envie uma Mensagem</h3>
             <p>Preencha o formulário e entraremos em contato em breve.</p>
             <form onsubmit="handleForm(event)">
+                <!-- input type="text": campo de texto livre.
+                     placeholder: texto de dica que some ao digitar.
+                     required: validação nativa do HTML5 — impede envio se vazio -->
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nome">Nome completo</label>
@@ -229,11 +232,14 @@
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone / WhatsApp</label>
+                        <!-- type="tel": teclado numérico em mobile, sem validação de formato -->
                         <input type="tel" id="telefone" placeholder="(84) 9 0000-0000" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="assunto">Assunto</label>
+                    <!-- select: lista suspensa de opções predefinidas.
+                         Mais controlado que um input de texto livre -->
                     <select id="assunto">
                         <option value="">Selecione o assunto</option>
                         <option>Contratar Plano Fibra</option>
@@ -245,8 +251,13 @@
                 </div>
                 <div class="form-group">
                     <label for="mensagem">Mensagem</label>
+                    <!-- textarea: campo de texto multilinha.
+                         Diferente do input, permite quebras de linha.
+                         O CSS define min-height e overflow-y:auto para scroll -->
                     <textarea id="mensagem" placeholder="Como podemos te ajudar?"></textarea>
                 </div>
+                <!-- button type="submit": envia o formulário ao clicar.
+                     O evento onsubmit no form intercepta o envio via JS -->
                 <button type="submit" class="btn-submit">Enviar Mensagem</button>
             </form>
         </div>

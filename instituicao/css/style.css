@@ -7,6 +7,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
 
 /* === RESET & BASE === */
+
+/*
+  box-sizing: border-box
+  ─────────────────────────────────────────────
+  Por padrão o CSS usa content-box: width/height
+  medem APENAS o conteúdo. Com border-box, padding
+  e border são INCLUÍDOS nas dimensões declaradas.
+  Exemplo: um elemento com width:300px, padding:20px
+  e border:2px continua ocupando exatamente 300px.
+  Sem isso ele ocuparia 300 + 40 + 4 = 344px.
+*/
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -136,6 +147,13 @@ ul  { list-style: none; }
 /* === HEADER === */
 header {
   background: linear-gradient(90deg, var(--dark) 0%, var(--primary-dk) 100%);
+  /*
+    position: sticky
+    ─────────────────────────────────────────────
+    O header "gruda" no topo da viewport ao rolar.
+    Diferente de fixed, ele ocupa espaço no fluxo
+    normal do documento até atingir o threshold (top:0).
+  */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -143,6 +161,14 @@ header {
 }
 
 .header-inner {
+  /*
+    display: flex
+    ─────────────────────────────────────────────
+    Transforma o container em flex container.
+    Os filhos (logo e nav) se alinham em linha,
+    com justify-content: space-between empurrando
+    logo para a esquerda e nav para a direita.
+  */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -373,8 +399,25 @@ nav { position: relative; }
 .testimonials {
   padding: 4rem 1.5rem;
   background: var(--white);
+  /*
+    overflow: hidden
+    ─────────────────────────────────────────────
+    Garante que nenhum card filho "vaze" para fora
+    dos limites da seção, especialmente em animações
+    de hover com transform: translateY.
+  */
+  overflow: hidden;
 }
 
+/*
+  display: grid
+  ─────────────────────────────────────────────
+  Cria um layout de grade responsivo para os cards.
+  Em mobile: 1 coluna. Em tablet: 2 colunas.
+  Em desktop: 3 colunas (definido no @media 1024px).
+  O gap controla o espaço entre os cards sem precisar
+  de margin em cada elemento filho.
+*/
 .testimonials-grid { display: grid; gap: 1.5rem; }
 
 article.testimonial-card {
@@ -394,6 +437,14 @@ article.testimonial-card:hover {
 
 article.testimonial-card::before {
   content: '"';
+  /*
+    position: absolute
+    ─────────────────────────────────────────────
+    Remove o elemento do fluxo normal e o posiciona
+    em relação ao pai com position: relative (.testimonial-card).
+    Permite sobrepor a aspa decorativa sem deslocar
+    o conteúdo interno do card.
+  */
   position: absolute;
   top: 0.5rem;
   right: 1.25rem;
@@ -454,7 +505,7 @@ article.testimonial-card::before {
 
 .map-wrapper iframe { width: 100%; height: 300px; border: none; display: block; }
 
-/* === ASIDE === */
+/* === ASIDE (BARRA LATERAL) === */
 aside {
   background: linear-gradient(160deg, var(--primary-dk), var(--primary));
   color: var(--white);
@@ -462,6 +513,16 @@ aside {
   padding: 1.75rem;
   margin: 2rem 1.5rem;
   box-shadow: var(--shadow-lg);
+  /*
+    overflow: auto + max-height
+    ─────────────────────────────────────────────
+    Se o conteúdo da sidebar crescer além de 480px,
+    uma barra de rolagem vertical aparece automaticamente,
+    mantendo o layout sem "estourar" a página.
+    overflow: auto só exibe a scrollbar quando necessário.
+  */
+  max-height: 480px;
+  overflow-y: auto;
 }
 
 aside h3 {
@@ -584,18 +645,51 @@ aside ul li:last-child { border-bottom: none; }
 }
 
 /* === FORMULÁRIOS === */
+/*
+  BOX MODEL NO FORMULÁRIO — EXPLICAÇÃO DIDÁTICA
+  ─────────────────────────────────────────────
+  Cada campo de formulário é uma caixa com 4 camadas:
+
+  ┌─────────────────────────────────┐  ← margin (espaço externo entre campos)
+  │  ┌───────────────────────────┐  │  ← border (borda visível 1.5px)
+  │  │  ┌─────────────────────┐  │  │  ← padding (espaço interno 0.75rem 1rem)
+  │  │  │    CONTEÚDO (texto)  │  │  │  ← content (onde o usuário digita)
+  │  │  └─────────────────────┘  │  │
+  │  └───────────────────────────┘  │
+  └─────────────────────────────────┘
+
+  Com box-sizing: border-box (herdado do reset global):
+  → width: 100% inclui padding + border
+  → O campo nunca "vaza" para fora do container pai
+  → Sem box-sizing, um campo com width:100% + padding:16px
+    ficaria 32px mais largo que o container!
+*/
 .forms-section { padding: 4rem 1.5rem; }
 
 .form-card {
   background: var(--white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
+  /*
+    padding: 2rem 1.5rem
+    ─────────────────────────────────────────────
+    Espaçamento interno (Box Model): 2rem no topo/base,
+    1.5rem nas laterais. Cria "respiro" entre a borda
+    do card e o conteúdo interno sem alterar o width.
+    Funciona corretamente por causa do box-sizing: border-box.
+  */
   padding: 2rem 1.5rem;
   margin-bottom: 2.5rem;
   border: 1px solid rgba(0,86,179,0.07);
 }
 
 fieldset {
+  /*
+    border: 2px solid
+    ─────────────────────────────────────────────
+    A borda faz parte do Box Model. Com border-box,
+    esses 2px já estão incluídos nas dimensões do fieldset.
+  */
   border: 2px solid rgba(108,43,217,0.2);
   border-radius: var(--radius);
   padding: 1.75rem 1.5rem;
@@ -611,6 +705,12 @@ legend {
 }
 
 .form-group {
+  /*
+    display: flex + flex-direction: column
+    ─────────────────────────────────────────────
+    Empilha label acima do input verticalmente.
+    Sem isso, label e input ficariam lado a lado (inline).
+  */
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -626,7 +726,21 @@ legend {
 .form-group input,
 .form-group select,
 .form-group textarea {
+  /*
+    padding: 0.75rem 1rem
+    ─────────────────────────────────────────────
+    Espaçamento interno do campo (Box Model).
+    Aumenta a área clicável e melhora a legibilidade.
+    Com box-sizing: border-box, o width: 100% abaixo
+    já absorve esse padding sem "estourar" o layout.
+  */
   padding: 0.75rem 1rem;
+  /*
+    border: 1.5px solid
+    ─────────────────────────────────────────────
+    Borda visual do campo. Faz parte do Box Model.
+    Incluída nas dimensões graças ao border-box.
+  */
   border: 1.5px solid #e2e8f0;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
@@ -634,6 +748,13 @@ legend {
   color: var(--text);
   background: #fafbfc;
   transition: var(--transition);
+  /*
+    width: 100%
+    ─────────────────────────────────────────────
+    O campo ocupa toda a largura do pai.
+    Com border-box: padding + border já estão incluídos.
+    Sem border-box: o campo ficaria mais largo que o pai.
+  */
   width: 100%;
 }
 
@@ -646,19 +767,78 @@ legend {
   box-shadow: 0 0 0 3px rgba(108,43,217,0.12);
 }
 
-.form-group textarea { resize: vertical; min-height: 120px; }
-.form-row { display: grid; gap: 1rem; }
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  /*
+    overflow: auto
+    ─────────────────────────────────────────────
+    Quando o texto digitado ultrapassa o min-height,
+    uma barra de rolagem vertical aparece automaticamente.
+    O textarea não cresce infinitamente nem corta o texto.
+  */
+  overflow-y: auto;
+}
+
+.form-row {
+  /*
+    display: grid
+    ─────────────────────────────────────────────
+    Em mobile: 1 coluna (padrão).
+    Em tablet+: 2 colunas (definido no @media 768px).
+    Distribui os campos lado a lado de forma responsiva.
+  */
+  display: grid;
+  gap: 1rem;
+}
 
 .required-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.25rem; }
 .required-note span { color: #e53e3e; }
 
-.form-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+.form-actions {
+  /*
+    display: flex
+    ─────────────────────────────────────────────
+    Coloca os botões lado a lado com gap entre eles.
+    flex-wrap: wrap garante que em telas pequenas
+    os botões quebrem para a linha de baixo.
+  */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+/* Centraliza o form-card na página */
+.form-card-centered {
+  /*
+    display: flex + justify-content: center
+    ─────────────────────────────────────────────
+    Centraliza horizontalmente o formulário na página.
+    O max-width limita a largura para não ficar muito
+    esticado em telas grandes.
+  */
+  display: flex;
+  justify-content: center;
+}
+
+.form-card-centered .form-card {
+  width: 100%;
+  max-width: 720px;
+}
 
 /* === FOOTER === */
 footer {
   background: var(--dark);
   color: rgba(255,255,255,0.7);
   padding: 3.5rem 1.5rem 1.5rem;
+  /*
+    position: relative
+    ─────────────────────────────────────────────
+    Necessário para que o pseudo-elemento ::before
+    (a barra colorida no topo do footer) seja
+    posicionado em relação ao footer, não à viewport.
+  */
   position: relative;
 }
 
@@ -730,6 +910,22 @@ footer::before {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/*
+  visibility: hidden vs display: none
+  ─────────────────────────────────────────────
+  visibility: hidden → o elemento SOME visualmente
+  mas CONTINUA ocupando espaço no layout (ao contrário
+  de display:none que remove o espaço também).
+  Útil para ocultar elementos sem "pular" o layout.
+  Exemplo: esconder dica de campo sem mover outros elementos.
+*/
+.hint-hidden {
+  visibility: hidden; /* ocupa espaço, mas invisível */
+}
+.hint-visible {
+  visibility: visible;
+}
 
 /* === RESPONSIVE: TABLET (≥ 768px) === */
 @media (min-width: 768px) {
@@ -810,6 +1006,15 @@ footer::before {
   .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; }
 
   .main-with-aside {
+    /*
+      display: grid com duas colunas
+      ─────────────────────────────────────────────
+      Cria o layout de conteúdo principal + sidebar.
+      1fr = ocupa o espaço restante disponível.
+      300px = largura fixa da barra lateral.
+      align-items: start evita que a sidebar estique
+      para a altura do conteúdo principal.
+    */
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: 2.5rem;
@@ -817,4 +1022,375 @@ footer::before {
   }
 
   .section-title { font-size: 2.1rem; }
+}
+
+/* =============================================
+   UC7 — ATIVIDADE 2: SELETORES, PSEUDO-CLASSES
+   E PSEUDO-ELEMENTOS
+   ============================================= */
+
+/* ─────────────────────────────────────────────
+   1. LINKS — ESTADOS COMPLETOS
+   ─────────────────────────────────────────────
+   Cada estado representa um momento diferente
+   da interação do usuário com o link.
+   A ordem importa: LoVe HAte (link, visited, hover, active)
+*/
+
+/*
+  :is() — pseudo-classe de agrupamento
+  ─────────────────────────────────────────────
+  Equivale a escrever os seletores separados por vírgula,
+  mas com menor repetição e mesma especificidade do
+  seletor mais específico dentro dos parênteses.
+  Aqui aplicamos o estado "normal" dos links em
+  múltiplas seções de uma só vez.
+*/
+:is(.testimonials, .courses-section, .forms-section, .stats-bar) a {
+  color: var(--primary);           /* estado normal: roxo da marca */
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 0.25s ease, text-decoration-color 0.25s ease;
+}
+
+/*
+  :hover — pseudo-classe de interação
+  ─────────────────────────────────────────────
+  Ativada quando o ponteiro do mouse está sobre o elemento.
+  Não funciona em touch screens sem JavaScript.
+*/
+:is(.testimonials, .courses-section, .forms-section, .stats-bar) a:hover {
+  color: var(--secondary);         /* ciano neon ao passar o mouse */
+  text-decoration-color: var(--secondary);
+}
+
+/*
+  :active — pseudo-classe de clique
+  ─────────────────────────────────────────────
+  Ativada no instante em que o botão do mouse é pressionado.
+  Dura apenas enquanto o clique está sendo realizado.
+*/
+:is(.testimonials, .courses-section, .forms-section, .stats-bar) a:active {
+  background: rgba(0, 212, 255, 0.15); /* fundo ciano translúcido ao clicar */
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+/* Links do nav — estados completos */
+.nav-menu a:link    { color: rgba(255,255,255,0.8); }   /* nunca visitado */
+.nav-menu a:visited { color: rgba(255,255,255,0.6); }   /* já visitado */
+
+/*
+  .active (classe JS) vs :active (pseudo-classe CSS)
+  ─────────────────────────────────────────────
+  .active = página atual (definido via JS/HTML)
+  :active = estado durante o clique
+*/
+.nav-menu a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+}
+
+/* ─────────────────────────────────────────────
+   2. DEPOIMENTOS — ::after E :hover
+   ─────────────────────────────────────────────
+*/
+
+/*
+  ::after — pseudo-elemento
+  ─────────────────────────────────────────────
+  Insere conteúdo APÓS o conteúdo real do elemento,
+  sem alterar o HTML. Só existe no CSS.
+  Requer obrigatoriamente a propriedade content.
+  Aqui usamos para exibir o cargo/função do autor
+  abaixo do nome, lendo o atributo data-role do HTML.
+*/
+.testimonial-card cite::after {
+  content: attr(data-role);  /* lê o atributo data-role do elemento <cite> */
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+
+/*
+  :hover no card de depoimento
+  ─────────────────────────────────────────────
+  Além do translateY já existente, adicionamos
+  uma borda colorida e mudança de fundo para
+  reforçar o feedback visual ao usuário.
+*/
+article.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-lt);
+  background: linear-gradient(160deg, var(--light), #e8e0ff);
+}
+
+/* ─────────────────────────────────────────────
+   3. CURSOS — :hover NA DESCRIÇÃO
+   ─────────────────────────────────────────────
+*/
+
+/*
+  :hover no parágrafo de descrição do curso
+  ─────────────────────────────────────────────
+  Seletor descendente: só afeta o <p> dentro de
+  .course-body quando o mouse está sobre .course-card.
+  Cria um efeito de "revelação" da cor do texto.
+*/
+.course-card:hover .course-body p {
+  color: var(--primary);
+  transition: color 0.3s ease;
+}
+
+.course-card:hover .course-body h2 {
+  color: var(--primary-dk);
+}
+
+/* ─────────────────────────────────────────────
+   4. SELEÇÃO DE TEXTO — ::selection
+   ─────────────────────────────────────────────
+   Aplicado nas páginas de turismo via classe .turismo-text.
+   Estiliza o texto quando o usuário o seleciona com o mouse.
+   Só aceita: color, background-color, text-shadow.
+*/
+.turismo-text::selection,
+.turismo-text *::selection {
+  background-color: #0077B6;  /* azul oceano */
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Seleção padrão para o projeto Inova Tech */
+::selection {
+  background-color: var(--primary);
+  color: var(--white);
+  text-shadow: none;
+}
+
+/* ─────────────────────────────────────────────
+   5. INPUTS — SELETORES DE ATRIBUTO
+   ─────────────────────────────────────────────
+   input[type="..."] seleciona campos pelo valor
+   do atributo type. Permite estilizar cada tipo
+   de campo de forma independente e semântica,
+   sem precisar adicionar classes extras no HTML.
+
+   COMO ISSO ORGANIZA O CSS EM FORMULÁRIOS COMPLEXOS:
+   ─────────────────────────────────────────────
+   Em vez de criar .input-texto, .input-email, .input-tel,
+   usamos os atributos que já existem no HTML:
+   → input[type="text"]   → campos de texto livre
+   → input[type="email"]  → campos de e-mail (ícone diferente)
+   → input[type="tel"]    → campos de telefone
+   → input[type="date"]   → campos de data
+   → input[type="file"]   → upload de arquivos
+   Isso mantém o HTML limpo e o CSS semântico.
+*/
+
+/* Texto livre — borda esquerda azul */
+input[type="text"] {
+  border-left: 3px solid var(--primary-lt);
+}
+
+/* E-mail — borda esquerda ciano */
+input[type="email"] {
+  border-left: 3px solid var(--secondary);
+}
+
+/* Telefone — borda esquerda laranja */
+input[type="tel"] {
+  border-left: 3px solid var(--accent2);
+}
+
+/* Data — borda esquerda coral */
+input[type="date"] {
+  border-left: 3px solid var(--accent);
+  cursor: pointer;
+}
+
+/* File upload — estilo diferenciado */
+input[type="file"] {
+  border: 2px dashed rgba(108,43,217,0.3);
+  border-radius: 8px;
+  padding: 0.6rem;
+  background: var(--light);
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+input[type="file"]:hover {
+  border-color: var(--primary);
+  background: #e8e0ff;
+}
+
+/* ─────────────────────────────────────────────
+   6. ::placeholder — ESTILO DO TEXTO DE DICA
+   ─────────────────────────────────────────────
+   ::placeholder estiliza o texto exibido quando
+   o campo está vazio. Desaparece ao digitar.
+   Aceita: color, font-*, opacity, letter-spacing.
+*/
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a0aec0;           /* cinza suave */
+  font-style: italic;
+  font-size: 0.87rem;
+  opacity: 1;               /* Firefox reduz opacity por padrão */
+  letter-spacing: 0.01em;
+}
+
+/* Placeholder específico para e-mail */
+input[type="email"]::placeholder {
+  color: var(--secondary-dk);
+  font-style: normal;
+}
+
+/* Placeholder específico para telefone */
+input[type="tel"]::placeholder {
+  color: #b7791f;
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────
+   7. :focus — FOCO NOS CAMPOS
+   ─────────────────────────────────────────────
+   :focus é ativado quando o elemento recebe foco
+   (clique, Tab ou toque). Essencial para acessibilidade.
+   Nunca remova o outline sem substituir por outro
+   indicador visual claro.
+*/
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;                          /* remove o outline padrão do browser */
+  border-color: var(--primary-lt);
+  border-left-width: 3px;
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(108,43,217,0.15),
+              0 2px 8px rgba(108,43,217,0.1);
+  transform: translateY(-1px);            /* leve elevação ao focar */
+  transition: all 0.25s ease;
+}
+
+/* ─────────────────────────────────────────────
+   8. :valid E :invalid — VALIDAÇÃO VISUAL
+   ─────────────────────────────────────────────
+   :valid   → campo com valor que passa na validação HTML5
+   :invalid → campo com valor inválido ou required vazio
+
+   IMPORTANTE: usamos :not(:placeholder-shown) para
+   evitar mostrar :invalid em campos ainda não tocados
+   (que estão vazios mas com placeholder visível).
+*/
+
+/* Campo válido — borda verde */
+.form-group input:not(:placeholder-shown):valid,
+.form-group textarea:not(:placeholder-shown):valid,
+.form-group select:valid:not([value=""]) {
+  border-color: #38a169;
+  background: #f0fff4;
+}
+
+/* Ícone ✓ via ::after no wrapper (requer position: relative no .form-group) */
+.form-group:has(input:not(:placeholder-shown):valid)::after,
+.form-group:has(textarea:not(:placeholder-shown):valid)::after {
+  content: '✓';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #38a169;
+  font-weight: 700;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.form-group { position: relative; } /* necessário para o ::after acima */
+
+/* Campo inválido — borda vermelha (só após interação) */
+.form-group input:not(:placeholder-shown):invalid,
+.form-group textarea:not(:placeholder-shown):invalid {
+  border-color: #e53e3e;
+  background: #fff5f5;
+  box-shadow: 0 0 0 2px rgba(229,62,62,0.1);
+}
+
+/* ─────────────────────────────────────────────
+   9. BOTÃO DE ENVIO — :hover COM TRANSIÇÃO
+   ─────────────────────────────────────────────
+*/
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(255,77,109,0.55);
+  filter: brightness(1.08);
+}
+
+/*
+  :active no botão — feedback de clique
+  ─────────────────────────────────────────────
+  Simula o "afundamento" físico do botão ao clicar.
+*/
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 3px 10px rgba(255,77,109,0.3);
+  filter: brightness(0.95);
+}
+
+/* ─────────────────────────────────────────────
+   10. RODAPÉ — :hover COM ESCALA
+   ─────────────────────────────────────────────
+*/
+
+/*
+  :hover nos itens do rodapé
+  ─────────────────────────────────────────────
+  Aumenta levemente o tamanho do texto e muda a cor
+  ao passar o mouse, criando um efeito de destaque
+  sem deslocar os outros elementos (transform não
+  afeta o fluxo do documento).
+*/
+.footer-col ul li:hover {
+  transform: scale(1.04) translateX(4px);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.footer-col ul li a:hover {
+  color: var(--secondary);
+  padding-left: 6px;
+  transition: all 0.25s ease;
+}
+
+/* Título da coluna do rodapé ao hover */
+.footer-col:hover h4 {
+  color: var(--secondary);
+  transition: color 0.3s ease;
+}
+
+/* Texto do rodapé inferior ao hover */
+.footer-bottom p:hover {
+  color: rgba(255,255,255,0.7);
+  transform: scale(1.02);
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────
+   ::after NOS LABELS — asterisco de obrigatório
+   ─────────────────────────────────────────────
+   :has() verifica se o .form-group contém um
+   input[required], e então adiciona * no label
+   via ::after. HTML limpo, semântica no CSS.
+*/
+.form-group:has(input[required]) label::after,
+.form-group:has(textarea[required]) label::after,
+.form-group:has(select[required]) label::after {
+  content: ' *';
+  color: var(--accent);
+  font-weight: 700;
 }

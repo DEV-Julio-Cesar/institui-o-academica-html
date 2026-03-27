@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- 1. METADADOS OBRIGATÓRIOS (Requisito Senac) -->
+  <!-- charset="UTF-8": define o conjunto de caracteres da página.
+       Necessário para exibir corretamente acentos e símbolos do português. -->
   <meta charset="UTF-8" />
+
+  <!-- viewport: torna a página responsiva em celulares e tablets.
+       "width=device-width" usa a largura real do dispositivo como referência. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- description: resumo da página para mecanismos de busca.
+       Aparece como subtítulo nos resultados do Google. -->
   <meta name="description" content="Grade curricular completa dos cursos da Inova Tech - Centro de Capacitação Profissional. Disciplinas, carga horária e ementa detalhada." />
+
+  <!-- author: identifica o autor do documento HTML. -->
   <meta name="author" content="Koldri" />
+
+  <!-- http-equiv="refresh": atualiza a página automaticamente a cada 30 segundos,
+       garantindo que novas disciplinas ou alterações de horário apareçam sem recarregar. -->
   <meta http-equiv="refresh" content="30" />
+
+  <!-- rel="icon": ícone exibido na aba do navegador.
+       O formato SVG é preferido por ser vetorial e ficar nítido em qualquer tamanho. -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%236C2BD9'/><text y='.9em' font-size='70' x='10' fill='white' font-weight='900'>IT</text></svg>" />
   <title>Grade Curricular | Inova Tech</title>
 
@@ -220,7 +235,11 @@
   <main>
     <div class="grade-content">
 
-      <!-- Introdução (elemento com ID único) -->
+      <!-- id="intro-grade": identificador único para este bloco de introdução.
+           O id permite criar links diretos para este elemento (ex: grade-curricular.html#intro-grade)
+           e também é usado pelo CSS para aplicar estilos específicos apenas a este bloco,
+           sem afetar outros elementos da página. role="note": informa a leitores de tela
+           que este bloco é uma nota informativa, não conteúdo principal. -->
       <div id="intro-grade" role="note">
         <strong>ℹ️ Como ler esta grade:</strong> cada tabela apresenta as disciplinas organizadas por módulo,
         com carga horária individual e total. Use os badges de nível
@@ -241,11 +260,32 @@
       </div>
 
       <div class="table-wrapper">
-        <!-- border="1" — Requisito: atributo border na tabela -->
+        <!-- .table-wrapper com overflow-x: auto: quando a tabela é larga demais
+             para a tela (especialmente em celulares), este wrapper cria uma barra
+             de rolagem horizontal APENAS dentro do container da tabela,
+             sem quebrar o layout do resto da página. Sem isso, a tabela
+             ultrapassaria as bordas da tela em dispositivos móveis. -->
+
+        <!-- border="1": atributo HTML que adiciona bordas visíveis à tabela.
+             Embora hoje seja preferível usar CSS para bordas, o atributo border
+             ainda é válido e garante bordas mesmo sem folha de estilo carregada.
+             aria-label="...": descreve a tabela para leitores de tela,
+             que anunciam o nome da tabela antes de começar a lê-la. -->
         <table border="1" aria-label="Grade curricular do curso de Desenvolvimento Web Full Stack">
+          <!-- <caption>: título visível da tabela, posicionado acima dela.
+               É a forma semântica correta de nomear uma tabela — diferente de um
+               <h3> externo, o caption está associado diretamente à tabela,
+               o que ajuda leitores de tela a identificar qual tabela está sendo lida. -->
           <caption>📋 Grade Curricular — Desenvolvimento Web Full Stack</caption>
+          <!-- <thead>: agrupa as linhas de cabeçalho da tabela.
+               Separar thead, tbody e tfoot é importante para acessibilidade e
+               para que o navegador possa repetir o cabeçalho ao imprimir tabelas longas. -->
           <thead>
             <tr>
+              <!-- scope="col": informa que este <th> é cabeçalho de uma coluna inteira.
+                   Leitores de tela usam o scope para associar cada célula de dados
+                   ao seu cabeçalho correto, permitindo que o usuário entenda
+                   "esta célula pertence à coluna Módulo" ao navegar pela tabela. -->
               <th scope="col">Módulo</th>
               <th scope="col">Disciplina</th>
               <th scope="col">Nível</th>
@@ -253,9 +293,16 @@
               <th scope="col">Resumo da Ementa</th>
             </tr>
           </thead>
+          <!-- <tbody>: agrupa as linhas de dados da tabela.
+               Separar do thead permite estilização independente e melhora
+               a semântica — o navegador sabe que aqui estão os dados reais. -->
           <tbody>
-            <!-- rowspan: módulo 1 ocupa 3 linhas -->
             <tr>
+              <!-- scope="row": informa que este <td> é cabeçalho da sua linha.
+                   Usado em células que identificam a linha (como "Módulo 1"),
+                   para que leitores de tela associem as células da linha a este rótulo.
+                   rowspan="3": faz esta célula ocupar 3 linhas verticalmente,
+                   evitando repetir "Módulo 1" em cada linha do mesmo módulo. -->
               <td class="td-modulo" rowspan="3">Módulo 1<br/>Fundamentos</td>
               <td>HTML5 Semântico e Acessibilidade</td>
               <td><span class="badge-nivel badge-basico">Básico</span></td>
@@ -308,7 +355,9 @@
               <td class="td-horas">24h</td>
               <td>Versionamento, pull requests, CI/CD básico, deploy na Vercel e Railway.</td>
             </tr>
-            <!-- colspan: linha de projeto final mescla colunas -->
+            <!-- colspan="2": esta célula ocupa 2 colunas horizontalmente,
+                 mesclando "Módulo" e "Disciplina" para indicar que o projeto
+                 final não pertence a um módulo específico, mas encerra o curso. -->
             <tr>
               <td class="td-modulo" colspan="2" align="center" bgcolor="#f0eeff">🏆 Projeto Final — Portfólio Full Stack</td>
               <td><span class="badge-nivel badge-avancado">Avançado</span></td>
@@ -316,6 +365,10 @@
               <td>Desenvolvimento de aplicação completa com front-end, back-end e banco de dados.</td>
             </tr>
           </tbody>
+          <!-- <tfoot>: agrupa a linha de rodapé da tabela, normalmente usada
+               para totais e resumos. Separar do tbody é semântico e permite
+               que o navegador posicione o tfoot corretamente ao imprimir,
+               repetindo-o no final de cada página impressa se a tabela for longa. -->
           <tfoot>
             <tr class="tr-total">
               <td colspan="3" align="right">CARGA HORÁRIA TOTAL:</td>

@@ -9,13 +9,24 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230077B6'/><text y='.9em' font-size='60' x='12' fill='white'>🍽</text></svg>" />
   <title>Gastronomia | São Miguel do Gostoso</title>
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- <style>: permite escrever CSS diretamente dentro do HTML, sem precisar de um arquivo separado.
+       Aqui usamos CSS interno porque estes estilos são EXCLUSIVOS desta página (gastronomia.html).
+       Colocar no arquivo style.css geral poluiria o CSS compartilhado com regras que só fazem
+       sentido aqui. É uma boa prática separar o que é específico do que é global. -->
   <style>
+    /* .food-card .emoji: seleciona o elemento com classe "emoji" dentro de um "food-card".
+       font-size aumenta o tamanho do emoji; display:block faz ele ocupar uma linha inteira. */
     .food-card .emoji { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+    /* .price-tag: estilo da etiqueta de preço/destaque nos cards.
+       border-radius:50px cria bordas arredondadas (formato de pílula). */
     .food-card .price-tag {
       display: inline-block; background: var(--green-lt); color: var(--white);
       font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.7rem;
       border-radius: 50px; margin-top: 0.5rem;
     }
+    /* .tip-box: caixa de dica com gradiente de fundo.
+       linear-gradient cria uma transição suave entre duas cores. */
     .tip-box {
       background: linear-gradient(135deg, var(--green), var(--green-lt));
       color: var(--white); border-radius: var(--radius-lg);
@@ -71,21 +82,36 @@
 
       <div>
 
+        <!-- ===== SEÇÃO: FRUTOS DO MAR =====
+             <section>: agrupa conteúdo relacionado. aria-labelledby="mar-title" conecta
+             esta seção ao <h2 id="mar-title"> abaixo, nomeando-a para leitores de tela. -->
         <!-- Frutos do Mar -->
         <section aria-labelledby="mar-title" style="margin-bottom:3rem;">
           <span class="tag">🦞 Especialidades</span>
           <h2 class="section-title" id="mar-title">Frutos do <span>Mar</span></h2>
           <p class="section-subtitle">Pescado fresco todos os dias, direto do oceano para a sua mesa.</p>
+
+          <!-- .food-grid: grade de cards de comida, organizada via CSS Grid ou Flexbox.
+               Cada <article> representa um prato independente — article é usado porque
+               cada card faz sentido sozinho, fora do contexto da página. -->
           <div class="food-grid">
+            <!-- Card de prato: estrutura repetida para cada item do cardápio.
+                 <span class="emoji">: exibe o emoji do prato em tamanho maior (via CSS).
+                 <h3>: subtítulo do card — hierarquia correta: h1 > h2 > h3.
+                 <ul>/<li>: lista de ingredientes — ul é ideal para itens sem ordem específica. -->
             <article class="food-card">
               <span class="emoji">🐟</span>
               <h3>Peixada Gostosense</h3>
               <p>Peixe fresco cozido com legumes, coentro e temperos regionais. O prato símbolo da cidade.</p>
+              <!-- <ul>: lista não ordenada de ingredientes. Cada <li> é um ingrediente.
+                   Usar lista aqui é semanticamente correto: são itens relacionados sem ordem de importância. -->
               <ul>
                 <li>Peixe do dia</li>
                 <li>Batata, cenoura e chuchu</li>
                 <li>Molho de tomate caseiro</li>
               </ul>
+              <!-- .price-tag: etiqueta visual de destaque (ex: "Prato típico", "Premium").
+                   <span> é um elemento inline — não quebra linha, apenas envolve o texto. -->
               <span class="price-tag">⭐ Prato típico</span>
             </article>
             <article class="food-card">
@@ -124,6 +150,8 @@
           </div>
         </section>
 
+        <!-- ===== SEÇÃO: PRATOS NORDESTINOS =====
+             Mesma estrutura da seção anterior: section + aria-labelledby + food-grid + articles. -->
         <!-- Pratos Nordestinos -->
         <section aria-labelledby="nordeste-title" style="margin-bottom:3rem;">
           <span class="tag">🌵 Tradição</span>
@@ -173,6 +201,9 @@
           </div>
         </section>
 
+        <!-- ===== SEÇÃO: BEBIDAS E SOBREMESAS =====
+             Os cards desta seção não têm lista de ingredientes — apenas descrição.
+             Isso mostra que a estrutura pode ser simplificada quando há menos informação. -->
         <!-- Bebidas e Sobremesas -->
         <section aria-labelledby="bebidas-title" style="margin-bottom:3rem;">
           <span class="tag">🥥 Bebidas & Doces</span>
@@ -202,6 +233,9 @@
           </div>
         </section>
 
+        <!-- .tip-box: caixa de dica destacada visualmente com fundo colorido.
+             Não é uma tag semântica especial — é apenas um <div> estilizado via CSS.
+             O <h3> e <p> dentro dela seguem a hierarquia normal de títulos. -->
         <div class="tip-box">
           <h3>💡 Dica do Pescador</h3>
           <p>Chegue cedo ao mercado de peixe! Os pescadores locais trazem o pescado fresco todas as manhãs. Quanto mais cedo, maior a variedade e melhor o preço. Pergunte pelo "peixe do dia" em qualquer restaurante.</p>
@@ -209,6 +243,8 @@
 
       </div>
 
+      <!-- <aside>: barra lateral com informações complementares (onde comer, horários, navegação).
+           aria-label="Onde comer e dicas": nomeia o aside para leitores de tela. -->
       <aside aria-label="Onde comer e dicas">
         <h3>🍴 Onde Comer</h3>
         <ul>

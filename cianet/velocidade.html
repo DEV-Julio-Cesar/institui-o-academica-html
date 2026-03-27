@@ -41,6 +41,7 @@
         <h2 class="section-title">Teste sua <span>Velocidade</span></h2>
         <p class="section-sub">Clique em iniciar e veja a velocidade real da sua conexão agora.</p>
     </div>
+    <!-- Container visual do iframe: borda verde e sombra para destacar o teste na página -->
     <div style="
         margin: 2.5rem auto 0;
         max-width: 900px;
@@ -50,6 +51,30 @@
         border: 3px solid var(--green);
         background: #000;
     ">
+        <!-- <iframe>: incorpora outra página web dentro desta, como uma "janela" para outro site.
+             Aqui usamos o fast.com (da Netflix) para medir a velocidade da conexão do usuário.
+
+             src="https://fast.com" → endereço da página que será carregada dentro do iframe.
+
+             width="100%" → ocupa toda a largura do container pai.
+
+             height="600" → altura fixa em pixels — necessária porque o iframe não tem
+             altura automática (ele não sabe o tamanho do conteúdo externo).
+
+             style="border:0" → remove a borda padrão que navegadores antigos adicionam.
+
+             title="Teste de Velocidade Fast.com" → OBRIGATÓRIO para acessibilidade!
+             Leitores de tela anunciam o título do iframe para usuários com deficiência visual.
+
+             referrerpolicy="no-referrer-when-downgrade" → controla quais informações
+             sobre a nossa página são enviadas ao fast.com. Este valor é o padrão seguro:
+             envia o endereço de origem em conexões HTTPS→HTTPS, mas não em HTTPS→HTTP.
+
+             POR QUE NÃO USAR loading="lazy" AQUI?
+             O atributo loading="lazy" adiaria o carregamento do iframe até o usuário
+             rolar a tela até ele. Mas nesta página o ÚNICO conteúdo é o teste de velocidade
+             — o usuário veio exatamente para isso. Carregar com lazy causaria um atraso
+             desnecessário e frustrante. Use lazy apenas para conteúdo fora da tela inicial. -->
         <iframe
             src="https://fast.com"
             width="100%"

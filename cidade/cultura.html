@@ -92,12 +92,23 @@
 
       <div>
 
+        <!-- ===== SEÇÃO: FESTAS TRADICIONAIS =====
+             <section>: agrupa os cards de festas. aria-labelledby conecta ao <h2> abaixo.
+             Usar <section> aqui (em vez de <div>) é correto porque este bloco tem
+             um título próprio e representa um tema distinto dentro da página. -->
         <!-- Festas Tradicionais -->
         <section aria-labelledby="festas-title" style="margin-bottom:3rem;">
           <span class="tag">🎉 Calendário</span>
           <h2 class="section-title" id="festas-title">Festas <span>Tradicionais</span></h2>
           <p class="section-subtitle">O ano inteiro tem motivo para celebrar em Gostoso.</p>
+
+          <!-- .cards-grid: grade de cards culturais.
+               Cada <article class="culture-card"> representa um evento independente.
+               <article> é usado porque cada card faz sentido sozinho, fora do contexto da grade. -->
           <div class="cards-grid">
+            <!-- .culture-card: card de cultura com borda colorida no topo (definida via CSS).
+                 A cor da borda muda para cada card usando :nth-child(2), :nth-child(3), etc. no CSS.
+                 <span class="icon">: exibe o emoji em tamanho maior como ícone visual do card. -->
             <article class="culture-card">
               <span class="icon">⛪</span>
               <h3>Festa de São Miguel Arcanjo</h3>
@@ -121,6 +132,10 @@
           </div>
         </section>
 
+        <!-- ===== SEÇÃO: MÚSICA =====
+             Esta section agrupa tudo relacionado à música regional: texto explicativo,
+             badges de ritmos e lista de artistas. Usar <section> aqui é correto porque
+             o conteúdo tem um tema único e um título próprio (id="musica-title"). -->
         <!-- Música -->
         <section aria-labelledby="musica-title" style="margin-bottom:3rem;">
           <span class="tag">🎸 Ritmos</span>
@@ -130,6 +145,8 @@
           <div class="info-box" style="margin-bottom:1.5rem;">
             <h3>🪗 Forró — O Ritmo da Alma</h3>
             <p>O forró é o ritmo mais popular, presente em festas e celebrações. Tocado com sanfona, zabumba e triângulo, embala as noites na cidade. Existem duas vertentes principais:</p>
+            <!-- <ul>/<li>: lista das vertentes do forró.
+                 <strong>: destaca o nome de cada vertente em negrito com importância semântica. -->
             <ul>
               <li><strong>Forró pé de serra</strong> — tradicional, raiz, com Luiz Gonzaga como maior referência</li>
               <li><strong>Forró eletrônico</strong> — moderno, com bandas contemporâneas e muito público jovem</li>
@@ -137,6 +154,10 @@
           </div>
 
           <p style="margin-bottom:1rem; font-weight:600; color:var(--ocean-dk);">Outros ritmos presentes na cidade:</p>
+          <!-- Badges de ritmos musicais: cada <span class="rhythm-badge"> é uma etiqueta visual
+               que representa um ritmo. São elementos inline estilizados via CSS para parecerem
+               "pílulas" coloridas. Não têm significado semântico especial — são apenas <span>s
+               com classe CSS que define a aparência (fundo gradiente, bordas arredondadas). -->
           <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2rem;">
             <span class="rhythm-badge">🥁 Coco</span>
             <span class="rhythm-badge">🎺 Maracatu</span>
@@ -173,6 +194,9 @@
           </div>
         </section>
 
+        <!-- ===== SEÇÃO: ARTESANATO =====
+             Reutiliza a classe .food-card (da gastronomia) para os cards de artesanato.
+             Isso mostra como uma mesma classe CSS pode ser reaproveitada em contextos diferentes. -->
         <!-- Artesanato -->
         <section aria-labelledby="artesanato-title" style="margin-bottom:3rem;">
           <span class="tag">🎨 Artesanato</span>
@@ -198,6 +222,10 @@
           </div>
         </section>
 
+        <!-- ===== SEÇÃO: TRADIÇÕES =====
+             Última section do conteúdo principal. Agrupa informações sobre a cultura pesqueira
+             e a hospitalidade local. Usar <section> aqui mantém a consistência estrutural
+             da página — cada bloco temático tem sua própria section com título identificado. -->
         <!-- Tradições -->
         <section aria-labelledby="tradicoes-title">
           <span class="tag">⚓ Tradições</span>

@@ -1,46 +1,115 @@
 <!DOCTYPE html>
+<!-- DOCTYPE html: diz ao navegador que este é um documento HTML5 (a versão mais moderna do HTML) -->
 <html lang="pt-BR">
+<!-- lang="pt-BR": informa ao navegador e aos leitores de tela que o idioma da página é Português do Brasil.
+     Isso ajuda na pronúncia correta para pessoas com deficiência visual que usam leitores de tela. -->
 <head>
+  <!-- <head>: área invisível da página. Aqui ficam as configurações e informações sobre o documento,
+       não o conteúdo que o usuário vê diretamente. -->
+
+  <!-- charset="UTF-8": define o conjunto de caracteres da página. UTF-8 suporta acentos, cedilha e
+       emojis. Sem isso, letras como "ã", "ç" e "é" podem aparecer como símbolos estranhos. -->
   <meta charset="UTF-8" />
+
+  <!-- viewport: controla como a página é exibida em celulares e tablets.
+       width=device-width → a largura da página se adapta ao tamanho da tela do dispositivo.
+       initial-scale=1.0 → não aplica zoom automático ao carregar. Essencial para sites responsivos. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- description: resumo da página para mecanismos de busca (Google, Bing).
+       É o texto que aparece abaixo do título nos resultados de pesquisa. -->
   <meta name="description" content="Guia turístico de São Miguel do Gostoso - RN. Praias, gastronomia, cultura e tudo sobre esse paraíso do litoral norte potiguar." />
+
+  <!-- author: identifica quem criou a página. Usado por ferramentas e mecanismos de busca. -->
   <meta name="author" content="Koldri" />
+
+  <!-- http-equiv="refresh" content="30": recarrega a página automaticamente a cada 30 segundos.
+       Útil para páginas com informações que mudam com frequência, como placares ou notícias ao vivo. -->
   <meta http-equiv="refresh" content="30" />
+
+  <!-- rel="icon": define o ícone que aparece na aba do navegador (favicon).
+       type="image/svg+xml" indica que o ícone é um arquivo SVG (imagem vetorial escalável).
+       Aqui o SVG é gerado diretamente no href usando "data:" em vez de um arquivo separado. -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%230077B6'/><text y='.9em' font-size='60' x='12' fill='white'>🌊</text></svg>" />
+
+  <!-- <title>: define o título da aba do navegador e o nome que aparece nos favoritos e resultados de busca. -->
   <title>São Miguel do Gostoso | Paraíso do RN</title>
+
+  <!-- rel="stylesheet": vincula um arquivo CSS externo à página.
+       href aponta para o caminho do arquivo. O CSS cuida de toda a aparência visual. -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
+  <!-- <header>: cabeçalho da página. Fica no topo e normalmente contém o logo e o menu de navegação.
+       É uma tag semântica — ela diz ao navegador "aqui começa o cabeçalho", o que ajuda
+       mecanismos de busca e leitores de tela a entenderem a estrutura da página. -->
   <header>
     <div class="header-inner container">
+      <!-- <a>: tag de link (âncora). href="index.html" define o destino ao clicar.
+           aria-label: descreve o link para leitores de tela, pois o logo usa ícone e texto
+           que podem não ser suficientemente claros fora de contexto visual. -->
       <a href="index.html" class="logo" aria-label="São Miguel do Gostoso - Início">
+        <!-- aria-hidden="true": esconde este elemento dos leitores de tela.
+             O emoji 🌊 é decorativo — o aria-label do link já descreve o destino,
+             então não precisamos que o leitor de tela leia "onda" separadamente. -->
         <div class="logo-icon" aria-hidden="true">🌊</div>
         <div class="logo-text">
+          <!-- <strong>: deixa o texto em negrito E indica que ele tem importância semântica.
+               Diferente de <b>, que só aplica negrito visual sem significado extra. -->
           <strong>São Miguel do Gostoso</strong>
           <span>Rio Grande do Norte</span>
         </div>
       </a>
+
+      <!-- <nav>: tag semântica que marca uma área de navegação.
+           aria-label="Menu principal": nomeia esta navegação para leitores de tela.
+           Isso é importante quando há mais de um <nav> na página — o leitor de tela
+           consegue diferenciar "Menu principal" de "Menu do rodapé", por exemplo. -->
       <nav aria-label="Menu principal">
+        <!-- Botão hambúrguer (☰) para abrir o menu em telas pequenas (celular).
+             aria-expanded="false": informa ao leitor de tela se o menu está aberto ou fechado.
+             aria-controls="nav-menu": diz qual elemento este botão controla (o id="nav-menu").
+             aria-label="Abrir menu": descreve a ação do botão para quem usa leitor de tela. -->
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu">
+          <!-- Três <span> vazios formam as três linhas do ícone hambúrguer via CSS. -->
           <span></span><span></span><span></span>
         </button>
+
+        <!-- <ul>: lista não ordenada (unordered list). Usada aqui para os itens do menu.
+             id="nav-menu": identificador único, referenciado pelo aria-controls do botão acima.
+             role="list": reforça explicitamente para leitores de tela que é uma lista,
+             pois alguns navegadores removem esse papel semântico quando CSS é aplicado. -->
         <ul class="nav-menu" id="nav-menu" role="list">
+          <!-- <li>: item de lista (list item). Cada link do menu fica dentro de um <li>.
+               aria-current="page": indica ao leitor de tela que este é o link da página atual.
+               É como um "você está aqui" para tecnologias assistivas. -->
           <li><a href="index.html" class="active" aria-current="page">Home</a></li>
           <li><a href="pontos-turisticos.html">Pontos Turísticos</a></li>
           <li><a href="gastronomia.html">Gastronomia</a></li>
           <li><a href="cultura.html">Cultura</a></li>
+          <li><a href="fale-conosco.html">Fale Conosco</a></li>
           <li><a href="../index.html">← UC7</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
+  <!-- <main>: conteúdo principal da página. Deve existir apenas um <main> por página.
+       Leitores de tela e ferramentas de acessibilidade usam essa tag para pular direto
+       ao conteúdo, ignorando cabeçalho e menu. -->
   <main>
 
+    <!-- <section>: agrupa conteúdo relacionado a um mesmo tema.
+         aria-labelledby="hero-title": associa esta seção ao título com id="hero-title".
+         Isso permite que leitores de tela anunciem o nome da seção ao navegar por ela,
+         melhorando a experiência de quem não enxerga a tela. -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container">
         <p class="hero-badge">🌴 Litoral Norte do RN</p>
+        <!-- <h1>: título principal da página. Deve haver apenas um <h1> por página.
+             id="hero-title": identificador único usado pelo aria-labelledby da section acima.
+             O <span> dentro do h1 serve apenas para aplicar estilo diferente à palavra "Gostoso". -->
         <h1 id="hero-title">São Miguel do <span>Gostoso</span></h1>
         <p>Ventos perfeitos, praias paradisíacas e a hospitalidade mais calorosa do Nordeste. Bem-vindo ao paraíso dos kitesurfistas.</p>
         <div class="hero-actions">
@@ -81,16 +150,21 @@
 
     <div class="container main-with-aside" style="padding: 3rem 1.5rem;">
 
+      <!-- <div> genérico que agrupa as sections principais (conteúdo central da página).
+           Não tem significado semântico próprio — serve apenas para organizar o layout. -->
       <div>
+        <!-- Cada <section> abaixo agrupa um bloco de conteúdo relacionado.
+             aria-labelledby aponta para o id do <h2> dentro da section,
+             nomeando a seção para leitores de tela. -->
         <section aria-labelledby="historia-title" style="margin-bottom:3rem;">
           <span class="tag">📖 Nossa História</span>
           <h2 class="section-title" id="historia-title">Uma vila que virou <span>paraíso</span></h2>
           <p class="section-subtitle">Da pesca artesanal ao destino internacional de kitesurf.</p>
 
-          <div class="info-box">
+          <div class="info-box turismo-text">
             <p>São Miguel do Gostoso é um município localizado no litoral norte do <strong>Rio Grande do Norte</strong>. O nome peculiar tem origem em uma lenda sobre um pescador chamado Miguel, famoso pela simpatia e pelo delicioso peixe que pescava.</p>
           </div>
-          <div class="info-box" style="border-left-color: var(--sand);">
+          <div class="info-box turismo-text" style="border-left-color: var(--sand);">
             <p>A cidade foi emancipada em <strong>1992</strong>, desmembrando-se de Touros. Nas últimas décadas transformou-se em um dos destinos mais procurados do Nordeste, especialmente por praticantes de <strong>kitesurf</strong> e <strong>windsurf</strong>.</p>
           </div>
         </section>
@@ -139,6 +213,9 @@
         </section>
       </div>
 
+      <!-- <aside>: conteúdo complementar ao principal, como uma barra lateral.
+           aria-label="Informações rápidas": nomeia o aside para leitores de tela,
+           pois ele não tem um título visível que possa ser referenciado com aria-labelledby. -->
       <aside aria-label="Informações rápidas">
         <h3>📋 Informações Úteis</h3>
         <ul>
@@ -159,6 +236,9 @@
 
   </main>
 
+  <!-- <footer>: rodapé da página. Fica no final e normalmente contém informações
+       de copyright, links secundários, contato e créditos do projeto.
+       Assim como <header> e <main>, é uma tag semântica que ajuda na estrutura do documento. -->
   <footer>
     <div class="container">
       <div class="footer-grid">

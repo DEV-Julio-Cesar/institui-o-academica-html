@@ -180,20 +180,37 @@
     <p>Conectando pessoas e empresas ao melhor do mundo digital, com tecnologia de ponta e atendimento humanizado.</p>
 </div>
 
-<!-- QUEM SOMOS -->
+<!-- QUEM SOMOS: seção principal com texto + imagens lado a lado.
+     <section> é uma tag semântica — indica ao navegador e leitores de tela
+     que este bloco é uma seção temática independente da página. -->
 <section class="sobre-section">
+    <!-- sobre-grid: layout de 2 colunas com CSS Grid.
+         grid-template-columns: 1fr 1fr → cada coluna ocupa metade do espaço.
+         align-items: center → alinha verticalmente o texto e as fotos no meio. -->
     <div class="sobre-grid">
+        <!-- Coluna da esquerda: texto institucional -->
         <div class="sobre-text">
+            <!-- <span class="section-label">: etiqueta decorativa acima do título,
+                 usada para contextualizar a seção sem peso semântico de heading -->
             <span class="section-label">Sobre Nós</span>
+            <!-- <h2>: segundo nível de título — hierarquia importante para SEO e acessibilidade.
+                 <span> dentro do h2 recebe cor diferente via CSS sem quebrar a semântica -->
             <h2>Mais do que internet, <span>conexão de verdade</span></h2>
             <p>A Cianet é um provedor de internet focado em oferecer soluções de conectividade de alta performance em Natal e região. Com uma infraestrutura moderna de fibra óptica e tecnologia 5G, nascemos com o propósito de aproximar pessoas e empresas ao que há de melhor no mundo digital.</p>
             <p>Nosso diferencial não está apenas nos "megas", mas no atendimento 100% humanizado, disponível todos os dias para garantir que você nunca fique desconectado.</p>
+            <!-- Botões de ação — display:flex com gap cria espaço entre eles sem margin manual -->
             <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
                 <a href="planos.html" class="btn-green">Ver Planos</a>
                 <a href="contato.html" class="btn-primary">Falar Conosco</a>
             </div>
         </div>
+
+        <!-- Coluna da direita: grade de 3 fotos.
+             grid-template-columns: 1fr 1fr → 2 colunas de fotos.
+             A primeira foto usa grid-column: span 2 (no CSS) para ocupar a linha inteira. -->
         <div class="sobre-imgs">
+            <!-- alt descritivo: informa o conteúdo da imagem para leitores de tela
+                 e para quando a imagem não carrega. Sempre descreva o que está na foto. -->
             <img src="WhatsApp Image 2026-03-19 at 19.38.22.jpeg" alt="Cianet Natal">
             <img src="WhatsApp Image 2026-03-19 at 19.38.28.jpeg" alt="Infraestrutura Cianet">
             <img src="WhatsApp Image 2026-03-19 at 19.38.31.jpeg" alt="Equipe Cianet">
@@ -201,14 +218,19 @@
     </div>
 </section>
 
-<!-- NÚMEROS -->
+<!-- NÚMEROS: estatísticas da empresa em destaque visual.
+     Números grandes com gradiente de cor chamam atenção e transmitem credibilidade. -->
 <section class="numeros-section">
     <div class="text-center">
         <span class="section-label">Cianet em Números</span>
         <h2 class="section-title">Nossa <span>Trajetória</span></h2>
         <p class="section-sub">Resultados que refletem nosso compromisso com qualidade.</p>
     </div>
+    <!-- numeros-grid: 4 colunas iguais para exibir as estatísticas lado a lado.
+         Em mobile (CSS responsivo), vira 2 colunas para caber na tela. -->
     <div class="numeros-grid">
+        <!-- numero-item: cada estatística tem um número grande (<strong>) e uma legenda (<span>).
+             <strong> indica importância semântica — o número é o dado principal. -->
         <div class="numero-item">
             <strong>1GB</strong>
             <span>Velocidade Máxima</span>
@@ -228,24 +250,34 @@
     </div>
 </section>
 
-<!-- MISSÃO, VISÃO -->
+<!-- MVV: seção de Missão, Visão e Valores — os pilares institucionais da empresa.
+     Cada card tem uma barra colorida no topo (::before no CSS) para diferenciá-los visualmente. -->
 <section class="mvv-section">
     <div class="text-center">
         <span class="section-label">Propósito</span>
         <h2 class="section-title">Missão, Visão e <span>Valores</span></h2>
         <p class="section-sub">Os pilares que guiam cada decisão da Cianet.</p>
     </div>
+    <!-- mvv-grid: 3 colunas iguais para os 3 cards.
+         Em mobile vira 1 coluna (empilhados) para melhor leitura. -->
     <div class="mvv-grid">
+        <!-- mvv-card missao: card da Missão com barra laranja no topo (via CSS ::before).
+             A classe "missao" define a cor da barra — cada card tem sua própria cor. -->
         <div class="mvv-card missao">
+            <!-- mvv-icon: emoji como ícone decorativo — rápido e sem precisar de imagem -->
             <div class="mvv-icon">🎯</div>
+            <!-- <h3>: terceiro nível de título — correto aqui pois está dentro de uma <section>
+                 que já tem <h2>. Manter a hierarquia de headings é importante para SEO. -->
             <h3>Missão</h3>
             <p>Prover serviços de telecomunicações com excelência, agilidade e tecnologia de ponta, garantindo uma conexão estável que agregue valor ao dia a dia dos nossos clientes, seja para lazer, estudos ou negócios.</p>
         </div>
+        <!-- mvv-card visao: card da Visão com barra verde no topo -->
         <div class="mvv-card visao">
             <div class="mvv-icon">👁️</div>
             <h3>Visão</h3>
             <p>Ser reconhecida como o melhor e mais confiável provedor de internet do Rio Grande do Norte, destacando-se pela inovação constante em infraestrutura e pela proximidade real com o cliente.</p>
         </div>
+        <!-- mvv-card valores: card dos Valores com barra roxa no topo -->
         <div class="mvv-card valores">
             <div class="mvv-icon">💎</div>
             <h3>Valores</h3>
@@ -307,12 +339,18 @@
     </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA (Call to Action): bloco de chamada para ação — o objetivo é converter o visitante.
+     Fica no final da página quando o usuário já leu tudo e está pronto para decidir.
+     Fundo laranja chamativo e botões grandes direcionam para os próximos passos. -->
 <div class="cta-band">
     <h2>Faça parte da família Cianet</h2>
     <p>Assine agora e experimente a diferença de uma internet com atendimento humanizado.</p>
+    <!-- Dois botões lado a lado: um para ver planos, outro para contato direto via WhatsApp.
+         display:flex com justify-content:center centraliza os botões horizontalmente.
+         flex-wrap:wrap faz os botões empilharem em telas pequenas. -->
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
         <a href="planos.html" class="btn-secondary">Ver Planos</a>
+        <!-- Link direto para o WhatsApp via wa.me — abre o app no celular ou web no desktop -->
         <a href="https://wa.me/558432634154" style="background:var(--white); color:var(--orange); padding:1rem 2.2rem; border-radius:50px; text-decoration:none; font-weight:700; font-size:1.05rem; display:inline-block;">📲 Falar no WhatsApp</a>
     </div>
 </div>

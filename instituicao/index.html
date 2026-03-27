@@ -1,22 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!-- charset="UTF-8": diz ao navegador que o arquivo usa o padrão UTF-8,
+       que suporta acentos, cedilha e caracteres especiais do português.
+       Sem isso, palavras como "ação" podem aparecer com símbolos estranhos. -->
   <meta charset="UTF-8" />
+
+  <!-- viewport: instrução para dispositivos móveis.
+       "width=device-width" faz a página usar a largura real da tela do celular.
+       "initial-scale=1.0" garante que o zoom começa em 100%, sem ampliar nem reduzir.
+       Sem essa tag, o celular exibiria a página como se fosse um desktop minúsculo. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- description: resumo da página para os mecanismos de busca (Google, Bing...).
+       É o texto que aparece logo abaixo do título nos resultados de pesquisa.
+       Ajuda o usuário a entender do que se trata antes de clicar. -->
   <meta name="description" content="Inova Tech - Centro de Capacitação Profissional. Cursos de tecnologia, programação e inovação para o mercado de trabalho." />
+
+  <!-- keywords: palavras-chave que descrevem o conteúdo da página.
+       Antigamente era muito usada pelo Google, hoje tem menos peso no SEO,
+       mas ainda é boa prática incluir para outros buscadores. -->
   <meta name="keywords" content="cursos tecnologia, capacitação profissional, programação, inova tech" />
+
+  <!-- author: identifica quem criou o conteúdo da página.
+       Útil para documentação, rastreabilidade e alguns agregadores de conteúdo. -->
   <meta name="author" content="Koldri" />
+
+  <!-- http-equiv="refresh": faz a página recarregar automaticamente após X segundos.
+       "content=30" significa que o navegador vai atualizar a página a cada 30 segundos.
+       Útil para páginas com informações que mudam com frequência, como placares ou notícias. -->
   <meta http-equiv="refresh" content="30" />
+
+  <!-- rel="icon": define o favicon, aquele ícone pequeno que aparece na aba do navegador
+       e nos favoritos. type="image/svg+xml" indica que o ícone é um arquivo SVG (vetor),
+       que fica nítido em qualquer tamanho de tela. Aqui o SVG está embutido diretamente
+       no href usando "data:image/svg+xml" em vez de um arquivo separado. -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%236C2BD9'/><text y='.9em' font-size='70' x='10' fill='white' font-weight='900'>IT</text></svg>" />
   <title>Inova Tech | Centro de Capacitação Profissional</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ===== CABEÇALHO ===== -->
+  <!-- ===== CABEÇALHO =====
+       <header>: tag semântica que representa o cabeçalho do site.
+       Usar <header> em vez de <div> ajuda leitores de tela a identificar
+       que aqui está o topo da página, com logo e navegação. -->
   <header>
     <div class="header-inner container">
+      <!-- aria-label="Inova Tech - Página inicial": descreve o link para tecnologias
+           assistivas (leitores de tela). Como o link contém imagem/texto estilizado,
+           o aria-label garante que o usuário com deficiência visual ouça
+           "Inova Tech - Página inicial" ao navegar pelo link do logo. -->
       <a href="index.html" class="logo" aria-label="Inova Tech - Página inicial">
+        <!-- aria-hidden="true": esconde este elemento dos leitores de tela.
+             As letras "IT" são decorativas — o aria-label do link já descreve tudo.
+             Sem isso, o leitor de tela leria "I T" letra por letra, o que confunde. -->
         <div class="logo-icon" aria-hidden="true">IT</div>
         <div class="logo-text">
           <strong>Inova Tech</strong>
@@ -24,11 +62,26 @@
         </div>
       </a>
 
+      <!-- <nav>: tag semântica para blocos de navegação.
+           aria-label="Menu principal": identifica este nav específico,
+           pois pode haver mais de um <nav> na página (ex: rodapé também tem links). -->
       <nav aria-label="Menu principal">
+        <!-- aria-expanded="false": informa ao leitor de tela se o menu está aberto ou fechado.
+             O JavaScript atualiza esse valor para "true" quando o menu abre.
+             aria-controls="nav-menu": aponta para o id do elemento que este botão controla,
+             conectando o botão ao menu para tecnologias assistivas.
+             aria-label="Abrir menu": descreve a função do botão (ícone hambúrguer sem texto visível). -->
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu">
           <span></span><span></span><span></span>
         </button>
+        <!-- id="nav-menu": identificador único referenciado pelo aria-controls do botão acima.
+             role="list": reforça explicitamente que este <ul> é uma lista,
+             necessário porque alguns CSS retiram o estilo padrão de lista e
+             certos leitores de tela deixam de anunciá-la como lista nesses casos. -->
         <ul class="nav-menu" id="nav-menu" role="list">
+          <!-- aria-current="page": indica ao leitor de tela qual link corresponde
+               à página atual. O usuário ouve "Home, link, página atual" em vez de
+               só "Home, link", facilitando a orientação na navegação. -->
           <li><a href="index.html" class="active" aria-current="page">Home</a></li>
           <li><a href="pages/cursos.html">Cursos</a></li>
           <li><a href="pages/grade-curricular.html">Grade Curricular</a></li>
@@ -39,13 +92,22 @@
     </div>
   </header>
 
-  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+  <!-- ===== CONTEÚDO PRINCIPAL =====
+       <main>: tag semântica que delimita o conteúdo central e único da página.
+       Leitores de tela e ferramentas de acessibilidade usam <main> para
+       permitir que o usuário pule direto para o conteúdo, ignorando o menu. -->
   <main>
 
-    <!-- Hero -->
+    <!-- <section>: agrupa conteúdo relacionado com um tema em comum (aqui, o hero).
+         aria-labelledby="hero-title": conecta esta seção ao seu título pelo id.
+         Leitores de tela anunciam "seção: Aprenda com quem lidera o mercado..."
+         em vez de apenas "seção", dando contexto imediato ao usuário. -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container">
         <p class="hero-badge">🚀 Transforme sua carreira</p>
+        <!-- id="hero-title": identificador único que o aria-labelledby da <section> referencia.
+             O id cria uma "ponte" entre a seção e seu título, permitindo que tecnologias
+             assistivas anunciem o nome da seção corretamente ao navegar pela página. -->
         <h1 id="hero-title">Aprenda com quem <span>lidera</span> o mercado de tecnologia</h1>
         <p>Cursos práticos, instrutores experientes e certificação reconhecida. Dê o próximo passo na sua carreira com a Inova Tech.</p>
         <div class="hero-actions">
@@ -115,14 +177,24 @@
 
         <div class="testimonials-grid">
 
+          <!-- <article>: tag semântica para conteúdo independente e reutilizável.
+               Cada depoimento é um "artigo" porque faz sentido sozinho — pode ser
+               compartilhado, indexado ou exibido fora do contexto da página.
+               É diferente de <div>, que não carrega nenhum significado semântico. -->
           <article class="testimonial-card">
             <div class="stars" aria-label="5 estrelas">★★★★★</div>
+            <!-- <blockquote>: indica que o texto é uma citação de outra pessoa.
+                 Navegadores e leitores de tela tratam blockquote como citação,
+                 dando o contexto correto de que não é o autor da página falando. -->
             <blockquote>
               "O curso de Desenvolvimento Web mudou completamente minha vida profissional. Em 6 meses consegui meu primeiro emprego como dev!"
             </blockquote>
             <div style="display:flex;align-items:center;gap:0.75rem;">
               <div class="testimonial-avatar" aria-hidden="true">L</div>
-              <cite>— Lucas Ferreira, Desenvolvedor Front-End</cite>
+              <!-- <cite>: identifica a fonte ou autoria de uma citação.
+                   Semanticamente correto para nomear quem disse o blockquote acima.
+                   Motores de busca e leitores de tela reconhecem <cite> como referência. -->
+              <cite data-role="Desenvolvedor Front-End">— Lucas Ferreira, Desenvolvedor Front-End</cite>
             </div>
           </article>
 
@@ -133,7 +205,7 @@
             </blockquote>
             <div style="display:flex;align-items:center;gap:0.75rem;">
               <div class="testimonial-avatar" aria-hidden="true" style="background:linear-gradient(135deg,var(--secondary),var(--accent))">J</div>
-              <cite>— Juliana Mendes, Analista de Dados</cite>
+              <cite data-role="Analista de Dados">— Juliana Mendes, Analista de Dados</cite>
             </div>
           </article>
 
@@ -144,14 +216,18 @@
             </blockquote>
             <div style="display:flex;align-items:center;gap:0.75rem;">
               <div class="testimonial-avatar" aria-hidden="true" style="background:linear-gradient(135deg,var(--primary-lt),var(--primary))">R</div>
-              <cite>— Rafael Oliveira, Gerente de Projetos</cite>
+              <cite data-role="Gerente de Projetos">— Rafael Oliveira, Gerente de Projetos</cite>
             </div>
           </article>
 
         </div>
       </section>
 
-      <!-- Sidebar -->
+      <!-- <aside>: tag semântica para conteúdo complementar ao principal.
+           Representa informações relacionadas mas que não fazem parte do fluxo central,
+           como uma barra lateral com datas de turmas e contatos.
+           aria-label="Informações rápidas": descreve o propósito do aside para
+           leitores de tela, já que <aside> sozinho não diz o que contém. -->
       <aside aria-label="Informações rápidas">
         <h3>📌 Próximas Turmas</h3>
         <ul>
@@ -182,6 +258,16 @@
             Substitua o src abaixo pelo embed real do Google Maps da Inova Tech.
             Acesse maps.google.com → Compartilhar → Incorporar mapa → copie o src do iframe.
           -->
+          <!-- <iframe>: incorpora um documento externo (aqui, o Google Maps) dentro da página.
+               title="...": obrigatório para acessibilidade — descreve o conteúdo do iframe
+               para leitores de tela, que não conseguem "ver" o mapa visualmente.
+               loading="lazy": o mapa só é carregado quando o usuário rolar até ele,
+               economizando dados e acelerando o carregamento inicial da página.
+               referrerpolicy="no-referrer-when-downgrade": controla quais informações
+               sobre a origem da visita são enviadas ao Google Maps — protege a privacidade
+               do usuário sem quebrar a funcionalidade do mapa.
+               allowfullscreen: permite que o usuário expanda o mapa para tela cheia,
+               melhorando a experiência ao buscar a localização. -->
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975!2d-46.6333!3d-23.5505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzAxLjgiUyA0NsKwMzcnNTkuOSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
             title="Mapa de localização da Inova Tech"
@@ -195,9 +281,16 @@
 
   </main>
 
-  <!-- ===== RODAPÉ ===== -->
+  <!-- ===== RODAPÉ =====
+       <footer>: tag semântica que representa o rodapé da página.
+       Normalmente contém informações de copyright, links secundários e contato.
+       Leitores de tela identificam automaticamente esta área como rodapé,
+       permitindo que o usuário navegue diretamente até ela se quiser. -->
   <footer>
     <div class="container">
+      <!-- footer-grid: divide o rodapé em colunas temáticas.
+           Cada footer-col agrupa um assunto (sobre, navegação, cursos, contato),
+           tornando o rodapé organizado e fácil de escanear visualmente. -->
       <div class="footer-grid">
         <div class="footer-col">
           <h4>Inova Tech</h4>

@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!-- charset="UTF-8": garante que acentos e caracteres especiais do português
+       sejam exibidos corretamente pelo navegador. -->
   <meta charset="UTF-8" />
+
+  <!-- viewport: adapta a página para telas de celular e tablet.
+       Sem isso, o site apareceria minúsculo em dispositivos móveis. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- description: texto de resumo exibido nos resultados do Google.
+       Deve descrever o conteúdo da página de forma atrativa e objetiva. -->
   <meta name="description" content="Conheça os cursos da Inova Tech: Desenvolvimento Web, Python, UX/UI Design, Banco de Dados e muito mais." />
+
+  <!-- author: registra o nome do criador da página, útil para documentação. -->
   <meta name="author" content="Koldri" />
+
+  <!-- http-equiv="refresh": recarrega a página automaticamente a cada 30 segundos,
+       mantendo o catálogo de cursos sempre atualizado sem o usuário precisar apertar F5. -->
   <meta http-equiv="refresh" content="30" />
+
+  <!-- rel="icon": define o ícone que aparece na aba do navegador (favicon).
+       Usar SVG garante que o ícone fique nítido em qualquer resolução de tela. -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%236C2BD9'/><text y='.9em' font-size='70' x='10' fill='white' font-weight='900'>IT</text></svg>" />
   <title>Cursos | Inova Tech</title>
   <link rel="stylesheet" href="../css/style.css" />
@@ -37,28 +53,52 @@
     </div>
   </header>
 
-  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+  <!-- ===== CONTEÚDO PRINCIPAL =====
+       <main>: delimita o conteúdo central e único desta página.
+       Ferramentas de acessibilidade permitem pular direto para o <main>,
+       ignorando o cabeçalho e menu que se repetem em todas as páginas. -->
   <main>
 
-    <!-- Hero da página -->
+    <!-- <section>: agrupa o banner de topo (hero) desta página.
+         aria-labelledby="page-title": conecta a seção ao seu título pelo id,
+         para que leitores de tela anunciem o nome da seção corretamente. -->
     <section class="page-hero" aria-labelledby="page-title">
       <div class="container">
+        <!-- id="page-title": identificador único referenciado pelo aria-labelledby acima.
+             Cria a ligação semântica entre a seção e seu título principal. -->
         <h1 id="page-title">Nossos Cursos</h1>
         <p>Formação prática e atualizada para você conquistar o mercado de tecnologia.</p>
       </div>
     </section>
 
-    <!-- Grade de Cursos -->
+    <!-- <section>: agrupa todos os cards de cursos disponíveis.
+         aria-labelledby="courses-heading": associa esta seção ao título "Escolha sua área",
+         facilitando a navegação por seções em leitores de tela. -->
     <section class="courses-section" aria-labelledby="courses-heading">
       <div class="container">
         <span class="tag">Catálogo 2026</span>
         <h2 class="section-title" id="courses-heading">Escolha sua área</h2>
         <p class="section-subtitle">Todos os cursos incluem certificado, suporte e acesso vitalício ao material.</p>
 
-        <!-- Curso 1 -->
+        <!-- <article>: tag semântica para conteúdo independente e autocontido.
+             Cada card de curso é um "artigo" porque faz sentido por si só —
+             poderia ser exibido em outra página ou compartilhado separadamente.
+             aria-labelledby="course1-title": conecta o article ao seu título,
+             para que o leitor de tela anuncie o nome do curso ao entrar no card. -->
         <article class="course-card" aria-labelledby="course1-title">
+          <!-- <video>: incorpora um vídeo diretamente na página sem plugin externo.
+               controls: exibe os botões de play, pause, volume e barra de progresso.
+               Sem esse atributo, o vídeo aparece mas o usuário não consegue controlá-lo.
+               preload="metadata": carrega apenas as informações básicas do vídeo
+               (duração, dimensões) sem baixar o arquivo inteiro, economizando dados. -->
           <video controls preload="metadata" style="width:100%; display:block; height:220px; object-fit:cover;">
+            <!-- <source>: define o arquivo de vídeo e seu formato.
+                 type="video/mp4": informa ao navegador o formato do arquivo,
+                 permitindo que ele decida se consegue reproduzir antes de baixar.
+                 É possível ter múltiplos <source> com formatos diferentes como fallback. -->
             <source src="../videos/Geração_de_Vídeos_para_HTML (1).mp4" type="video/mp4" />
+            <!-- Texto de fallback: exibido apenas se o navegador não suportar <video>.
+                 Garante que o usuário saiba o que deveria aparecer ali. -->
             Seu navegador não suporta a reprodução de vídeo.
           </video>
           <div class="course-body">
@@ -67,6 +107,10 @@
             <p>Domine HTML, CSS, JavaScript, React e Node.js do zero ao avançado. Construa projetos reais e monte um portfólio sólido para o mercado.</p>
 
             <h3 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.5rem;">Disciplinas:</h3>
+            <!-- <ul>: lista não ordenada, usada quando a ordem dos itens não importa.
+                 Aqui as disciplinas não precisam de sequência numérica obrigatória.
+                 aria-label="Disciplinas do curso...": descreve o propósito da lista
+                 para leitores de tela, que anunciam "lista de 7 itens: Disciplinas do curso". -->
             <ul class="disciplines" aria-label="Disciplinas do curso de Desenvolvimento Web">
               <li>HTML5 Semântico e Acessibilidade</li>
               <li>CSS3, Flexbox e Grid Layout</li>
@@ -85,12 +129,15 @@
             </div>
 
             <div style="margin-top:1.25rem;">
+              <!-- Link de matrícula: usa <a> com href apontando para a página da secretaria.
+                   Usar <a> em vez de <button> é correto aqui porque leva o usuário
+                   para outra página — botões são para ações dentro da mesma página. -->
               <a href="secretaria.html" class="btn btn-primary">Matricule-se</a>
             </div>
           </div>
         </article>
 
-        <!-- Curso 2 -->
+        <!-- Curso 2: mesmo padrão de article + video + ul de disciplinas -->
         <article class="course-card" aria-labelledby="course2-title">
           <video controls preload="metadata" style="width:100%; display:block; height:220px; object-fit:cover;">
             <source src="../videos/Geração_de_Vídeos_para_HTML (2).mp4" type="video/mp4" />
@@ -102,6 +149,9 @@
             <p>Aprenda Python do básico ao avançado com foco em Machine Learning, análise de dados e automação de processos com IA.</p>
 
             <h3 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.5rem;">Disciplinas:</h3>
+            <!-- <ul> com aria-label: lista não ordenada das disciplinas do curso.
+                 O aria-label diferencia esta lista das outras na página,
+                 evitando que o leitor de tela anuncie apenas "lista" sem contexto. -->
             <ul class="disciplines" aria-label="Disciplinas do curso de Python e IA">
               <li>Fundamentos de Python</li>
               <li>Estruturas de Dados e Algoritmos</li>
@@ -125,7 +175,11 @@
           </div>
         </article>
 
-        <!-- Curso 3 -->
+        <!-- Curso 3: usa <img> em vez de <video> pois não há vídeo disponível.
+             alt="...": texto alternativo obrigatório — descreve a imagem para
+             leitores de tela e aparece se a imagem não carregar.
+             width e height: informar as dimensões evita o "layout shift" (salto
+             visual da página enquanto a imagem carrega). -->
         <article class="course-card" aria-labelledby="course3-title">
           <img
             src="https://placehold.co/600x300/0080ff/FFFFFF?text=UX%2FUI+Design"
