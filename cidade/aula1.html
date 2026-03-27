@@ -1,24 +1,47 @@
+<!-- DOCTYPE: diz ao navegador que este é um documento HTML5 (versão mais moderna do HTML) -->
 <!DOCTYPE html>
+
+<!-- <html>: tag raiz que envolve todo o conteúdo da página -->
+<!-- lang="pt-br": informa ao navegador e leitores de tela que o idioma da página é português do Brasil -->
 <html lang="pt-br">
 <head>
+    <!-- <meta charset="UTF-8">: define o conjunto de caracteres como UTF-8,
+         que suporta acentos, cedilha e outros caracteres especiais do português -->
     <meta charset="UTF-8">
+
+    <!-- <meta name="viewport">: controla como a página é exibida em dispositivos móveis
+         width=device-width: a largura da página se adapta à largura da tela do dispositivo
+         initial-scale=1.0: o zoom inicial é 100%, sem ampliar nem reduzir -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <title>: define o texto que aparece na aba do navegador -->
     <title>Sobre a CIANET NATAL</title>
     
+    <!-- <style>: bloco onde escrevemos CSS diretamente dentro do HTML
+         CSS é a linguagem que controla a aparência visual dos elementos -->
     <style>
         /* Estilos da área interativa da imagem */
+
+        /* .gif-olhando-mouse: classe aplicada à imagem que aparece quando o mouse passa por cima
+           display: none — esconde o elemento completamente (não ocupa espaço na tela) */
         .gif-olhando-mouse {
             display: none;
         }
 
+        /* .area-interativa:hover .gif-olhando-frente:
+           :hover é uma pseudo-classe que ativa o estilo quando o mouse está sobre o elemento
+           Este seletor diz: "quando o mouse estiver sobre .area-interativa, esconda .gif-olhando-frente" */
         .area-interativa:hover .gif-olhando-frente {
             display: none;
         }
 
+        /* Quando o mouse estiver sobre .area-interativa, mostre .gif-olhando-mouse
+           display: block — faz o elemento aparecer ocupando uma linha inteira */
         .area-interativa:hover .gif-olhando-mouse {
             display: block;
         }
 
+        /* Estilo aplicado a todas as imagens dentro de .area-interativa */
         .area-interativa img {
             width: 300px; /* Tamanho da imagem, ajuste conforme necessário */
             cursor: pointer; /* Muda o ponteiro do mouse para indicar interatividade */
@@ -28,11 +51,24 @@
     </style>
 </head>
 <body>
+
+    <!-- <h1>: título principal da página — deve existir apenas um por página
+         É o título de maior importância, usado por buscadores e leitores de tela -->
     <h1>Sobre a CIANET NATAL</h1>
+
+    <!-- <h6>: título de menor hierarquia (vai de h1 até h6)
+         Quanto maior o número, menor a importância visual e semântica do título -->
     <h6>SENAC</h6>
     
+    <!-- <h2>: subtítulo de segundo nível, usado para organizar seções dentro da página -->
     <h2>Biografia</h2>
+
+    <!-- <p>: parágrafo de texto comum
+         style="color: green": aplica a cor verde ao texto diretamente na tag (CSS inline)
+         style="font-family: lucida Sans": define a fonte do texto como Lucida Sans -->
     <p style="color: green; font-family: lucida Sans;">
+        <!-- <strong>: deixa o texto em negrito e indica que ele tem importância semântica
+             Diferente de <b>, o <strong> comunica relevância para leitores de tela -->
         A <strong>Cianet</strong>, localizada em Lagoa Azul, Natal, RN, é um provedor de internet que oferece serviços personalizados
         e uma conexão rápida e estável. A empresa se destaca por sua <strong>tecnologia moderna</strong> e atendimento personalizado, 
         garantindo uma experiência de navegação de alta qualidade para seus clientes. A Cianet é uma empresa séria e 
@@ -41,38 +77,75 @@
         Para mais informações, você pode entrar em contato pelo telefone <strong>(84) 3263-4154</strong>
     </p>
     
+    <!-- <h2>: segundo subtítulo da página, abre uma nova seção de conteúdo -->
     <h2>Contribuições</h2>
+
+    <!-- <p>: parágrafo com estilo inline
+         color: lch(67.5% 75.86 70.1) — define a cor usando o modelo LCH (luminosidade, croma, matiz),
+         um formato moderno que representa cores de forma mais precisa que o RGB
+         font-family: lucida Sans — define a fonte do parágrafo -->
     <p style="color: lch(67.5% 75.86 70.1); font-family: lucida Sans;">
-        A <abbr title="Companhia de Internet">CIA</abbr>NET, uma empresa brasileira de provedores de internet, foi fundada em <mark>05/07/2011</mark> e está localizada em São Miguel
+        <!-- <abbr>: tag de abreviação — exibe a forma curta de uma palavra ou sigla
+             title="Companhia de Internet": ao passar o mouse, aparece o significado completo da sigla
+             Também ajuda leitores de tela a pronunciar corretamente -->
+        A <abbr title="Companhia de Internet">CIA</abbr>NET, uma empresa brasileira de provedores de internet, foi fundada em
+        <!-- <mark>: destaca o texto com fundo amarelo, como se fosse um marca-texto
+             Usado para chamar atenção para informações importantes -->
+        <mark>05/07/2011</mark> e está localizada em São Miguel
         do Gostoso, RN. A empresa é conhecida por seus serviços personalizados e pela sua abordagem de conectar empresas com
         uma internet que acompanha o crescimento. A CIANET se destaca por oferecer uma conexão rápida e estável, garantindo 
         diversão sem interrupções para toda a família. A empresa também se compromete a ser referência em soluções para o 
         negócio de internet, com foco em tecnologias que garantem o desempenho de rede.
     </p>
     
+    <!-- <h3>: título de terceiro nível, organiza subtópicos dentro de uma seção -->
     <h3>Principais Serviços</h3>
+
+    <!-- <ul>: lista não ordenada (unordered list) — exibe itens com marcadores (bolinhas)
+         Usada quando a ordem dos itens não importa -->
     <ul>
+        <!-- <li>: item de lista (list item) — cada <li> representa um item dentro de <ul> ou <ol> -->
         <li><strong>Fibra Óptica</strong> - Conexão de alta velocidade</li>
         <li><strong>Internet via Rádio</strong> - Cobertura em áreas remotas</li>
         <li><strong>Internet via Cabo</strong> - Estabilidade garantida</li>
         <li><strong>Internet via Satélite</strong> - Alcance em qualquer localidade</li>
     </ul>
     
+    <!-- Segunda lista não ordenada, agora para prêmios e reconhecimentos -->
     <h3>Prêmios e Reconhecimentos</h3>
     <ul>
+        <!-- <mark> usado novamente para destacar os anos dos prêmios -->
         <li>Melhor provedor regional - <mark>2020</mark></li>
         <li>Excelência em atendimento - <mark>2022</mark></li>
     </ul>
     
+    <!-- <h4>: título de quarto nível, menor que h3 mas ainda organiza o conteúdo -->
     <h4>Criador da pagina: JULIO CESAR</h4>
     
     <p>
+        <!-- <a>: tag de âncora — cria um link clicável
+             href="https://cianet.net.br": endereço para onde o link leva (URL completa)
+             target="_blank": abre o link em uma nova aba do navegador, sem fechar a página atual -->
         <a href="https://cianet.net.br" target="_blank">Visite o site da Cianet</a>
     </p>
 
+    <!-- <div class="area-interativa">: divisão genérica que agrupa as duas imagens
+         class="area-interativa": nome da classe CSS usada para aplicar os estilos de interação
+         O efeito funciona assim: ao passar o mouse, a imagem da frente some e a outra aparece -->
     <div class="area-interativa">
-        <img class="gif-olhando-frente" src="../../../Submitted%20files/Julio%20Cesar%20da%20Silva%20Bezerra/Atividade%202%20-%20HTML%20(Formata��o,%20Lista%20e%20Link)/image_0.png" alt="Programador focado">
-        <img class="gif-olhando-mouse" src="../../../Submitted%20files/Julio%20Cesar%20da%20Silva%20Bezerra/Atividade%202%20-%20HTML%20(Formata��o,%20Lista%20e%20Link)/image_1.png" alt="Programador olhando para o usuário">
+
+        <!-- <img>: tag de imagem — exibe uma imagem na página (não tem tag de fechamento)
+             class="gif-olhando-frente": classe CSS que controla a visibilidade desta imagem
+             src: caminho do arquivo de imagem a ser exibido
+             alt="Programador focado": texto alternativo — aparece se a imagem não carregar
+             e é lido por leitores de tela para pessoas com deficiência visual -->
+        <img class="gif-olhando-frente" src="../../../Submitted%20files/Julio%20Cesar%20da%20Silva%20Bezerra/Atividade%202%20-%20HTML%20(Formata��o,%20Lista%20e%20Link)/image_0.png" alt="Programador focado">
+
+        <!-- Segunda imagem: fica escondida por padrão (display: none no CSS)
+             class="gif-olhando-mouse": classe que faz esta imagem aparecer quando o mouse
+             passa sobre a div.area-interativa, criando o efeito de troca de imagem
+             alt="Programador olhando para o usuário": descrição acessível da imagem -->
+        <img class="gif-olhando-mouse" src="../../../Submitted%20files/Julio%20Cesar%20da%20Silva%20Bezerra/Atividade%202%20-%20HTML%20(Formata��o,%20Lista%20e%20Link)/image_1.png" alt="Programador olhando para o usuário">
     </div>
 
 </body>

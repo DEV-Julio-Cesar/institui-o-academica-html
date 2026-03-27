@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- meta charset="UTF-8": diz ao navegador que o arquivo usa o conjunto de
+         caracteres UTF-8, que suporta acentos, cedilha e emojis.
+         Sem isso, letras como "ã", "ç" e "é" podem aparecer como símbolos estranhos. -->
     <meta charset="UTF-8">
+
+    <!-- meta name="viewport": controla como a página é exibida em celulares.
+         width=device-width → a largura da página iguala a largura real da tela.
+         initial-scale=1.0 → sem zoom inicial; a página aparece no tamanho normal.
+         Sem essa tag, celulares mostram a página como se fosse um desktop minúsculo. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- title: define o texto que aparece na aba do navegador e nos resultados
+         de busca do Google. É importante para SEO (aparecer bem no Google). -->
     <title>Teste de Velocidade — Cianet</title>
+
+    <!-- link rel="stylesheet": conecta um arquivo CSS externo a esta página HTML.
+         rel="stylesheet" → informa que o arquivo é uma folha de estilos.
+         href="css/style.css" → caminho relativo até o arquivo de estilos.
+         Tudo que está nesse arquivo CSS será aplicado a esta página. -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<!-- header: tag semântica que representa o cabeçalho da página.
+     Fica no topo e normalmente contém logo, navegação e ações principais.
+     Usar <header> (em vez de <div>) ajuda leitores de tela a identificar
+     que aqui está o cabeçalho do site. -->
 <header>
+    <!-- <a>: tag de link (âncora). href="index.html" → ao clicar, vai para a página inicial.
+         class="logo-text": aplica o estilo visual do logotipo definido no CSS.
+         O <span> dentro colora a parte "NET" com a cor verde da marca. -->
     <a href="index.html" class="logo-text">CIA<span>NET</span></a>
+
+    <!-- nav: tag semântica de navegação. Indica ao navegador e leitores de tela
+         que este bloco contém os links principais do site.
+         id="main-nav": identificador único usado pelo JavaScript para abrir/fechar
+         o menu em telas pequenas. -->
     <nav id="main-nav">
+        <!-- ul: lista não ordenada (unordered list) — cria uma lista com marcadores.
+             Aqui os marcadores são removidos via CSS, mas a estrutura semântica
+             de lista é mantida para acessibilidade. -->
         <ul>
+            <!-- li: item de lista (list item). Cada link do menu fica dentro de um li.
+                 class="active": marca visualmente o link da página atual (velocidade.html). -->
             <li><a href="planos.html">Planos Fibra</a></li>
             <li><a href="celular.html">Chip 5G</a></li>
             <li><a href="galeria.html">Galeria</a></li>
@@ -20,8 +53,20 @@
             <li><a href="velocidade.html" class="active">⚡ Velocidade</a></li>
         </ul>
     </nav>
+
+    <!-- div.header-actions: agrupa os botões de ação do cabeçalho (WhatsApp e App).
+         Usar uma div aqui é correto pois é apenas um agrupamento visual, sem
+         significado semântico próprio. -->
     <div class="header-actions">
+        <!-- target="_blank": abre o link em uma nova aba do navegador.
+             rel="noopener": segurança — impede que a nova aba acesse a página original
+             via JavaScript (proteção contra ataques de "reverse tabnapping"). -->
         <a href="https://wa.me/558432634154" class="header-wpp" target="_blank" rel="noopener">
+            <!-- svg: gráfico vetorial escalável. Diferente de imagens .png/.jpg,
+                 o SVG é desenhado por código matemático, então nunca fica pixelado.
+                 viewBox="0 0 32 32": define a área de desenho (32x32 unidades).
+                 fill="currentColor": usa a cor do texto atual (herdada do CSS).
+                 width/height="18": tamanho em pixels na tela. -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="18" height="18">
                 <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.47 2.027 7.773L0 32l8.476-2.004A15.94 15.94 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.77-1.853l-.485-.288-5.03 1.188 1.21-4.898-.317-.503A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.87c-.398-.2-2.355-1.162-2.72-1.294-.365-.133-.63-.2-.896.2-.265.398-1.03 1.294-1.262 1.56-.232.265-.465.298-.863.1-.398-.2-1.68-.619-3.2-1.974-1.183-1.054-1.982-2.356-2.214-2.754-.232-.398-.025-.613.174-.811.179-.178.398-.465.597-.697.2-.232.265-.398.398-.664.133-.265.066-.497-.033-.697-.1-.2-.896-2.16-1.228-2.957-.323-.776-.65-.67-.896-.683l-.763-.013c-.265 0-.697.1-1.062.497-.365.398-1.394 1.362-1.394 3.32s1.427 3.85 1.626 4.116c.2.265 2.808 4.287 6.803 6.013.951.41 1.693.655 2.272.838.954.303 1.823.26 2.51.158.765-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.1-.166-.365-.265-.763-.465z"/>
             </svg>
@@ -29,10 +74,21 @@
         </a>
         <a href="https://play.google.com/store/apps/details?id=br.com.appdoprovedor.cianet" target="_blank" rel="noopener" class="header-app-btn">📱 Área do Cliente</a>
     </div>
+
+    <!-- button: cria um botão clicável. Aqui é o botão "hambúrguer" (☰) do menu mobile.
+         class="menu-toggle": estilo definido no CSS para as três linhas do ícone.
+         id="menu-toggle": identificador para o JavaScript encontrar este botão.
+         aria-label="Menu": atributo de acessibilidade — como o botão não tem texto
+         visível, o aria-label diz ao leitor de tela o que ele faz ("Menu").
+         Os três <span> vazios são as três linhas do ícone hambúrguer, desenhadas via CSS. -->
     <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
 </header>
+
+<!-- div.nav-overlay: camada escura semitransparente que aparece atrás do menu
+     quando ele está aberto em telas pequenas. Clicar nela fecha o menu.
+     id="nav-overlay": o JavaScript usa este id para adicionar/remover a classe "open". -->
 <div class="nav-overlay" id="nav-overlay"></div>
 
 <section style="background: var(--gray-bg); min-height: calc(100vh - 70px); padding: 4rem 5%;">
